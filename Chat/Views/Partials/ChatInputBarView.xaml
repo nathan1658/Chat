@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Chat.Controls"
+    x:Class="Chat.Views.Partials.ChatInputBarView"
+    
+    >
+    <ContentView.Resources>
+        <Style TargetType="Image" x:Key="ToolImages">
+            <Setter Property="Aspect" Value="AspectFit"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="WidthRequest" Value="30"/>
+            
+        </Style>
+    </ContentView.Resources>
+    <Grid
+        RowSpacing="0"
+        ColumnSpacing="0"      
+        Padding="0,2,0,2" 
+        BackgroundColor="LightGray"        
+        
+        >
+
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <!--Some buttons..-->
+            <ColumnDefinition
+                Width="auto" />
+            <!--Text part-->
+            <ColumnDefinition
+                Width="*" />
+            <!--Send button-->
+            <ColumnDefinition
+                Width="60" />
+        </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalOptions="End" Margin="0,0,0,5">
+            <Image Source="stopwatch.png" Style="{StaticResource Key=ToolImages}" />
+            <Image Source="attach.png"  Style="{StaticResource Key=ToolImages}" />
+        </StackLayout>
+
+
+        <Frame CornerRadius="5" Grid.Column="1" Grid.Row="0" OutlineColor="Black"  HasShadow="False"  BackgroundColor="Red" Padding="0" Margin="0" VerticalOptions="Center" >
+            <controls:ExtendedEditorControl
+            x:Name="chatTextInput"
+            Text="{Binding TextToSend}"            
+            TextColor="Black"
+            Keyboard="Chat"
+            HasRoundedCorner="true"
+            IsExpandable="true"            
+            HorizontalOptions="FillAndExpand"
+            PlaceholderColor="LightGray"
+            Placeholder="Type your message here"          
+            Completed="Handle_Completed" 
+            
+            />
+        </Frame>
+        <Label
+            VerticalOptions="End"            
+            HorizontalTextAlignment="Center"
+            Text="Send"
+            TextColor="Blue"
+            Margin="0,0,0,5"
+            Grid.Row="0"
+            Grid.Column="2"
+            VerticalTextAlignment="End">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="Handle_Completed">
+                </TapGestureRecognizer>
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+
+</ContentView>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Chat.Views.ConversationSelector">
+    <ContentPage.Content>
+        <ListView
+            x:Name="ConversationListView"
+            ItemsSource="{Binding ConversationList}"
+            ItemTapped="Handle_ItemTapped"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="5,10,0,10"  HeightRequest="50" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid Grid.RowSpan="2" Grid.Column="0" BackgroundColor="LightGreen" >
+                                <Label VerticalOptions="Center" HorizontalOptions="Center">Icon</Label>
+                            </Grid>
+                            <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" BackgroundColor="red"
+                                Text="{Binding Title}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="你食左飯未?" TextColor="Gray"/>
+                            <!--TODO Blue dot here?-->
+                            <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="End" Margin="0,0,10,0">
+                                <Frame HasShadow="False" WidthRequest="10" HeightRequest="10" Margin="0" Padding="0" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="DeepSkyBlue">
+                                    
+                                </Frame>
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

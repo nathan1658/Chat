@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Chat"
+    xmlns:localHelpers="clr-namespace:Chat.Helpers"
+    xmlns:partials="clr-namespace:Chat.Views.Partials"
+    x:Class="Chat.Views.ChatPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <localHelpers:ChatTemplateSelector
+                x:Key="MessageTemplateSelector" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  
+    <Grid
+        RowSpacing="0"  
+        ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                Height="*" />
+            <RowDefinition
+                Height="auto" />
+
+        </Grid.RowDefinitions> 
+
+        <ListView
+            Grid.Row="0"
+            ItemTemplate="{StaticResource MessageTemplateSelector}"
+            ItemsSource="{Binding Messages}"
+            Margin="0"
+            SelectionMode="None" 
+            HasUnevenRows="true"
+            VerticalOptions="FillAndExpand"
+            SeparatorColor="Transparent"
+            x:Name="ChatList" />
+         
+        <partials:ChatInputBarView
+            Grid.Row="1"                        
+            x:Name="InputBar" />
+        
+    </Grid>
+</ContentPage>

@@ -1,0 +1,10 @@
+Chat.Android/bin/
+Chat.Android/obj/
+._.DS_Store
+.DS_Store
+Chat.iOS/bin/
+Chat.iOS/obj/
+Chat.UITests/bin/
+Chat.UITests/obj/
+Chat/bin/
+Chat/obj/
