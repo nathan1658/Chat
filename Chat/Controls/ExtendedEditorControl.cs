@@ -55,9 +55,9 @@ namespace Chat.Controls
         {
             if (IsExpandable)
                 InvalidateMeasure();
-
-
         }
+
+      
 
     }
 }

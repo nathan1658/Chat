@@ -25,6 +25,9 @@ namespace Chat.Views.Partials
 
             (this.Parent.Parent as ChatPage).ScrollListCommand.Execute(null);
         }
-       
+        public void UnFocusEntry()
+        {
+            chatTextInput?.Unfocus();
+        }
     }
 }

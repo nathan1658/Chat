@@ -31,6 +31,5 @@
     <Folder Include="Views\Cells\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Partials\" />
-    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>
