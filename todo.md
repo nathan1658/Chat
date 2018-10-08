@@ -1,4 +1,7 @@
 # To do
-- [ ] Frame Color of go to bottom 
-- [ ] Text of the above frame
-- [ ] Amend table
+- [ ] Go to bottom Circle button(Text and color) 
+- [ ] Amend table with buttons
+- [ ] Scroll to top to get more
+- [ ] Send Message smoothless and bugs..
+- [ ] Timeout spinner
+- [ ] Navigation Bar(?)
