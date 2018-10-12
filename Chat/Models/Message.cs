@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Timers;
+using Xamarin.Forms;
 
 namespace Chat.Models
 {
-    public class Message:INotifyPropertyChanged
+    public class Message : INotifyPropertyChanged
     {
         public string Text
         {
@@ -23,6 +25,25 @@ namespace Chat.Models
             get;
             set;
         }
+
+        public Stream PhotoStream { get; set; }
+
+        public ImageSource PhotoSource
+        {
+            get
+            {
+                if (PhotoStream != null)
+                {
+                    return ImageSource.FromStream(() => { return PhotoStream; });
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
 
         public Conversation Conversation { get; set; }
 
@@ -54,19 +75,20 @@ namespace Chat.Models
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             int elapsedSeconds = (int)(DateTime.Now - startTime).TotalSeconds;
-            if(timeoutValue.TotalSeconds <= elapsedSeconds)
+            if (timeoutValue.TotalSeconds <= elapsedSeconds)
             {
                 IsExpired = true;
                 timer.Stop();
+                timer.Dispose();
             };
-            RemainingTime =  TimeSpan.FromSeconds(timeoutValue.TotalSeconds - elapsedSeconds);
+            RemainingTime = TimeSpan.FromSeconds(timeoutValue.TotalSeconds - elapsedSeconds);
         }
 
         public TimeSpan RemainingTime { get; set; }
 
         private Timer timer = new Timer();
 
-        public String RemainingTimeString { get { if(RemainingTime!=null)return RemainingTime.ToString();return "aaa";}}
+        public String RemainingTimeString { get { if (RemainingTime != null) return RemainingTime.ToString(); return "aaa"; } }
 
         public bool IsExpired
         { get; set; }

@@ -7,8 +7,8 @@ using System.Linq;
 using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Timers;
-using Chat.Views.Modals;
 using Rg.Plugins.Popup.Services;
+using System.IO;
 
 namespace Chat.ViewModels
 {
@@ -138,6 +138,13 @@ namespace Chat.ViewModels
             TextToSend = string.Empty;
         }
 
+        internal void SubmitMessage(Stream stream, string user,DateTime SubmittedDate)
+        {
+            var msg = new Message() { PhotoStream = stream, User = user, SubmittedDate = SubmittedDate };
+            SubmitMessage(msg);
+        }
+
+
         void OnMessageAppearing(Message msg)
         {
             var idx = Messages.IndexOf(msg);
@@ -168,13 +175,7 @@ namespace Chat.ViewModels
 
             }
         }
-
-        public async void DisplayCountDownModal()
-        {
-            await PopupNavigation.Instance.PushAsync(new CountDownPickerModal());
-
-            //await Application.Current.MainPage.Navigation.PushAsync(new CountDownPickerModal());
-        }
+              
 
 
         public ObservableCollection<Message> Messages

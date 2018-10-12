@@ -11,6 +11,8 @@ namespace Chat.Views.Partials
     public partial class ChatInputBarView : ContentView
     {
 
+        ChatPage chatPage; 
+
         public ChatInputBarView()
         {
             InitializeComponent();
@@ -20,7 +22,13 @@ namespace Chat.Views.Partials
                 //  this.SetBinding(HeightRequestProperty, new Binding("Height", BindingMode.OneWay, null, null, null, chatTextInput));
             }
 
+            var g = this.Parent;
+            while (!g.GetType().Equals(typeof(ChatPage)))
+            {
+                g = g.Parent;
+            }
 
+            chatPage = g as ChatPage;
 
             chatTextInput.Focused += (s, e) =>
             {
@@ -37,7 +45,7 @@ namespace Chat.Views.Partials
         {
             (this.BindingContext as ChatPageViewModel).OnSendCommand.Execute(null);
 
-            (this.Parent?.Parent as ChatPage).ScrollListCommand.Execute(null);
+            chatPage.ScrollListCommand.Execute(null);
         }
 
 
@@ -51,13 +59,7 @@ namespace Chat.Views.Partials
         protected async void AttatchmentTapped(object s, EventArgs e)
         {
 
-            var g = this.Parent;
-            while(!g.GetType().Equals(typeof(ChatPage)))
-            {
-                g = g.Parent;
-            }
-
-            var chatPage = g as ChatPage;
+          
 
             var action  = await chatPage.DisplayActionSheet("Select an action", "Cancel", null,"Camera","Library","File");
             switch(action)
@@ -96,13 +98,11 @@ namespace Chat.Views.Partials
                 return;
 
             // await DisplayAlert("File Location", file.Path, "OK");
-
-            testIamge.Source = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                file.Dispose();
-                return stream;
-            });
+            var vm = this.BindingContext as ChatPageViewModel;
+            var stream = file.GetStream();
+            file.Dispose();
+            vm.SubmitMessage(stream, App.User, DateTime.Now);
+          
            
         }
 
@@ -122,12 +122,10 @@ namespace Chat.Views.Partials
 
             // await DisplayAlert("File Location", file.Path, "OK");
 
-            testIamge.Source = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                file.Dispose();
-                return stream;
-            });
+            var vm = this.BindingContext as ChatPageViewModel;
+            var stream = file.GetStream();
+            file.Dispose();
+            vm.SubmitMessage(stream, App.User, DateTime.Now);
         }
 
 
