@@ -26,6 +26,9 @@ namespace Chat.Models
 
         private ConversationTypeEnum ConversationType { get; set; }
 
+        //TODO really?? Use html table??
+        public string HTMLTable { get; set;}
+
 
     }
 }

@@ -14,7 +14,7 @@ namespace Chat
         public App()
         {
 #if DEBUG
-            LiveReload.Init();
+            //LiveReload.Init();
 #endif
 
             InitializeComponent();

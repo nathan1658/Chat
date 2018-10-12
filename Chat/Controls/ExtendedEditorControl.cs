@@ -57,7 +57,6 @@ namespace Chat.Controls
                 InvalidateMeasure();
         }
 
-      
 
     }
 }

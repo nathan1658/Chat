@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Chat.Views.Partials.ChatButtonsBarView"
+    HeightRequest="30"
+    BackgroundColor="Purple"
+    >
+    <ContentView.Content>
+        <Grid>
+          <Grid  VerticalOptions="Fill" x:Name="ButtonsGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+            
+                    <Button
+                            Margin="5"
+                        Grid.Column="0"
+                        BackgroundColor="Green"
+                        TextColor="White"
+                        Clicked="OK_ButtonClicked"
+                    
+                        
+                        Text="Yes">
+                    </Button>
+                    <Button
+                    Margin="5"
+                        Grid.Column="1"
+                        TextColor="White"
+                     
+                        BackgroundColor="Red"
+                        Text="NO">
+                    </Button>
+            
+            
+                </Grid>
+                <Label x:Name="ButtonResultLabel" IsVisible="false" Text="You Have Selected YES">
+          
+            
+        </Label>
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

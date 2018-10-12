@@ -18,8 +18,12 @@ namespace Chat.Views
         public ChatPage()
         {
             InitializeComponent();
+
         }
 
+
+
+     
         public ChatPage(Conversation con):this()
         {
             
@@ -27,12 +31,17 @@ namespace Chat.Views
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.First(), ScrollToPosition.End, true);                    
-                });
+                Device.BeginInvokeOnMainThread(ScrollToBottom);
             });
+            if(!string.IsNullOrEmpty(con.HTMLTable))
+            {
+                var webView = MessageBoard.FindByName<WebView>("webView");
+                webView.Source = new HtmlWebViewSource
+                {
+                    Html = con.HTMLTable
+                };
 
+            }
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)
@@ -58,7 +67,9 @@ namespace Chat.Views
                         vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
-                        ChatList?.ScrollToFirst();
+
+                    ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.First(), ScrollToPosition.End, true);   
+                        //cd cd ChatList?.ScrollToFirst();
                     });
 
 
@@ -67,7 +78,17 @@ namespace Chat.Views
             }
         }
 
-        
+        void ScrollToBottom()
+        {
+            ChatList.Focused += (s, e) =>
+             {
+                 InputBar.FocusEntry();
+             };
+            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.First(), ScrollToPosition.End, true);   
+        }
+
+
+
 
     }
 }

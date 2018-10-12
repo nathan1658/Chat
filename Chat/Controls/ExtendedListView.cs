@@ -13,6 +13,7 @@ namespace Chat.Controls
 
         public ExtendedListView() : this(ListViewCachingStrategy.RecycleElement)
         {
+
         }
 
 

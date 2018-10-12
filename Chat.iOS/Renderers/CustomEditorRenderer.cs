@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Chat.Controls;
 using Chat.iOS.Renderers;
+using Chat.Views.Partials;
 using CoreGraphics;
 using Foundation;
 using UIKit;
@@ -128,6 +129,19 @@ namespace Chat.iOS.Renderers
                         previousHeight = customControl.Height;
 
                     }
+                }
+            }
+            else if(e.PropertyName == ExtendedEditorControl.IsFocusedProperty.PropertyName)
+            {
+                if(Control!=null)
+                {
+                    var chatEntryView = this.Element as ExtendedEditorControl;
+                    Control.ShouldEndEditing = (textField) =>
+                    {
+                        var bb = chatEntryView.Parent.Parent.Parent as ChatInputBarView;
+
+                        return !bb.KeepTextInputFocus;
+                    };
                 }
             }
         }

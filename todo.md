@@ -5,3 +5,12 @@
 - [ ] Send Message smoothless and bugs..
 - [ ] Timeout spinner
 - [ ] Navigation Bar(?)
+- [ ] 上拉load message
+- [ ] MessageBoard with button
+- [ ] Attatchment
+- [X] listview 回彈
+- [ ] Copy Message 
+- [ ] Scroll down messageboard
+- [ ] Retain scroll position when height of UITableview change
+- [ ] Remove [DONE] button of picker
+- [ ] Attatchment

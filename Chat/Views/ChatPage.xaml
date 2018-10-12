@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:Chat"
     xmlns:localHelpers="clr-namespace:Chat.Helpers"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
-    xmlns:controls ="clr-namespace:Chat.Controls"
+    xmlns:controls="clr-namespace:Chat.Controls"
     x:Class="Chat.Views.ChatPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -13,68 +13,74 @@
                 x:Key="MessageTemplateSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
-  
     <Grid
-        RowSpacing="0"  
+        RowSpacing="0"
         ColumnSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition 
+            <RowDefinition
+                Height="auto" />
+            <RowDefinition
                 Height="*" />
             <RowDefinition
                 Height="auto" />
-
+            <RowDefinition
+                Height="auto" />
         </Grid.RowDefinitions>
-        <controls:ExtendedListView
+        <partials:MessageBoard
             Grid.Row="0"
-              ItemTemplate="{StaticResource MessageTemplateSelector}"
+            x:Name="MessageBoard">
+        </partials:MessageBoard>
+        <controls:ExtendedListView
+            Grid.Row="1"
+            ItemTemplate="{StaticResource MessageTemplateSelector}"
             ItemsSource="{Binding Messages}"
             Margin="0"
             ItemTapped="OnListTapped"
             HasUnevenRows="true"
             VerticalOptions="FillAndExpand"
-            
             SeparatorColor="Transparent"
             FlowDirection="RightToLeft"
             Rotation="180"
-            x:Name="ChatList" 
-             ItemAppearingCommand="{Binding MessageAppearingCommand}"
-            ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
-            >
-            
-            
-            
+            x:Name="ChatList"
+            ItemAppearingCommand="{Binding MessageAppearingCommand}"
+            ItemDisappearingCommand="{Binding MessageDisappearingCommand}">
         </controls:ExtendedListView>
-
-        <Frame HorizontalOptions="EndAndExpand" 
-                                 Margin="0,0,2,15"
-                                 VerticalOptions="End"
-                                 HasShadow="false" 
-                                 Grid.Row="0"  
-                                 HeightRequest="50" WidthRequest="50"
-                                 CornerRadius="25"
-                                 Padding="1"
-                                 BackgroundColor="LightGreen"   
-                                 IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
-            <StackLayout Spacing="3">
-                <Label Text="{Binding PendingMessageCount}"
-                              HorizontalOptions="CenterAndExpand"
-                              IsVisible="{Binding PendingMessageCountVisible}"
-                              VerticalTextAlignment="Center"
-                              TextColor="{DynamicResource primary}"/>
-                <Image Source="ic_scrolldown"
-                               WidthRequest="30"
-                               HeightRequest="30"
-                               VerticalOptions="CenterAndExpand"/>
-
+        <Frame
+            HorizontalOptions="EndAndExpand"
+            Margin="0,0,2,15"
+            VerticalOptions="End"
+            HasShadow="false"
+            Grid.Row="1"
+            HeightRequest="50"
+            WidthRequest="50"
+            CornerRadius="25"
+            Padding="1"
+            BackgroundColor="LightGreen"
+            IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
+            <StackLayout
+                Spacing="3">
+                <Label
+                    Text="{Binding PendingMessageCount}"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding PendingMessageCountVisible}"
+                    VerticalTextAlignment="Center"
+                    TextColor="{DynamicResource primary}" />
+                <Image
+                    Source="ic_scrolldown"
+                    WidthRequest="30"
+                    HeightRequest="30"
+                    VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ScrollTap"/>
+                <TapGestureRecognizer
+                    Tapped="ScrollTap" />
             </Frame.GestureRecognizers>
         </Frame>
-        
+        <partials:ChatButtonsBarView
+            Grid.Row="2">
+        </partials:ChatButtonsBarView>
         <partials:ChatInputBarView
-            Grid.Row="1"                        
+            Grid.Row="3"
             x:Name="InputBar" />
-        
     </Grid>
 </ContentPage>

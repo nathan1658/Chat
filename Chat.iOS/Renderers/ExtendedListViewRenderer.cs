@@ -22,11 +22,21 @@ namespace Chat.iOS.Renderers
             {
                 if (Control != null)
                 {
+        
                     Control.AllowsSelection = false;
                     Control.AlwaysBounceVertical = false;
-                    Control.Bounces = false;
+                    Control.Bounces = true;
+                    Control.ScrollsToTop = true;
+
+                   
                 }
             }
         }
+
+
+
+
     }
+
+
 }
