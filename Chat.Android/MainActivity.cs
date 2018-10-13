@@ -19,9 +19,10 @@ namespace Chat.Droid
 
             base.OnCreate(savedInstanceState);
 
-
+            #region plugin init
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
-
+            Stormlion.PhotoBrowser.Droid.Platform.Init(this);
+            #endregion
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

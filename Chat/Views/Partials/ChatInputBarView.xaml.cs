@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Chat.ViewModels;
 using Plugin.Media;
 using Xamarin.Forms;
@@ -22,18 +23,32 @@ namespace Chat.Views.Partials
                 //  this.SetBinding(HeightRequestProperty, new Binding("Height", BindingMode.OneWay, null, null, null, chatTextInput));
             }
 
-            var g = this.Parent;
-            while (!g.GetType().Equals(typeof(ChatPage)))
-            {
-                g = g.Parent;
-            }
-
-            chatPage = g as ChatPage;
+            this.SizeChanged += (s, e) =>
+              {
+                  base.OnParentSet();
+                  var g = this.Parent;
+                  if (this.Parent != null)
+                  {
+                      while (!g.GetType().Equals(typeof(ChatPage)))
+                      {
+                          g = g.Parent;
+                      }
+                  }
+                  chatPage = g as ChatPage;
+              };
+            
+            
 
             chatTextInput.Focused += (s, e) =>
             {
                 KeepTextInputFocus = true;
             };
+
+        }
+
+        private void setParent()
+        {
+          
 
         }
 
@@ -44,7 +59,10 @@ namespace Chat.Views.Partials
         protected void SendTapped(object sender, System.EventArgs e)
         {
             (this.BindingContext as ChatPageViewModel).OnSendCommand.Execute(null);
-
+            if(chatPage == null)
+            {
+                setParent();
+            }
             chatPage.ScrollListCommand.Execute(null);
         }
 
@@ -59,7 +77,10 @@ namespace Chat.Views.Partials
         protected async void AttatchmentTapped(object s, EventArgs e)
         {
 
-          
+            if (chatPage == null)
+            {
+                setParent();
+            }
 
             var action  = await chatPage.DisplayActionSheet("Select an action", "Cancel", null,"Camera","Library","File");
             switch(action)
@@ -90,8 +111,10 @@ namespace Chat.Views.Partials
 
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                Directory = "Sample",
-                Name = "test.jpg"
+             //   Directory = "Sample",
+               // Name = "test.jpg",
+                SaveToAlbum = false
+                
             });
 
             if (file == null)
@@ -99,12 +122,26 @@ namespace Chat.Views.Partials
 
             // await DisplayAlert("File Location", file.Path, "OK");
             var vm = this.BindingContext as ChatPageViewModel;
+           
+
             var stream = file.GetStream();
+            var imageByteArr = readFully(stream);
+            stream.Dispose();
             file.Dispose();
-            vm.SubmitMessage(stream, App.User, DateTime.Now);
+            vm.SubmitMessage(imageByteArr, App.User, DateTime.Now);
           
            
         }
+
+        private byte[] readFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
 
         async void pickFromLibrary()
         {
@@ -124,8 +161,10 @@ namespace Chat.Views.Partials
 
             var vm = this.BindingContext as ChatPageViewModel;
             var stream = file.GetStream();
+            var imageByteArr = readFully(stream);
             file.Dispose();
-            vm.SubmitMessage(stream, App.User, DateTime.Now);
+            stream.Dispose();
+            vm.SubmitMessage(imageByteArr, App.User, DateTime.Now);
         }
 
 

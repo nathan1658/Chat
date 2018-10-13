@@ -138,9 +138,9 @@ namespace Chat.ViewModels
             TextToSend = string.Empty;
         }
 
-        internal void SubmitMessage(Stream stream, string user,DateTime SubmittedDate)
+        internal void SubmitMessage(byte[] imageByteArr, string user,DateTime SubmittedDate)
         {
-            var msg = new Message() { PhotoStream = stream, User = user, SubmittedDate = SubmittedDate };
+            var msg = new Message() { PhotoAttatchment = imageByteArr, User = user, SubmittedDate = SubmittedDate };
             SubmitMessage(msg);
         }
 

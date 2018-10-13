@@ -22,9 +22,10 @@ namespace Chat.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            #region plugin init
             Rg.Plugins.Popup.Popup.Init();
-
-
+            Stormlion.PhotoBrowser.iOS.Platform.Init();
+            #endregion
 
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();

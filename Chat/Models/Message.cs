@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Chat.Helpers;
+using Chat.Interfaces;
+using Chat.Shared.Helpers;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Timers;
@@ -8,10 +11,18 @@ namespace Chat.Models
 {
     public class Message : INotifyPropertyChanged
     {
+
+        private string _text;
         public string Text
         {
-            get;
-            set;
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _text = value;
+            }
         }
 
         public string User
@@ -26,15 +37,34 @@ namespace Chat.Models
             set;
         }
 
-        public Stream PhotoStream { get; set; }
+        public byte[] PhotoAttatchment { get; set; }
 
-        public ImageSource PhotoSource
+
+        private ImageSource _imageThumbnail;
+
+        public ImageSource ImageThumbnail
         {
             get
             {
-                if (PhotoStream != null)
+                if (PhotoAttatchment != null && _imageThumbnail == null)
+                {                                     
+                    try
+                    {
+                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoAttatchment, 50, 50, 50);
+                        //Generate compressed image..
+                        
+                        _imageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(compressedImage); });
+                    }
+                    catch(Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error when generating image thumbnail, returning null, exception: "+ex.Message);
+                        return null;
+                    }
+                    
+                }
+                if(PhotoAttatchment!=null)
                 {
-                    return ImageSource.FromStream(() => { return PhotoStream; });
+                    return _imageThumbnail;
                 }
                 else
                 {
@@ -59,8 +89,7 @@ namespace Chat.Models
             {
                 timeoutValue = value;
                 if (timeoutValue.TotalSeconds > 0)
-                {
-                    HaveTimeout = true;
+                {                    
                     RemainingTime = value;
                     startTime = DateTime.Now;
                     timer = new Timer(1);
@@ -70,7 +99,7 @@ namespace Chat.Models
             }
         }
 
-        public bool HaveTimeout { get; set; }
+
 
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -88,7 +117,20 @@ namespace Chat.Models
 
         private Timer timer = new Timer();
 
-        public String RemainingTimeString { get { if (RemainingTime != null) return RemainingTime.ToString(); return "aaa"; } }
+        public String RemainingTimeString
+        {
+            get
+            {
+                if (RemainingTime != null && RemainingTime.TotalSeconds > 0)
+                {
+                    return RemainingTime.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
 
         public bool IsExpired
         { get; set; }

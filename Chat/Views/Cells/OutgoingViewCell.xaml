@@ -3,7 +3,9 @@
     IsEnabled="true"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:Chat.Converter"
     x:Class="Chat.Views.Cells.OutgoingViewCell">
+    
     <Frame
         FlowDirection="LeftToRight"
         Rotation="180"
@@ -12,12 +14,23 @@
         Margin="10,10,80,10"
         CornerRadius="5"
         HasShadow="False">
+        <Frame.Resources>
+            <converter:IsNullConverter x:Key="IsNullConverter"/>
+        </Frame.Resources>
         <StackLayout>
             <Image
-                Source="{Binding PhotoSource}"
+                Source="{Binding ImageThumbnail}"
                 HeightRequest="50"
                 WidthRequest="50"
-                Aspect="AspectFit" />
+                Aspect="AspectFit"
+                >
+                <Image.GestureRecognizers>
+                    <!--TODO make use of command here-->
+                    <TapGestureRecognizer
+                        Tapped="TapGestureRecognizer_Tapped">
+                    </TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
@@ -55,12 +68,12 @@
                 IsVisible="false">
                 <Label.Triggers>
                     <DataTrigger
-                        Binding="{Binding HaveTimeout}"
-                        Value="True"
+                        Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
+                        Value="false"
                         TargetType="Label">
                         <Setter
                             Property="IsVisible"
-                            Value="True" />
+                            Value="true" />
                     </DataTrigger>
                 </Label.Triggers>
             </Label>

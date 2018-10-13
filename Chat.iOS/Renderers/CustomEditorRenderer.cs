@@ -138,13 +138,21 @@ namespace Chat.iOS.Renderers
                     var chatEntryView = this.Element as ExtendedEditorControl;
                     Control.ShouldEndEditing = (textField) =>
                     {
-                        var bb = chatEntryView.Parent.Parent.Parent as ChatInputBarView;
+                        ChatInputBarView chatInputBarView = null;
+                        var parent = chatEntryView.Parent;
+                        while(parent as ChatInputBarView == null)
+                        {
+                            parent = parent.Parent;
+                        }
+                        chatInputBarView = parent as ChatInputBarView;
 
-                        return !bb.KeepTextInputFocus;
+                        return !chatInputBarView.KeepTextInputFocus;
                     };
                 }
             }
         }
+
+
 
         public void CreatePlaceholder()
         {
