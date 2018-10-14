@@ -9,7 +9,7 @@ namespace Chat
     public partial class App : Application
     {
         public static string User = "SpongeBob";
-
+        public static INavigation Navigation { get; set; }
 
         public App()
         {
@@ -18,8 +18,9 @@ namespace Chat
 #endif
 
             InitializeComponent();
-
-            MainPage = new NavigationPage(new ConversationSelector());            
+            
+            MainPage = new NavigationPage(new ConversationSelector());
+            Navigation = MainPage.Navigation;
         }
 
         protected override void OnStart()

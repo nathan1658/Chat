@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:Chat.Converter"
+    xmlns:extensions="clr-namespace:Chat.Extensions"
     x:Class="Chat.Views.Cells.OutgoingViewCell">
     
     <Frame
@@ -23,11 +24,37 @@
                 HeightRequest="50"
                 WidthRequest="50"
                 Aspect="AspectFit"
+                IsVisible="False"
                 >
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding ImageThumbnail,Converter={StaticResource IsNullConverter}}" Value="false">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Image.Triggers>
                 <Image.GestureRecognizers>
                     <!--TODO make use of command here-->
                     <TapGestureRecognizer
-                        Tapped="TapGestureRecognizer_Tapped">
+                        Tapped="ImageThumbnail_Tapped">
+                    </TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image 
+                Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
+                HeightRequest="50"
+                WidthRequest="50"
+                Aspect="AspectFit"
+                IsVisible="False"
+                >
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding PDFByte,Converter={StaticResource IsNullConverter}}" Value="false">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Image.Triggers>
+                <Image.GestureRecognizers>
+                    <!--TODO make use of command here-->
+                    <TapGestureRecognizer
+                        Tapped="PDFIcon_Tapped">
                     </TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>

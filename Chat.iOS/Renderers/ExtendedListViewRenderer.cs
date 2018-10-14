@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Chat.Controls;
+﻿using Chat.Controls;
 using Chat.iOS.Renderers;
-using Foundation;
-using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -21,22 +15,13 @@ namespace Chat.iOS.Renderers
             if (e.NewElement != null)
             {
                 if (Control != null)
-                {
-        
+                {        
                     Control.AllowsSelection = false;
                     Control.AlwaysBounceVertical = false;
                     Control.Bounces = true;
-                    Control.ScrollsToTop = true;
-
-                   
+                    Control.ScrollsToTop = true;                   
                 }
             }
         }
-
-
-
-
     }
-
-
 }

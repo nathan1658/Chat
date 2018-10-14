@@ -33,5 +33,9 @@ namespace Chat.iOS
 
             return base.FinishedLaunching(app, options);
         }
+
+
+        
+
     }
 }

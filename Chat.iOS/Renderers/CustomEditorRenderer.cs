@@ -8,6 +8,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+
 [assembly: ExportRenderer(typeof(ExtendedEditorControl), typeof(CustomEditorRenderer))]
 namespace Chat.iOS.Renderers
 {

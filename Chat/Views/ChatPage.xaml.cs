@@ -40,8 +40,12 @@ namespace Chat.Views
                 {
                     Html = con.HTMLTable
                 };
-
             }
+
+
+         
+          
+
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)

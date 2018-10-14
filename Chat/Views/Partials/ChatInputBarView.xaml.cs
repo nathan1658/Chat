@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using Chat.ViewModels;
 using Plugin.Media;
 using Xamarin.Forms;
@@ -82,7 +83,7 @@ namespace Chat.Views.Partials
                 setParent();
             }
 
-            var action  = await chatPage.DisplayActionSheet("Select an action", "Cancel", null,"Camera","Library","File");
+            var action  = await chatPage.DisplayActionSheet("Select an action", "Cancel", null,"Camera","Library","PDF","File");
             switch(action)
             {
                 case "Camera":
@@ -91,10 +92,25 @@ namespace Chat.Views.Partials
                 case "Library":
                     pickFromLibrary();
                     break;
+                case "PDF":
+                    submitPDF();
+                    break;
                 default:
                     //TODO
                     chatPage.DisplayAlert("Error", "Sosad not yet implement","Cancel");
                     break;
+            }
+        }
+
+        void submitPDF()
+        {
+            //TODO Think the mechanism here, cache it or download it everytime?
+            var vm = (this.BindingContext as ChatPageViewModel);
+            if(vm!=null)
+            {
+                var webClient = new WebClient();
+                var data = webClient.DownloadData("http://www.africau.edu/images/default/sample.pdf");
+                vm.SubmitMessage(null, null, data);
             }
         }
 
@@ -128,7 +144,7 @@ namespace Chat.Views.Partials
             var imageByteArr = readFully(stream);
             stream.Dispose();
             file.Dispose();
-            vm.SubmitMessage(imageByteArr, App.User, DateTime.Now);
+            vm.SubmitMessage(null,imageByteArr, null);
           
            
         }
@@ -164,7 +180,7 @@ namespace Chat.Views.Partials
             var imageByteArr = readFully(stream);
             file.Dispose();
             stream.Dispose();
-            vm.SubmitMessage(imageByteArr, App.User, DateTime.Now);
+            vm.SubmitMessage(null,imageByteArr, null);
         }
 
 

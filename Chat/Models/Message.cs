@@ -37,7 +37,7 @@ namespace Chat.Models
             set;
         }
 
-        public byte[] PhotoAttatchment { get; set; }
+        public byte[] PhotoByte { get; set; }
 
 
         private ImageSource _imageThumbnail;
@@ -46,11 +46,11 @@ namespace Chat.Models
         {
             get
             {
-                if (PhotoAttatchment != null && _imageThumbnail == null)
+                if (PhotoByte != null && _imageThumbnail == null)
                 {                                     
                     try
                     {
-                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoAttatchment, 50, 50, 50);
+                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoByte, 50, 50, 50);
                         //Generate compressed image..
                         
                         _imageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(compressedImage); });
@@ -62,7 +62,7 @@ namespace Chat.Models
                     }
                     
                 }
-                if(PhotoAttatchment!=null)
+                if(PhotoByte!=null)
                 {
                     return _imageThumbnail;
                 }
@@ -73,6 +73,8 @@ namespace Chat.Models
             }
         }
 
+
+        public byte[] PDFByte { get; set; }
 
 
         public Conversation Conversation { get; set; }

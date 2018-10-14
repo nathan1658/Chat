@@ -23,7 +23,7 @@ namespace Chat.Views.Partials
                 {
 
                     var vm = this.BindingContext as ChatPageViewModel;
-                    vm.SubmitMessage("You clicked yes", null, DateTime.Now);
+                    vm.SubmitMessage("You clicked yes", null, null);
 
 
                     ButtonsGrid.IsVisible = false;

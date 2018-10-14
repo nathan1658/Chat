@@ -14,7 +14,7 @@ namespace Chat.Views.Cells
             InitializeComponent();
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void ImageThumbnail_Tapped(object sender, EventArgs e)
         {
 
             Message msg = this.BindingContext as Message;
@@ -24,7 +24,7 @@ namespace Chat.Views.Cells
                 tmpFile = Path.GetFileName(tmpFile);
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), tmpFile);
 
-                File.WriteAllBytes(fileName, msg.PhotoAttatchment);
+                File.WriteAllBytes(fileName, msg.PhotoByte);
 
 
                 new PhotoBrowser
@@ -35,22 +35,30 @@ namespace Chat.Views.Cells
                         {
                             URL= @"File://"+fileName
                         }
-                    },
-                    ActionButtonPressed = (index) =>
-                    {
-                        System.Diagnostics.Debug.WriteLine($"Clicked {index}");
                     }
                 }.Show();
 
-                //Remove image after preview..
-                try
-                {
-                    File.Delete(fileName);
-                }catch(Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Error when deleting tmp image: " + ex.Message);
-                }
+                //TODO Remove image after preview..
+                //try
+                //{
+                //    File.Delete(fileName);
+                //}catch(Exception ex)
+                //{
+                //    System.Diagnostics.Debug.WriteLine("Error when deleting tmp image: " + ex.Message);
+                //}
             }
         }
+
+
+        private void PDFIcon_Tapped(object sender, EventArgs e)
+        {
+
+            Message msg = this.BindingContext as Message;
+            if (msg != null)
+            {
+                App.Navigation.PushModalAsync(new NavigationPage(new PDFWebViewPage(msg.PDFByte)));
+            }
+        }
+
     }
 }

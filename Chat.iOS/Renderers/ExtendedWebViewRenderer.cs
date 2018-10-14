@@ -8,7 +8,6 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportRenderer(typeof(ExtendedWebView), typeof(ExtendedWebViewRenderer))]
 namespace Chat.iOS.Renderers
 {
-
     public class ExtendedWebViewRenderer:Xamarin.Forms.Platform.iOS.WebViewRenderer
     {
         protected override void OnElementChanged(VisualElementChangedEventArgs e)

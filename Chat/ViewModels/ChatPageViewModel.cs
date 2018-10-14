@@ -14,6 +14,7 @@ namespace Chat.ViewModels
 {
     public class ChatPageViewModel : INotifyPropertyChanged
     {
+        static Random random = new Random();
         private Conversation _conversation;
         private static readonly List<string> chatExample = new List<string>{
             @"你幾時拍拖呀？",
@@ -34,7 +35,7 @@ namespace Chat.ViewModels
             "你同我講野呀？",
             "收聲喇",
             "一人少句啦！！！！",
-            "幾時開追悼會？",           
+            "幾時開追悼會？",
             "留返拜山先講ok?"
             };
 
@@ -59,9 +60,9 @@ namespace Chat.ViewModels
             _conversation = con;
             OnSendCommand = new Command(() =>
             {
-                if(!string.IsNullOrEmpty(TextToSend))
+                if (!string.IsNullOrEmpty(TextToSend))
                 {
-                    SubmitMessage(TextToSend,App.User,DateTime.Now);
+                    SubmitMessage(TextToSend,null,null);
                 }
             });
             Messages = new ObservableCollection<Message>(_conversation.Messages);
@@ -69,8 +70,8 @@ namespace Chat.ViewModels
             var rnd = new Random();
             int rndInterval = 10 + rnd.Next(5);
             Timer timer = new Timer();
-            timer.Interval = rndInterval*1000;
-            timer.Elapsed += (s,e) =>
+            timer.Interval = rndInterval * 1000;
+            timer.Elapsed += (s, e) =>
               {
 
                   Device.BeginInvokeOnMainThread(() =>
@@ -88,7 +89,7 @@ namespace Chat.ViewModels
                       }
                   });
 
-                timer.Interval = (5 + rnd.Next(5))*1000;
+                  timer.Interval = (5 + rnd.Next(5)) * 1000;
               };
             timer.Start();
 
@@ -100,21 +101,21 @@ namespace Chat.ViewModels
         public static Message GenRandomMessage()
         {
             Message msg;
-            var random = new Random();
+
             var text = chatExample[random.Next(chatExample.Count)];
             var user = userExample[random.Next(userExample.Count)];
             var expiryTime = TimeSpan.FromSeconds(10 + random.Next(10));
-            if(expiryTime.TotalSeconds%2==0)
+            if (expiryTime.TotalSeconds % 2 == 0)
             {
-                 msg = new Message() { Text = text, User = user, SubmittedDate = DateTime.Now, TimeOutValue = expiryTime };
+                msg = new Message() { Text = text, User = user, SubmittedDate = DateTime.Now, TimeOutValue = expiryTime };
             }
             else
             {
-                 msg = new Message() { Text = text, User = user, SubmittedDate = DateTime.Now,  };
+                msg = new Message() { Text = text, User = user, SubmittedDate = DateTime.Now, };
             }
 
             return msg;
-            
+
         }
 
         void ReceiveMessage(Message msg)
@@ -123,25 +124,32 @@ namespace Chat.ViewModels
         }
 
 
-        internal void SubmitMessage(string textToSend,String User, DateTime SubmittedDate)
+        internal void SubmitMessage(string textToSend, byte[] imageByteArr, byte[] pdfByte)
         {
-            string formattedText = textToSend;
-
-            formattedText = formattedText.TrimStart('\n').TrimEnd('\n');
-
-            SubmitMessage(new Message() { Text = formattedText, User = User, SubmittedDate = SubmittedDate,TimeOutValue = CountDownValue });
+            string formattedText = null;
+            if (!string.IsNullOrEmpty(TextToSend))
+            {
+                formattedText = TextToSend;
+                formattedText = formattedText.TrimStart('\n').TrimEnd('\n');
+            }
+            Message msgToSend = new Message()
+            {
+                Text = formattedText,
+                PhotoByte = imageByteArr,
+                PDFByte = pdfByte
+            };
+            SubmitMessage(msgToSend);
         }
+
+   
 
         void SubmitMessage(Message msg)
         {
-            Messages.Insert(0,msg);
+            msg.TimeOutValue = CountDownValue;
+            msg.SubmittedDate = DateTime.Now;
+            msg.User = App.User;
+            Messages.Insert(0, msg);
             TextToSend = string.Empty;
-        }
-
-        internal void SubmitMessage(byte[] imageByteArr, string user,DateTime SubmittedDate)
-        {
-            var msg = new Message() { PhotoAttatchment = imageByteArr, User = user, SubmittedDate = SubmittedDate };
-            SubmitMessage(msg);
         }
 
 
@@ -175,7 +183,7 @@ namespace Chat.ViewModels
 
             }
         }
-              
+
 
 
         public ObservableCollection<Message> Messages
