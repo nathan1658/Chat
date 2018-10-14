@@ -91,7 +91,7 @@ namespace Chat.ViewModels
 
                   timer.Interval = (5 + rnd.Next(5)) * 1000;
               };
-            timer.Start();
+            //timer.Start();
 
             MessageAppearingCommand = new Command<Message>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<Message>(OnMessageDisappearing);

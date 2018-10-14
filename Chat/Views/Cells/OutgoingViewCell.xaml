@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewCell
+<cells:BaseMessageViewCell
+    xmlns:cells="clr-namespace:Chat.Views.Cells"
     IsEnabled="true"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:Chat.Converter"
     xmlns:extensions="clr-namespace:Chat.Extensions"
+    xmlns:partials="clr-namespace:Chat.Views.Partials"
     x:Class="Chat.Views.Cells.OutgoingViewCell">
     
     <Frame
@@ -15,95 +17,7 @@
         Margin="10,10,80,10"
         CornerRadius="5"
         HasShadow="False">
-        <Frame.Resources>
-            <converter:IsNullConverter x:Key="IsNullConverter"/>
-        </Frame.Resources>
-        <StackLayout>
-            <Image
-                Source="{Binding ImageThumbnail}"
-                HeightRequest="50"
-                WidthRequest="50"
-                Aspect="AspectFit"
-                IsVisible="False"
-                >
-                <Image.Triggers>
-                    <DataTrigger TargetType="Image" Binding="{Binding ImageThumbnail,Converter={StaticResource IsNullConverter}}" Value="false">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Image.Triggers>
-                <Image.GestureRecognizers>
-                    <!--TODO make use of command here-->
-                    <TapGestureRecognizer
-                        Tapped="ImageThumbnail_Tapped">
-                    </TapGestureRecognizer>
-                </Image.GestureRecognizers>
-            </Image>
+        <partials:MessageBody/>
 
-            <Image 
-                Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
-                HeightRequest="50"
-                WidthRequest="50"
-                Aspect="AspectFit"
-                IsVisible="False"
-                >
-                <Image.Triggers>
-                    <DataTrigger TargetType="Image" Binding="{Binding PDFByte,Converter={StaticResource IsNullConverter}}" Value="false">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Image.Triggers>
-                <Image.GestureRecognizers>
-                    <!--TODO make use of command here-->
-                    <TapGestureRecognizer
-                        Tapped="PDFIcon_Tapped">
-                    </TapGestureRecognizer>
-                </Image.GestureRecognizers>
-            </Image>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="auto" />
-                    <RowDefinition
-                        Height="auto" />
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Text="{Binding Text}">
-                    <Label.Triggers>
-                        <DataTrigger
-                            Binding="{Binding IsExpired}"
-                            Value="True"
-                            TargetType="Label">
-                            <Setter
-                                Property="Text"
-                                Value="Message Deleted." />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    HorizontalTextAlignment="End"
-                    Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}" />
-            </Grid>
-            <Label
-                Text="{Binding RemainingTimeString}"
-                IsVisible="false">
-                <Label.Triggers>
-                    <DataTrigger
-                        Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
-                        Value="false"
-                        TargetType="Label">
-                        <Setter
-                            Property="IsVisible"
-                            Value="true" />
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-        </StackLayout>
     </Frame>
-</ViewCell>
+</cells:BaseMessageViewCell>

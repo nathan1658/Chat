@@ -35,10 +35,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\Cells\" />
-    <Folder Include="Views\Partials\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Views\Partials\MessageBody.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PDFWebViewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

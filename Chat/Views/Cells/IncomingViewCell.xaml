@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewCell
+<cells:BaseMessageViewCell
+    xmlns:cells="clr-namespace:Chat.Views.Cells"
     IsEnabled="true"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partials="clr-namespace:Chat.Views.Partials"
     x:Class="Chat.Views.Cells.IncomingViewCell">
     <Frame
         FlowDirection="LeftToRight"
@@ -23,51 +25,15 @@
                         Height="auto" />
                     <RowDefinition
                         Height="auto" />
-                    <RowDefinition
-                        Height="auto" />
+
                 </Grid.RowDefinitions>
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{Binding User}"
                     FontAttributes="Bold" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Text="{Binding Text}"
->
-                    <Label.Triggers>
-                        <DataTrigger
-                            Binding="{Binding IsExpired}"
-                            Value="True"
-                            TargetType="Label">
-                            <Setter
-                                Property="Text"
-                                Value="Message Deleted." />
-                       
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    HorizontalTextAlignment="End"
-                    Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}' }" />
+                <partials:MessageBody Grid.Row="1" Grid.Column="0"/>
             </Grid>
-             <Label
-                Text="{Binding RemainingTimeString}" IsVisible="false">
-                <Label.Triggers>
-                    
-                      <DataTrigger
-                            Binding="{Binding HaveTimeout}"
-                            Value="True"
-                            TargetType="Label">
-                            <Setter
-                                Property="IsVisible"
-                                Value="True" />
-                        </DataTrigger>
-                </Label.Triggers>
-                </Label>
         </StackLayout>
     </Frame>
-</ViewCell>
+</cells:BaseMessageViewCell>

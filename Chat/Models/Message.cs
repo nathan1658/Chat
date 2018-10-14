@@ -1,6 +1,5 @@
 ﻿using Chat.Helpers;
 using Chat.Interfaces;
-using Chat.Shared.Helpers;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -133,9 +132,25 @@ namespace Chat.Models
                 }
             }
         }
-
+        private bool _isExpired;
         public bool IsExpired
-        { get; set; }
+        {
+            get
+            {
+                return _isExpired;
+            }
+            set
+            {
+                _isExpired = value;
+                if(IsExpired == true)
+                {
+                    Text = null;
+                    PhotoByte = null;
+                    PDFByte = null;
+               }
+
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

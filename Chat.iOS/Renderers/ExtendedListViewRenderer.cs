@@ -1,5 +1,6 @@
 ﻿using Chat.Controls;
 using Chat.iOS.Renderers;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -19,7 +20,10 @@ namespace Chat.iOS.Renderers
                     Control.AllowsSelection = false;
                     Control.AlwaysBounceVertical = false;
                     Control.Bounces = true;
-                    Control.ScrollsToTop = true;                   
+                    Control.ScrollsToTop = true;
+
+                    Control.RowHeight = UITableView.AutomaticDimension;
+                    Control.EstimatedRowHeight = 100;
                 }
             }
         }
