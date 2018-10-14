@@ -5,7 +5,7 @@
     x:Class="Chat.Views.Cells.SystemMessageViewCell">
      <Frame
     FlowDirection="LeftToRight" 
-        Rotation="180"
+
       BackgroundColor=" Yellow"
         Padding="10"        
         Margin="10,10,10,10"

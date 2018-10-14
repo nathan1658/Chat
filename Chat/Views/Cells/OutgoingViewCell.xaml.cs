@@ -14,7 +14,6 @@ namespace Chat.Views.Cells
             InitializeComponent();
         }
 
-       
-
+   
     }
 }

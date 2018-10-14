@@ -31,7 +31,7 @@ namespace Chat.Views
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
-                Device.BeginInvokeOnMainThread(ScrollToBottom);
+                Device.BeginInvokeOnMainThread(scrollToBottom);
             });
             if(!string.IsNullOrEmpty(con.HTMLTable))
             {
@@ -41,11 +41,7 @@ namespace Chat.Views
                     Html = con.HTMLTable
                 };
             }
-
-
-         
-          
-
+                   
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)
@@ -72,26 +68,22 @@ namespace Chat.Views
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
 
-                    ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.First(), ScrollToPosition.End, true);   
-                        //cd cd ChatList?.ScrollToFirst();
+                        scrollToBottom();
                     });
-
-
                 }
 
             }
         }
 
-        void ScrollToBottom()
-        {
-            ChatList.Focused += (s, e) =>
-             {
-                 InputBar.FocusEntry();
-             };
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.First(), ScrollToPosition.End, true);   
+        void scrollToBottom()
+        {           
+            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.Last(), ScrollToPosition.End, true);   
         }
 
-
+        internal void FocusEntry()
+        {            
+                InputBar.FocusEntry();          
+        }
 
 
     }

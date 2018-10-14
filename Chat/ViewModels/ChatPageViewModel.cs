@@ -120,7 +120,7 @@ namespace Chat.ViewModels
 
         void ReceiveMessage(Message msg)
         {
-            Messages.Insert(0, msg);
+            Messages.Add(msg);
         }
 
 
@@ -147,8 +147,8 @@ namespace Chat.ViewModels
         {
             msg.TimeOutValue = CountDownValue;
             msg.SubmittedDate = DateTime.Now;
-            msg.User = App.User;
-            Messages.Insert(0, msg);
+            msg.User = App.User;            
+            Messages.Add(msg);
             TextToSend = string.Empty;
         }
 
@@ -156,13 +156,14 @@ namespace Chat.ViewModels
         void OnMessageAppearing(Message msg)
         {
             var idx = Messages.IndexOf(msg);
-            if (idx <= 6)
+            if (idx >= 6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     while (DelayedMessages.Count > 0)
                     {
-                        Messages.Insert(0, DelayedMessages.Dequeue());
+                        //Messages.Insert(0, DelayedMessages.Dequeue());
+                        Messages.Add(DelayedMessages.Dequeue());
                     }
                     ShowScrollTap = false;
                     LastMessageVisible = true;
@@ -173,7 +174,7 @@ namespace Chat.ViewModels
         void OnMessageDisappearing(Message message)
         {
             var idx = Messages.IndexOf(message);
-            if (idx >= 6)
+            if (idx <= 6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {

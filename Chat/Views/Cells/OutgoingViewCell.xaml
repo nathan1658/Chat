@@ -7,14 +7,16 @@
     xmlns:converter="clr-namespace:Chat.Converter"
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
-    x:Class="Chat.Views.Cells.OutgoingViewCell">
+    x:Class="Chat.Views.Cells.OutgoingViewCell"    
+    Appearing="BaseMessageViewCell_Appearing"
+    >
     
     <Frame
         FlowDirection="LeftToRight"
-        Rotation="180"
+
         BackgroundColor="Gray"
         Padding="10"
-        Margin="10,10,80,10"
+        Margin="80,10,10,10"
         CornerRadius="5"
         HasShadow="False">
         <partials:MessageBody/>

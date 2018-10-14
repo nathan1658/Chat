@@ -65,6 +65,11 @@ namespace Chat.Views.Partials
                 setParent();
             }
             chatPage.ScrollListCommand.Execute(null);
+            chatPage.FocusEntry();
+            //chatPage.ChatList.Focused += (s, e) =>
+            //{
+            //    InputBar.FocusEntry();
+            //};
         }
 
 

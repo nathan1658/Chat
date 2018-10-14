@@ -38,9 +38,7 @@
             ItemTapped="OnListTapped"
             HasUnevenRows="true"
             VerticalOptions="FillAndExpand"
-            SeparatorColor="Transparent"
-            FlowDirection="RightToLeft"
-            Rotation="180"
+            SeparatorColor="Transparent"            
             x:Name="ChatList"
             ItemAppearingCommand="{Binding MessageAppearingCommand}"
             ItemDisappearingCommand="{Binding MessageDisappearingCommand}">
