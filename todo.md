@@ -3,14 +3,16 @@
 - [ ] Amend table with buttons
 - [ ] Scroll to top to get more
 - [ ] Send Message smoothless and bugs..
-- [ ] Timeout spinner
-- [ ] Navigation Bar(?)
+- [X] Timeout spinner
+- [X] Navigation Bar(?)
 - [ ] 上拉load message
-- [ ] MessageBoard with button
+- [X] MessageBoard with button
 - [ ] Attatchment
 - [X] listview 回彈
 - [ ] Copy Message 
 - [ ] Scroll down messageboard
 - [ ] Retain scroll position when height of UITableview change
 - [ ] Remove [DONE] button of picker
-- [ ] Attatchment
+- [ ] Build做Shared project後Navigation/要init既野點擺位
+- [ ] IOS UITableViewCell Rendering 問題
+- [ ] Pdf document name
