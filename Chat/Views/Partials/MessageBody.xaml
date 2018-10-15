@@ -1,10 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converter="clr-namespace:Chat.Converter"
              xmlns:extensions="clr-namespace:Chat.Extensions"
              xmlns:helpers ="clr-namespace:Chat.Helpers"
              x:Class="Chat.Views.Partials.MessageBody"
+             VerticalOptions="FillAndExpand"
              >
     <ContentView.Resources>
         <converter:IsNullConverter x:Key="IsNullConverter"/>
@@ -117,10 +118,13 @@
 
     </ContentView.Resources>
     <ContentView.Content>
-        <ContentView ControlTemplate="{StaticResource NormalMessage}">
+        <ContentView  >
             <ContentView.Triggers>
                 <DataTrigger TargetType="ContentView" Binding="{Binding IsExpired}" Value="True">
                     <Setter Property="ControlTemplate" Value="{StaticResource ExpiredMessage}"/>
+                </DataTrigger>
+                 <DataTrigger TargetType="ContentView" Binding="{Binding IsExpired}" Value="false">
+                    <Setter Property="ControlTemplate" Value="{StaticResource NormalMessage}"/>
                 </DataTrigger>
             </ContentView.Triggers>
         </ContentView>

@@ -28,7 +28,9 @@
         </Grid.RowDefinitions>
         <partials:MessageBoard
             Grid.Row="0"
-            x:Name="MessageBoard">
+            x:Name="MessageBoard"
+            IsVisible="false">
+            
         </partials:MessageBoard>
         <controls:ExtendedListView
             Grid.Row="1"
@@ -41,7 +43,10 @@
             SeparatorColor="Transparent"            
             x:Name="ChatList"
             ItemAppearingCommand="{Binding MessageAppearingCommand}"
-            ItemDisappearingCommand="{Binding MessageDisappearingCommand}">
+            ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
+            IsPullToRefreshEnabled="true" 
+            RefreshCommand="{Binding RefreshCommand}" 
+            IsRefreshing="{Binding IsRefreshing}">
         </controls:ExtendedListView>
         <Frame
             HorizontalOptions="EndAndExpand"

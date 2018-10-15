@@ -7,7 +7,7 @@ namespace Chat.Views.Cells
     {
         internal void BaseMessageViewCell_Appearing(object sender, EventArgs e)
         {
-            var aa = this.Height;
+      
         }
     }
 }

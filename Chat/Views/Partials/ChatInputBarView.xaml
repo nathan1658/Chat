@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Chat.Controls"
     x:Class="Chat.Views.Partials.ChatInputBarView"
+    xmlns:extensions="clr-namespace:Chat.Extensions"
     >
     <ContentView.Resources>
         <Style
@@ -54,7 +55,7 @@
             >
 
             <Image
-                Source="stopwatch.png"
+                Source="{extensions:ImageResource Chat.Images.stopwatch.png}"
                 Style="{StaticResource Key=ToolImages}">
                 <!--Work around here.. Use a Image to force focus the invisible picker-->
                 <Image.GestureRecognizers>
@@ -67,7 +68,7 @@
 
             </controls:ExtendedCountDownPicker>
             <Image
-                Source="attach.png"
+                Source="{extensions:ImageResource Chat.Images.attach.png}"
                  
                 Style="{StaticResource Key=ToolImages}" >
                 <Image.GestureRecognizers>

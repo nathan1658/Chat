@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Chat.Views.Partials.ChatButtonsBarView"
-    HeightRequest="30"
+    
     BackgroundColor="Purple"
     >
     <ContentView.Content>
@@ -21,17 +21,16 @@
                         Grid.Column="0"
                         BackgroundColor="Green"
                         TextColor="White"
-                        Clicked="OK_ButtonClicked"
-                    
-                        
+                        Clicked="OK_ButtonClicked" 
+                    FontSize="Small"
                         Text="Yes">
                     </Button>
                     <Button
                     Margin="5"
                         Grid.Column="1"
-                        TextColor="White"
-                     
+                        TextColor="White"                     
                         BackgroundColor="Red"
+                    FontSize="Small"
                         Text="NO">
                     </Button>
             

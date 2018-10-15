@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewCell
+<cells:BaseMessageViewCell
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Chat.Views.Cells.SystemMessageViewCell">
+    x:Class="Chat.Views.Cells.SystemMessageViewCell"
+      xmlns:cells="clr-namespace:Chat.Views.Cells">
      <Frame
     FlowDirection="LeftToRight" 
 
@@ -38,4 +39,4 @@
 
         </Grid>
     </Frame>
-</ViewCell>
+</cells:BaseMessageViewCell>

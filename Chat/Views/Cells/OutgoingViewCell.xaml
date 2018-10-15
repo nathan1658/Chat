@@ -19,7 +19,7 @@
         Margin="80,10,10,10"
         CornerRadius="5"
         HasShadow="False">
-        <partials:MessageBody/>
+        <partials:MessageBody VerticalOptions="FillAndExpand"/>
 
     </Frame>
 </cells:BaseMessageViewCell>

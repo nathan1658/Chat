@@ -34,7 +34,7 @@
                     Grid.Column="0"
                     Text="{Binding User}"
                     FontAttributes="Bold" />
-                <partials:MessageBody Grid.Row="1" Grid.Column="0"/>
+                <partials:MessageBody Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand"/>
             </Grid>
         </StackLayout>
     </Frame>

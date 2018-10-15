@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Chat.Views.Cells
 {
-    public partial class SystemMessageViewCell : ViewCell
+    public partial class SystemMessageViewCell : BaseMessageViewCell
     {
         public SystemMessageViewCell()
         {

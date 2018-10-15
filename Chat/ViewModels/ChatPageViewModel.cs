@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Timers;
 using Rg.Plugins.Popup.Services;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Chat.ViewModels
 {
@@ -36,7 +37,12 @@ namespace Chat.ViewModels
             "收聲喇",
             "一人少句啦！！！！",
             "幾時開追悼會？",
-            "留返拜山先講ok?"
+            "留返拜山先講ok?",
+            "派咁少不如唔好派",
+            "😂😂😂😂😂",
+            "😂😂😂😂",
+            "😂😂😂",
+            "😂"
             };
 
         private static readonly List<string> userExample = new List<string>
@@ -50,10 +56,40 @@ namespace Chat.ViewModels
             "Token",
             "Jimmy",
             "Timmy",
-            "Peter"
+            "Peter",
+            "👼🏿"
         };
 
+        //TODO for testing only, limit refresh count to 3.
+        private int refreshCount = 0;
+        async Task<List<Message>> RefreshData()
+        {
+        
+            await Task.Delay(1500);
+                //Each time get n old messages..
 
+                List<Message> oldMessages = new List<Message>();
+            if (refreshCount < 3)
+            {
+                for (int i = 0; i < LOAD_MESSAGE_COUNT; i++)
+                {
+                    oldMessages.Add(GenRandomMessage());
+                }
+
+                var oldestDateTime = Messages.Min(x => x.SubmittedDate);
+
+                var index = 1;
+                foreach (var msg in oldMessages)
+                {
+                    msg.SubmittedDate = oldestDateTime.AddDays(index * -1).AddHours(index * -1);
+                    index++;
+                }
+                oldMessages = new List<Message>(oldMessages.OrderByDescending(x => x.SubmittedDate.ToBinary()));
+            }
+            refreshCount++;
+                return oldMessages;
+
+        }
 
         public ChatPageViewModel(Conversation con)
         {
@@ -91,8 +127,7 @@ namespace Chat.ViewModels
 
                   timer.Interval = (5 + rnd.Next(5)) * 1000;
               };
-            //timer.Start();
-
+            timer.Start();
             MessageAppearingCommand = new Command<Message>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<Message>(OnMessageDisappearing);
 
@@ -156,7 +191,7 @@ namespace Chat.ViewModels
         void OnMessageAppearing(Message msg)
         {
             var idx = Messages.IndexOf(msg);
-            if (idx >= 6)
+            if (idx >= Messages.Count-6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -170,11 +205,17 @@ namespace Chat.ViewModels
                     PendingMessageCount = 0;
                 });
             }
+            //TODO fix this
+            //if(Messages.IndexOf(msg)==0)
+            //{
+            //    this.RefreshCommand.Execute(null);
+            //}
+
         }
         void OnMessageDisappearing(Message message)
         {
             var idx = Messages.IndexOf(message);
-            if (idx <= 6)
+            if (idx <= Messages.Count- 6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -202,8 +243,37 @@ namespace Chat.ViewModels
         public bool LastMessageVisible { get; set; } = true;
         public int PendingMessageCount { get; set; } = 0;
         public bool PendingMessageCountVisible { get { return PendingMessageCount > 0; } }
+        public bool IsRefreshing { get; set; } = false;
+        public readonly int LOAD_MESSAGE_COUNT = 5;
         public Queue<Message> DelayedMessages { get; set; } = new Queue<Message>();
         public ICommand MessageAppearingCommand { get; set; }
         public ICommand MessageDisappearingCommand { get; set; }
+        public ICommand RefreshCommand
+        {
+            get {
+                return new Command(async () =>
+                {
+                    IsRefreshing = true;
+                    var loadedMessages = await RefreshData();
+
+                    IsRefreshing = false;
+
+                    if (loadedMessages.Count > 0)
+                    {
+                        foreach (var msg in loadedMessages)
+                        {
+                            Messages.Insert(0, msg);
+                        }
+                    }else
+                    {
+                        App.Current.MainPage.DisplayAlert("Alert", "No more message to load!", "OK");
+                    }
+
+                });
+
+            }
+        }
+
+
     }
 }
