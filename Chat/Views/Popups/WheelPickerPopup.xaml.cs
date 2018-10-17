@@ -8,43 +8,40 @@ namespace Chat.Views.Popups
 {
     public partial class WheelPickerPopup : PopupPage
     {
-        public WheelPickerPopup()
+
+
+
+        public WheelPickerPopup() : this(new TimeSpan())
+        {
+        }
+
+        public WheelPickerPopup(TimeSpan defaultValue)
         {
             InitializeComponent();
-            listView.ItemsSource = new List<string>
-            {
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView",
-                "Test ListView"
-            };
-
+            picker.SelectedTime= defaultValue;
         }
+
+
+        private async void OnOK(object o, EventArgs e)
+        {
+            MessagingCenter.Send<WheelPickerPopup, TimeSpan>(this, "ReturnedTimeSpan", picker.SelectedTime);
+            this.OnClose(o, e);
+        }
+
 
         private async void OnClose(object o, EventArgs e)
-        {
+        {                     
             await PopupNavigation.Instance.PopAsync();
         }
+
+
+
+        protected override bool OnBackgroundClicked()
+        {
+            base.OnBackgroundClicked();
+            this.OnClose(null,null);
+            return true;
+        }
+        
     }
 }

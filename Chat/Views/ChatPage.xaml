@@ -5,6 +5,7 @@
     xmlns:local="clr-namespace:Chat"
     xmlns:localHelpers="clr-namespace:Chat.Helpers"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
+      xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:controls="clr-namespace:Chat.Controls"
     x:Class="Chat.Views.ChatPage">
     <ContentPage.Resources>
@@ -69,7 +70,7 @@
                     VerticalTextAlignment="Center"
                     TextColor="{DynamicResource primary}" />
                 <Image
-                    Source="ic_scrolldown"
+                    Source="{extensions:ImageResource Chat.Images.ic_scrolldown.png}"
                     WidthRequest="30"
                     HeightRequest="30"
                     VerticalOptions="CenterAndExpand" />

@@ -2,19 +2,25 @@
 <pages:PopupPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        xmlns:controls="clr-namespace:Chat.Controls"
+    xmlns:controls="clr-namespace:Chat.Controls"
+    xmlns:animations="clr-namespace:Chat.Animations"
       xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     x:Class="Chat.Views.Popups.WheelPickerPopup">
-<StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20, 20, 20, 20">
-    <StackLayout BackgroundColor="White">
-      <ListView x:Name="listView">
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <TextCell TextColor="Black" Text="{Binding .}"></TextCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+    <pages:PopupPage.Animation>
+        <animations:UserAnimation/>
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20, 20, 20, 20">
+        <StackLayout BackgroundColor="White" >
+            <controls:ExtendedCountDownPicker HorizontalOptions="CenterAndExpand" x:Name="picker" IsVisible="true"  />
+        </StackLayout>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="OK" TextColor="#FFFFFF" BackgroundColor="#39b44a" Clicked="OnOK" Grid.Column="0"></Button>
+            <Button Text="Close" TextColor="#FFFFFF" Clicked="OnClose"  BackgroundColor="#5a595b" Grid.Column="1"></Button>
+        </Grid>
+        
     </StackLayout>
-    <Button Text="Close" TextColor="#A9D1DE" Clicked="OnClose"></Button>
-  </StackLayout>
 </pages:PopupPage>

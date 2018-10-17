@@ -6,6 +6,7 @@
     x:Class="Chat.Views.PickerTest">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Show" Clicked="Button_Clicked"/>
             <Label Text="{Binding TimeSpanValueString}"/>
           <controls:ExtendedCountDownPicker x:Name="picker"  SelectedTime="{Binding CountDownValue}"  IsVisible="true"  />
         </StackLayout>

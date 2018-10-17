@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Chat.ViewModels;
+using Chat.Views.Popups;
 using Plugin.Media;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 
@@ -73,10 +75,19 @@ namespace Chat.Views.Partials
         }
 
 
-        protected void StopWatchTapped(object s, EventArgs e)
+        protected async void StopWatchTapped(object s1, EventArgs e)
         {
             this.UnFocusEntry();
-            picker.Focus();
+
+            MessagingCenter.Subscribe<WheelPickerPopup, TimeSpan>(this, "ReturnedTimeSpan", (s, ts) =>
+            {
+                var vm = this.BindingContext as ChatPageViewModel;
+                vm.CountDownValue = ts;
+                MessagingCenter.Unsubscribe<WheelPickerPopup, TimeSpan>(this, "ReturnedTimeSpan");
+
+            });
+
+            await PopupNavigation.Instance.PushAsync(new WheelPickerPopup((this.BindingContext as ChatPageViewModel).CountDownValue));
 
         }
         //TODO launch panel for selecting attatchment

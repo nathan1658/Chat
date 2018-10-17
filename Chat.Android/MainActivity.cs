@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using XLabs.Ioc;
+using XLabs.Serialization;
+using XLabs.Platform.Device;
 
 namespace Chat.Droid
 {
@@ -22,10 +25,23 @@ namespace Chat.Droid
             #region plugin init
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Stormlion.PhotoBrowser.Droid.Platform.Init(this);
+            XlabsInit();
             #endregion
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+        }
+
+
+        private void XlabsInit()
+        {
+            var resolverContainer = new SimpleContainer();
+
+            resolverContainer.Register(t => AndroidDevice.CurrentDevice);
+            resolverContainer.Register<IJsonSerializer, XLabs.Serialization.JsonNET.JsonSerializer>();
+            resolverContainer.Register<IDependencyContainer>(resolverContainer);            
+
+            Resolver.SetResolver(resolverContainer.GetResolver());
         }
     }
 }

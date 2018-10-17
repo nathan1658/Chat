@@ -10,11 +10,28 @@ namespace Chat.Views
 {
     public partial class PickerTest : ContentPage
     {
+ 
         public PickerTest()
         {
             InitializeComponent();
             this.BindingContext = new PickerTestViewModel();
-            PopupNavigation.Instance.PushAsync(new WheelPickerPopup());
+        
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+
+         
+            MessagingCenter.Subscribe<WheelPickerPopup,TimeSpan>(this, "ReturnedTimeSpan", (s,ts) =>
+            {
+                var vm = this.BindingContext as PickerTestViewModel;
+                vm.TimeSpanValue = ts;
+                MessagingCenter.Unsubscribe<WheelPickerPopup, TimeSpan>(this, "ReturnedTimeSpan");
+             
+            });
+        
+            await PopupNavigation.Instance.PushAsync(new WheelPickerPopup((this.BindingContext as PickerTestViewModel).TimeSpanValue));
+            
         }
     }
 

@@ -34,12 +34,25 @@ namespace Chat.Droid.Renderers
         void configPicker(out WheelPicker picker,List<string> data)
         {
             picker = new WheelPicker(this.Context);
+            //TODO maybe use format string is better here..
+            for (int i = 0; i < data.Count; i++)
+            {
+                var d = data[i];
+                if (int.Parse(d) < 10)
+                {
+                    data[i] = "0" + d;
+                }
+
+            }
+                       
+
+
             var layoutParams = new Android.Widget.LinearLayout.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
             layoutParams.SetMargins(10, 0, 10, 0);
             picker.LayoutParameters = layoutParams;
             picker.SetAtmospheric(true);
             picker.Curved = true;
-            var ucolor = ColorToUInt(System.Drawing.Color.Red);
+            var ucolor = ColorToUInt(System.Drawing.Color.DarkGray);
             picker.SelectedItemTextColor = unchecked((int)ucolor);
 
             picker.Data = data;
@@ -79,6 +92,8 @@ namespace Chat.Droid.Renderers
 
 
                 stack.SetGravity(Android.Views.GravityFlags.CenterVertical);
+
+
                 SetNativeControl(stack);
             }
             if (e.OldElement != null)
@@ -97,6 +112,12 @@ namespace Chat.Droid.Renderers
            
         }
 
+        private void updateWheelIndex(TimeSpan ts)
+        {
+            hourPicker.SelectedItemPosition = ts.Hours;
+            minutePicker.SelectedItemPosition = ts.Minutes;
+            secondPicker.SelectedItemPosition = ts.Seconds;
+        }
 
         protected void wheelItemSelected()
         {

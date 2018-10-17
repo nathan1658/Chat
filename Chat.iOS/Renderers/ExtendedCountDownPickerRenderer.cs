@@ -12,7 +12,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace Chat.iOS.Renderers
 {
 
-    public class ExtendedCountDownPickerRenderer : PickerRenderer
+    public class ExtendedCountDownPickerRenderer : ViewRenderer<ExtendedCountDownPicker, UIPickerView>
     {
         public static double DisplayScale = UIScreen.MainScreen.Scale;
         public static int DispalyHeight = (int)UIScreen.MainScreen.NativeBounds.Height;
@@ -24,57 +24,61 @@ namespace Chat.iOS.Renderers
 
         private ExtendedCountDownPicker timeCountdownPicker;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<ExtendedCountDownPicker> e)
         {
 
 
 
             base.OnElementChanged(e);
 
-            if (Control != null)
-            {
-                UITextField aa = Control as UITextField;
-               
-               
-               
+            if (Control == null)
+                //  {
+                //ExtendedCountDownPicker aa = Control as ExtendedCountDownPicker;
 
-                aa.BackgroundColor = UIColor.Clear;
-                //j.Size = new CGSize(0.1, 0.1);
-                aa.LeftViewMode = UITextFieldViewMode.Always;
- 
-                aa.TextColor = UIColor.Clear;
-                aa.Font = UIFont.SystemFontOfSize((nfloat)0);
-                Control.BorderStyle = UITextBorderStyle.None;
 
                 timeCountdownPicker = e.NewElement as ExtendedCountDownPicker;
-              
-                var customModelPickerView = new UIPickerView
+
+                 //aa.BackgroundColor = UIColor.Clear;
+                 ////j.Size = new CGSize(0.1, 0.1);
+                 //aa.LeftViewMode = UITextFieldViewMode.Always;
+
+                 //aa.TextColor = UIColor.Clear;
+                 //aa.Font = UIFont.SystemFontOfSize((nfloat)0);
+                 //Control.BorderStyle = UITextBorderStyle.None;
+
+                 //timeCountdownPicker = e.NewElement as ExtendedCountDownPicker;
+
+                 var customModelPickerView = new UIPickerView
                 {
                     Model = new TimeCountdownPickerView(timeCountdownPicker)
                 };
 
 
-                //TODO hide the [DONE] button
-                aa.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                aa.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
-                customModelPickerView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                customModelPickerView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
+                ////TODO hide the [DONE] button
+                //aa.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
+                //aa.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
+                //customModelPickerView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
+                //customModelPickerView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
 
                 SelectPickerValue(customModelPickerView, timeCountdownPicker);
                 CreatePickerLabels(customModelPickerView);
-         
-                Control.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                Control.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
-                Control.InputView = customModelPickerView;
+
+                SetNativeControl(customModelPickerView);
+
+                //Control.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
+                //Control.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
+                //Control.InputView = customModelPickerView;
+
+
 
                 //TODO work around for buttons
-                aa.TouchDown += (s,e1) =>
-                 {
-                     var bb = timeCountdownPicker.Parent.Parent.Parent as ChatInputBarView;
-                     bb.KeepTextInputFocus = false;
-                 };
+                //aa.TouchDown += (s,e1) =>
+                // {
+                //     var bb = timeCountdownPicker.Parent.Parent.Parent as ChatInputBarView;
+                //     bb.KeepTextInputFocus = false;
+                // };
 
-            }
+          //  }
         }
 
         private void SelectPickerValue(UIPickerView customModelPickerView, ExtendedCountDownPicker myTimePicker)

@@ -32,6 +32,7 @@ namespace Chat.Droid.Renderers
                     originalBackground = Control.Background;
                     initial = false;
                 }
+
                 Control.SetMaxLines(5);
 
             }
@@ -79,7 +80,8 @@ namespace Chat.Droid.Renderers
                 }
                 else
                 {
-                    this.Control.Background = originalBackground;
+                    //this.Control.Background = originalBackground;
+                    this.Control.Background = new ColorDrawable(Android.Graphics.Color.White);
                 }
             }
         }

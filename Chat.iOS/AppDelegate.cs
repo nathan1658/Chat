@@ -4,6 +4,9 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Serialization;
 
 namespace Chat.iOS
 {
@@ -25,6 +28,7 @@ namespace Chat.iOS
             #region plugin init
             Rg.Plugins.Popup.Popup.Init();
             Stormlion.PhotoBrowser.iOS.Platform.Init();
+            XLabsInit();
             #endregion
 
             Xamarin.Calabash.Start();
@@ -34,6 +38,17 @@ namespace Chat.iOS
             return base.FinishedLaunching(app, options);
         }
 
+        private void XLabsInit()
+        {
+            var resolverContainer = new SimpleContainer();
+
+            resolverContainer.Register(t => AppleDevice.CurrentDevice);
+            resolverContainer.Register<IJsonSerializer, XLabs.Serialization.JsonNET.JsonSerializer>();
+            resolverContainer.Register<IDependencyContainer>(resolverContainer);
+  
+
+            Resolver.SetResolver(resolverContainer.GetResolver());
+        }
 
         
 

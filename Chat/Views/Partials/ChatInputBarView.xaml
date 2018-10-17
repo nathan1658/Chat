@@ -64,9 +64,7 @@
                     </TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>
-            <controls:ExtendedCountDownPicker x:Name="picker"  SelectedTime="{Binding CountDownValue}"  IsVisible="true"  >
-
-            </controls:ExtendedCountDownPicker>
+         
             <Image
                 Source="{extensions:ImageResource Chat.Images.attach.png}"
                  
@@ -87,7 +85,7 @@
             Grid.Row="0"
             OutlineColor="Black"
             HasShadow="False"
-            BackgroundColor="Red"
+            BackgroundColor="White"
             Padding="0"
             Margin="0"
             VerticalOptions="Center">

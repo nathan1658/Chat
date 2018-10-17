@@ -14,13 +14,13 @@ namespace Chat
         public App()
         {
 #if DEBUG
-            //LiveReload.Init();
+            LiveReload.Init();
 #endif
 
             InitializeComponent();
 
-            //MainPage = new NavigationPage(new ConversationSelector());
-            MainPage = new NavigationPage(new PickerTest());
+            MainPage = new NavigationPage(new ConversationSelector());
+            //MainPage = new NavigationPage(new PickerTest());
             Navigation = MainPage.Navigation;
         }
 
