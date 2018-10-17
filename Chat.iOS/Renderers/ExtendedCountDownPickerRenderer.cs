@@ -34,14 +34,9 @@ namespace Chat.iOS.Renderers
             if (Control != null)
             {
                 UITextField aa = Control as UITextField;
-                aa.Frame = new CGRect(0, 0, 40, 40);
                
-                var imageView = new UIImageView(new CGRect(0, 0, 40, 40));
-                imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
-
-                var image = new UIImage("stopwatch.png");
-                imageView.Image = image;
-                aa.LeftView = imageView;
+               
+               
 
                 aa.BackgroundColor = UIColor.Clear;
                 //j.Size = new CGSize(0.1, 0.1);

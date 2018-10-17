@@ -132,8 +132,8 @@ namespace Chat.Views.Partials
 
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-             //   Directory = "Sample",
-               // Name = "test.jpg",
+                Directory = "Temp",
+                Name = "test.jpg",
                 SaveToAlbum = false
                 
             });

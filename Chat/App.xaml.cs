@@ -18,8 +18,9 @@ namespace Chat
 #endif
 
             InitializeComponent();
-            
-            MainPage = new NavigationPage(new ConversationSelector());
+
+            //MainPage = new NavigationPage(new ConversationSelector());
+            MainPage = new NavigationPage(new PickerTest());
             Navigation = MainPage.Navigation;
         }
 

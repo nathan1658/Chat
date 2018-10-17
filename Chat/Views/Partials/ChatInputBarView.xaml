@@ -64,7 +64,7 @@
                     </TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>
-            <controls:ExtendedCountDownPicker x:Name="picker"  SelectedTime="{Binding CountDownValue}"  IsVisible="false"  >
+            <controls:ExtendedCountDownPicker x:Name="picker"  SelectedTime="{Binding CountDownValue}"  IsVisible="true"  >
 
             </controls:ExtendedCountDownPicker>
             <Image

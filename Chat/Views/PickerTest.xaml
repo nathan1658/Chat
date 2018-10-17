@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Chat.Controls"
+    x:Class="Chat.Views.PickerTest">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding TimeSpanValueString}"/>
+          <controls:ExtendedCountDownPicker x:Name="picker"  SelectedTime="{Binding CountDownValue}"  IsVisible="true"  />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

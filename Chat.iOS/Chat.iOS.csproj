@@ -167,9 +167,6 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>3.2.0.871581</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.LiveReload">
-      <Version>0.3.27</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.TestCloud.Agent" Version="0.21.7" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -185,8 +182,5 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\attach.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\123pdfIcon.png" />
   </ItemGroup>
 </Project>
