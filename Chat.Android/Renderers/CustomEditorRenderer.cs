@@ -32,7 +32,7 @@ namespace Chat.Droid.Renderers
                     originalBackground = Control.Background;
                     initial = false;
                 }
-
+                Control.MovementMethod = null;
                 Control.SetMaxLines(5);
 
             }

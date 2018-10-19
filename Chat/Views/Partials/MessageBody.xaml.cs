@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 namespace Chat.Views.Partials
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MessageBody : ContentView
-	{
-		public MessageBody ()
-		{
-			InitializeComponent ();
-		}
+    public partial class MessageBody : ContentView
+    {
+        public MessageBody()
+        {
+            InitializeComponent();
+        }
 
         //TODO Place in baseViewCell?
         //TODO use event?
@@ -25,18 +25,18 @@ namespace Chat.Views.Partials
             if (msg != null)
             {
                 var tmpFile = System.IO.Path.GetTempFileName();
-                tmpFile = Path.GetFileName(tmpFile);
+                tmpFile = Path.GetFileName(tmpFile);         
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), tmpFile);
-
                 File.WriteAllBytes(fileName, msg.PhotoByte);
-
+                string url = "file://" + fileName;
                 new PhotoBrowser
                 {
                     Photos = new List<Photo>
                     {
+                       
                         new Photo
                         {
-                            URL= @"File://"+fileName
+                            URL= url
                         }
                     }
                 }.Show();
