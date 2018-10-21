@@ -11,15 +11,71 @@
     Appearing="BaseMessageViewCell_Appearing"
     >
     
-    <Frame
-        FlowDirection="LeftToRight"
-
-        BackgroundColor="Gray"
-        Padding="10"
-        Margin="80,10,10,10"
+    <Frame        
+        
+        FlowDirection="RightToLeft"
+        BackgroundColor="#effdde"
+        Padding="5"
+        Margin="10"
         CornerRadius="5"
-        HasShadow="False">
-        <partials:MessageBody VerticalOptions="FillAndExpand"/>
+        HasShadow="False"
+        VerticalOptions="StartAndExpand"
+        HorizontalOptions="EndAndExpand"
+        >
+
+        <Frame.Resources>
+            <converter:IsNullConverter x:Key="IsNullConverter"/>
+        </Frame.Resources>
+        <Grid
+             VerticalOptions="StartAndExpand"
+             HorizontalOptions="StartAndExpand"
+            FlowDirection="RightToLeft"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <partials:MessageBody Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand"
+                                  />
+            <Grid Grid.Row="1">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label
+                        Text="{Binding RemainingTimeString}"
+                        IsVisible="false"
+                        HorizontalTextAlignment="End"
+                        Grid.Column="0"
+                        >
+                    <Label.Triggers>
+                        <DataTrigger
+                                Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
+                                Value="false"
+                                TargetType="Label">
+                            <Setter
+                                    Property="IsVisible"
+                                    Value="true" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Label
+                    
+                    Grid.Column="1"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}" 
+                    TextColor="#6cc676"
+                >
+
+                </Label>
+            </Grid>
+          
+        </Grid>
+        
 
     </Frame>
 </cells:BaseMessageViewCell>
+    

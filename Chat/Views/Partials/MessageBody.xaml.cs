@@ -28,12 +28,11 @@ namespace Chat.Views.Partials
                 tmpFile = Path.GetFileName(tmpFile);         
                 string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), tmpFile);
                 File.WriteAllBytes(fileName, msg.PhotoByte);
-                string url = "file://" + fileName;
+                string url = @"file://" + fileName;
                 new PhotoBrowser
                 {
                     Photos = new List<Photo>
-                    {
-                       
+                    {                       
                         new Photo
                         {
                             URL= url

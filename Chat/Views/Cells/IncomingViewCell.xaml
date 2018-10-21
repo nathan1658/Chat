@@ -6,18 +6,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     x:Class="Chat.Views.Cells.IncomingViewCell"
-    Appearing="BaseMessageViewCell_Appearing">
-    <Frame
+    Appearing="BaseMessageViewCell_Appearing"
+    xmlns:converter="clr-namespace:Chat.Converter"
+    
+    >
+
+    <!--<Frame
         FlowDirection="LeftToRight"        
         CornerRadius="5"
-        BackgroundColor="LightBlue"
+        BackgroundColor="White"
         HasShadow="False"
         Padding="10"        
         Margin="10,10,80,10"
           
+        >-->
+
+    <Frame
+        FlowDirection="LeftToRight"        
+        CornerRadius="5"
+        BackgroundColor="White"
+        HasShadow="False"                    
+        VerticalOptions="StartAndExpand"
+        HorizontalOptions="StartAndExpand"
+        Margin="10"
+        Padding="5"
         >
-        <StackLayout>
-            <Grid>
+
+
+        <Frame.Resources>
+            <converter:IsNullConverter x:Key="IsNullConverter"/>
+        </Frame.Resources>
+        
+            <Grid 
+                
+                VerticalOptions="StartAndExpand"
+                  HorizontalOptions="StartAndExpand"
+                 
+                  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
                         Width="*" />
@@ -27,15 +52,55 @@
                         Height="auto" />
                     <RowDefinition
                         Height="auto" />
-
+                    <RowDefinition
+                        Height="auto" />
                 </Grid.RowDefinitions>
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{Binding User}"
                     FontAttributes="Bold" />
-                <partials:MessageBody Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand"/>
+
+                <partials:MessageBody Grid.Row="1"  Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+
+                <Grid Grid.Row="2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Text="{Binding RemainingTimeString}"
+                        IsVisible="false"
+                        
+                        Grid.Column="0"
+                        >
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
+                                Value="false"
+                                TargetType="Label">
+                                <Setter
+                                    Property="IsVisible"
+                                    Value="true" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label                    
+                    Grid.Column="1"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}" 
+                    TextColor="#abb7c0"
+                    >
+
+                    </Label>
+
+                </Grid>
+
+
             </Grid>
-        </StackLayout>
+        
     </Frame>
 </cells:BaseMessageViewCell>

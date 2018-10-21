@@ -6,14 +6,20 @@
              xmlns:helpers ="clr-namespace:Chat.Helpers"
              x:Class="Chat.Views.Partials.MessageBody"
              VerticalOptions="FillAndExpand"
+             WidthRequest="300"
              >
     <ContentView.Resources>
         <converter:IsNullConverter x:Key="IsNullConverter"/>
+        <Style TargetType="Label" x:Key="MessageBodyStyle">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontFamily" Value="Lucida Grande"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
 
         <ControlTemplate x:Key="ExpiredMessage">
             <StackLayout VerticalOptions="FillAndExpand"  >
                 <Grid>
-                    <Label Text="Message Deleted."/>
+                    <Label Text="Message Deleted." Style="{StaticResource Key=MessageBodyStyle}"/>
                 </Grid>
             </StackLayout>
         </ControlTemplate>
@@ -74,11 +80,12 @@
                     <Label
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Style="{StaticResource Key=MessageBodyStyle}"
+                    Grid.ColumnSpan="2"                      
                     Text="{TemplateBinding BindingContext.Text}">
                     </Label>
 
-                    <Label
+                    <!--<Label
                         Text="{TemplateBinding BindingContext.RemainingTimeString}"
                         IsVisible="false"
                         Grid.Row="1"
@@ -100,19 +107,12 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     HorizontalTextAlignment="End"
-                    Text="{TemplateBinding BindingContext.SubmittedDate, StringFormat='{}{0:h:mm tt}'}" />
+                    Text="{TemplateBinding BindingContext.SubmittedDate, StringFormat='{}{0:h:mm tt}'}" >
+                     
+                    </Label>-->
                 </Grid>
             </StackLayout>
 
-
-        </ControlTemplate>
-
-        <ControlTemplate x:Key="Test">
-            <StackLayout>
-                <Label BackgroundColor="RED" Text="1"/>
-                <Label BackgroundColor="Green" Text="{TemplateBinding BindingContext.Text}"/>
-                <Label BackgroundColor="Blue" Text="3"/>
-            </StackLayout>
         </ControlTemplate>
 
 

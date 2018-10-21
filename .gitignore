@@ -8,3 +8,8 @@ Chat.UITests/bin/
 Chat.UITests/obj/
 Chat/bin/
 Chat/obj/
+packages/
+AarBinding/obj/Debug/_WarningCodes
+AarBinding/obj/Debug/_ErrorCodes
+AarBinding/bin/Debug/AarBinding.pdb
+AarBinding/bin/Debug/AarBinding.dll
