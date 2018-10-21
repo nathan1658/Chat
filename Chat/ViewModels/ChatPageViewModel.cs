@@ -171,7 +171,8 @@ namespace Chat.ViewModels
             {
                 Text = formattedText,
                 PhotoByte = imageByteArr,
-                PDFByte = pdfByte
+                PDFByte = pdfByte,
+                OutgoingMessage = true
             };
             SubmitMessage(msgToSend);
         }

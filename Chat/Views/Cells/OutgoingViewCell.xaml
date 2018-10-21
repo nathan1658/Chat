@@ -13,7 +13,7 @@
     
     <Frame        
         
-        FlowDirection="RightToLeft"
+        
         BackgroundColor="#effdde"
         Padding="5"
         Margin="10"
@@ -29,7 +29,7 @@
         <Grid
              VerticalOptions="StartAndExpand"
              HorizontalOptions="StartAndExpand"
-            FlowDirection="RightToLeft"
+          
             >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

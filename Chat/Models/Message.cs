@@ -100,7 +100,7 @@ namespace Chat.Models
             }
         }
 
-
+        public bool OutgoingMessage { get; set; } = false;
 
         void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {

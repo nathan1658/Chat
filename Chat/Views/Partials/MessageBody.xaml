@@ -14,6 +14,11 @@
             <Setter Property="FontSize" Value="Medium"/>
             <Setter Property="FontFamily" Value="Lucida Grande"/>
             <Setter Property="TextColor" Value="Black"/>
+            <Style.Triggers>
+                <DataTrigger TargetType="Label" Binding="{TemplateBinding BindingContext.OutgoingMessage}" Value="True">
+                    <Setter Property="HorizontalOptions" Value="End"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <ControlTemplate x:Key="ExpiredMessage">
@@ -77,12 +82,15 @@
                         <RowDefinition
                         Height="auto" />
                     </Grid.RowDefinitions>
-                    <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource Key=MessageBodyStyle}"
+                    <Label                        
+                    HorizontalOptions= "Start"
+                    Grid.Row="0"                    
+                    Grid.Column="0"                    
                     Grid.ColumnSpan="2"                      
+                    Style="{StaticResource MessageBodyStyle}"
+                    LineBreakMode="WordWrap"
                     Text="{TemplateBinding BindingContext.Text}">
+                      
                     </Label>
 
                     <!--<Label
@@ -118,7 +126,7 @@
 
     </ContentView.Resources>
     <ContentView.Content>
-        <ContentView  >
+        <ContentView ControlTemplate="{StaticResource NormalMessage}" >
             <ContentView.Triggers>
                 <DataTrigger TargetType="ContentView" Binding="{Binding IsExpired}" Value="True">
                     <Setter Property="ControlTemplate" Value="{StaticResource ExpiredMessage}"/>

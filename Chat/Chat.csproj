@@ -12,6 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Arrow.png" />
+    <None Remove="Images\Arrow_250x250.png" />
     <None Remove="Images\attach.png" />
     <None Remove="Images\attach_100x100.png" />
     <None Remove="Images\attach_250x250.png" />
@@ -24,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\Arrow.png" />
+    <EmbeddedResource Include="Images\Arrow_250x250.png" />
     <EmbeddedResource Include="Images\attach.png" />
     <EmbeddedResource Include="Images\attach_100x100.png" />
     <EmbeddedResource Include="Images\attach_250x250.png" />

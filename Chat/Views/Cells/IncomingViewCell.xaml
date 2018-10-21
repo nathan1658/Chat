@@ -37,12 +37,7 @@
             <converter:IsNullConverter x:Key="IsNullConverter"/>
         </Frame.Resources>
         
-            <Grid 
-                
-                VerticalOptions="StartAndExpand"
-                  HorizontalOptions="StartAndExpand"
-                 
-                  >
+            <Grid HorizontalOptions="StartAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
                         Width="*" />
