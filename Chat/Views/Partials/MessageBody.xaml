@@ -5,8 +5,8 @@
              xmlns:extensions="clr-namespace:Chat.Extensions"
              xmlns:helpers ="clr-namespace:Chat.Helpers"
              x:Class="Chat.Views.Partials.MessageBody"
-             VerticalOptions="FillAndExpand"
-             WidthRequest="300"
+             VerticalOptions="FillAndExpand"            
+             MinimumWidthRequest="50"
              >
     <ContentView.Resources>
         <converter:IsNullConverter x:Key="IsNullConverter"/>
@@ -24,7 +24,7 @@
         <ControlTemplate x:Key="ExpiredMessage">
             <StackLayout VerticalOptions="FillAndExpand"  >
                 <Grid>
-                    <Label Text="Message Deleted." Style="{StaticResource Key=MessageBodyStyle}"/>
+                    <Label Text="Message Deleted." HorizontalOptions= "Start" Style="{StaticResource Key=MessageBodyStyle}"/>
                 </Grid>
             </StackLayout>
         </ControlTemplate>
@@ -69,56 +69,16 @@
                         </TapGestureRecognizer>
                     </Image.GestureRecognizers>
                 </Image>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                        Width="*" />
-                        <ColumnDefinition
-                        Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition
-                        Height="auto" />
-                        <RowDefinition
-                        Height="auto" />
-                    </Grid.RowDefinitions>
+               
                     <Label                        
                     HorizontalOptions= "Start"
-                    Grid.Row="0"                    
-                    Grid.Column="0"                    
-                    Grid.ColumnSpan="2"                      
                     Style="{StaticResource MessageBodyStyle}"
                     LineBreakMode="WordWrap"
                     Text="{TemplateBinding BindingContext.Text}">
-                      
+                               
+                                                     
                     </Label>
 
-                    <!--<Label
-                        Text="{TemplateBinding BindingContext.RemainingTimeString}"
-                        IsVisible="false"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        >
-                        <Label.Triggers>
-                            <DataTrigger
-                                Binding="{TemplateBinding BindingContext.RemainingTimeString,Converter={StaticResource IsNullConverter}}"
-                                Value="false"
-                                TargetType="Label">
-                                <Setter
-                                    Property="IsVisible"
-                                    Value="true" />
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
-
-                    <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    HorizontalTextAlignment="End"
-                    Text="{TemplateBinding BindingContext.SubmittedDate, StringFormat='{}{0:h:mm tt}'}" >
-                     
-                    </Label>-->
-                </Grid>
             </StackLayout>
 
         </ControlTemplate>

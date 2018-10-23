@@ -16,7 +16,7 @@ namespace Chat.iOS.Renderers
     {
         public static double DisplayScale = UIScreen.MainScreen.Scale;
         public static int DispalyHeight = (int)UIScreen.MainScreen.NativeBounds.Height;
-        public static int DisplayWidth = (int)UIScreen.MainScreen.NativeBounds.Width;
+        public static double DisplayWidth = (int)UIScreen.MainScreen.NativeBounds.Width*0.75;
 
         internal const int ComponentCount = 6;
 
@@ -32,53 +32,23 @@ namespace Chat.iOS.Renderers
             base.OnElementChanged(e);
 
             if (Control == null)
-                //  {
-                //ExtendedCountDownPicker aa = Control as ExtendedCountDownPicker;
-
+            {
 
                 timeCountdownPicker = e.NewElement as ExtendedCountDownPicker;
 
-                 //aa.BackgroundColor = UIColor.Clear;
-                 ////j.Size = new CGSize(0.1, 0.1);
-                 //aa.LeftViewMode = UITextFieldViewMode.Always;
-
-                 //aa.TextColor = UIColor.Clear;
-                 //aa.Font = UIFont.SystemFontOfSize((nfloat)0);
-                 //Control.BorderStyle = UITextBorderStyle.None;
-
-                 //timeCountdownPicker = e.NewElement as ExtendedCountDownPicker;
-
-                 var customModelPickerView = new UIPickerView
+                var customModelPickerView = new UIPickerView
                 {
-                    Model = new TimeCountdownPickerView(timeCountdownPicker)
+                    Model = new TimeCountdownPickerView(timeCountdownPicker),
+                    BackgroundColor = UIColor.Red
+
                 };
-
-
-                ////TODO hide the [DONE] button
-                //aa.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                //aa.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
-                //customModelPickerView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                //customModelPickerView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
-
+              
                 SelectPickerValue(customModelPickerView, timeCountdownPicker);
                 CreatePickerLabels(customModelPickerView);
 
                 SetNativeControl(customModelPickerView);
+            }
 
-                //Control.InputView.InputAssistantItem.LeadingBarButtonGroups = new UIBarButtonItemGroup[0];
-                //Control.InputView.InputAssistantItem.TrailingBarButtonGroups = new UIBarButtonItemGroup[0];
-                //Control.InputView = customModelPickerView;
-
-
-
-                //TODO work around for buttons
-                //aa.TouchDown += (s,e1) =>
-                // {
-                //     var bb = timeCountdownPicker.Parent.Parent.Parent as ChatInputBarView;
-                //     bb.KeepTextInputFocus = false;
-                // };
-
-          //  }
         }
 
         private void SelectPickerValue(UIPickerView customModelPickerView, ExtendedCountDownPicker myTimePicker)
@@ -96,12 +66,18 @@ namespace Chat.iOS.Renderers
             nfloat componentWidth = new nfloat(DisplayWidth / ComponentCount / DisplayScale);
 
             var hoursLabel = new UILabel(new CGRect(componentWidth, verticalPosition, _labelSize, _labelSize));
+            hoursLabel.TextAlignment = UITextAlignment.Center;
+
             hoursLabel.Text = "h";
 
             var minutesLabel = new UILabel(new CGRect((componentWidth * 3) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+            minutesLabel.TextAlignment = UITextAlignment.Center;
+
             minutesLabel.Text = "m";
 
             var secondsLabel = new UILabel(new CGRect((componentWidth * 5) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+            secondsLabel.TextAlignment = UITextAlignment.Center;
+
             secondsLabel.Text = "s";
 
             customModelPickerView.AddSubview(hoursLabel);

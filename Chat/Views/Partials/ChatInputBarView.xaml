@@ -57,6 +57,7 @@
             >
 
             <Image
+                Margin="5,0,0,0"
                 Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"
                 Style="{StaticResource Key=ToolImages}">
                 <Image.GestureRecognizers>

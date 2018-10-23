@@ -14,7 +14,25 @@ namespace Chat.Views.Partials
         public MessageBody()
         {
             InitializeComponent();
+
+            SizeChanged += MessageBody_SizeChanged;
+
+
+
+            var msg = this.BindingContext as Message;
+          
         }
+
+        void MessageBody_SizeChanged(object sender, EventArgs e)
+        {
+            if(this.Width>300)
+            {
+                this.WidthRequest = 250;
+            }
+        }
+
+
+
 
         //TODO Place in baseViewCell?
         //TODO use event?
