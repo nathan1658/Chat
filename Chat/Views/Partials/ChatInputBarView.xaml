@@ -77,18 +77,19 @@
                 </Image.GestureRecognizers>
             </Image>
         </StackLayout>
-        <Frame
-           
+        <Frame           
+            
+            
             CornerRadius="5"
             Grid.Column="1"
-            Grid.Row="0"
-            
+            Grid.Row="0"            
             HasShadow="False"
             BackgroundColor="White"
             Padding="0"
             Margin="0"
             VerticalOptions="Center">
             <controls:ExtendedEditorControl
+                IsVisible="true"
                 VerticalOptions="Center"
                 x:Name="chatTextInput"
                 Text="{Binding TextToSend}"

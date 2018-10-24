@@ -49,7 +49,7 @@ namespace Chat.Models
                 {                                     
                     try
                     {
-                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoByte, 50, 50, 50);
+                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoByte, 150, 150, 75);
                         //Generate compressed image..
                         
                         _imageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(compressedImage); });

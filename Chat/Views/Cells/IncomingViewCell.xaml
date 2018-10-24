@@ -11,30 +11,24 @@
     
     >
 
-    <!--<Frame
-        FlowDirection="LeftToRight"        
-        CornerRadius="5"
-        BackgroundColor="White"
-        HasShadow="False"
-        Padding="10"        
-        Margin="10,10,80,10"
-          
-        >-->
+
 
     <Frame
-        FlowDirection="LeftToRight"        
+        
         CornerRadius="5"
         BackgroundColor="White"
         HasShadow="False"                    
         VerticalOptions="StartAndExpand"
-        HorizontalOptions="StartAndExpand"
+        HorizontalOptions="Start"        
         Margin="10"
         Padding="5"
+        
         >
 
 
         <Frame.Resources>
             <converter:IsNullConverter x:Key="IsNullConverter"/>
+            <converter:NameToColorConverter x:Key="NameColorConverter"/>
         </Frame.Resources>
         
             <Grid >
@@ -54,9 +48,10 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Text="{Binding User}"
+                    TextColor="{Binding User,Converter={StaticResource NameColorConverter}}"
                     FontAttributes="Bold" />
 
-                <partials:MessageBody Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                <partials:MessageBody Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
 
 
                 <Grid Grid.Row="2" >
@@ -90,7 +85,7 @@
 
                     <Label                    
                     Grid.Column="2"          
-                    HorizontalOptions="End"
+                    HorizontalTextAlignment="End"
                     FlexLayout.AlignSelf="End"                               
                     Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}" 
                     TextColor="#abb7c0"

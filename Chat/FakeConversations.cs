@@ -46,7 +46,7 @@ namespace Chat
 
 
             var Messages = result[0].Messages;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 var msg = ChatPageViewModel.GenRandomMessage();
                 msg.SubmittedDate = DateTime.Now.Add(new TimeSpan(0, -i, 0));

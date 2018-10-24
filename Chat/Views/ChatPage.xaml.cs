@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,15 @@ namespace Chat.Views
         public ChatPage()
         {
             InitializeComponent();
-
+            ChatList.ItemAppearing += (sender, e) =>
+            {
+                Message msg = e.Item as Message;
+                var itemSource = ChatList.ItemsSource as ObservableCollection<Message>;
+                if (msg != null && itemSource != null && msg.OutgoingMessage && msg == (itemSource.Last()))
+                {
+                    ChatList.ScrollTo(e.Item, ScrollToPosition.MakeVisible, false);
+                }
+            };
         }
 
 

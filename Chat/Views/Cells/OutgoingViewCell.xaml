@@ -36,7 +36,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <partials:MessageBody Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand"
+            <partials:MessageBody Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="End"
                                   />
             <Grid Grid.Row="1"  >
                 
@@ -48,7 +48,8 @@
                 <Label
                         Text="{Binding RemainingTimeString}"
                         IsVisible="false"
-                        HorizontalOptions="Start"
+                        HorizontalOptions="Start"                    
+                    
                         Grid.Column="0"
                         >
                     <Label.Triggers>

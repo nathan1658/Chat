@@ -15,21 +15,23 @@ namespace Chat.Views.Partials
         {
             InitializeComponent();
 
-            SizeChanged += MessageBody_SizeChanged;
-
-
+         
 
             var msg = this.BindingContext as Message;
-          
+
         }
 
-        void MessageBody_SizeChanged(object sender, EventArgs e)
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            if(this.Width>300)
-            {
+            if (this.Width > 250)
                 this.WidthRequest = 250;
+            else
+            {
+                this.WidthRequest = -1;
             }
+            return base.OnMeasure(widthConstraint, heightConstraint);
         }
+
 
 
 
