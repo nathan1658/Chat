@@ -46,13 +46,13 @@ namespace Chat
 
 
             var Messages = result[0].Messages;
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var msg = ChatPageViewModel.GenRandomMessage();
                 msg.SubmittedDate = DateTime.Now.Add(new TimeSpan(0, -i, 0));
                 Messages.Add(msg);
             }
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 result.Add(new Conversation() { Title = $"Conversation {i}" });
             }

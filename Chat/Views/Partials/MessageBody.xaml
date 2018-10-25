@@ -6,7 +6,7 @@
              xmlns:helpers ="clr-namespace:Chat.Helpers"
              xmlns:controls = "clr-namespace:Chat.Controls"
              x:Class="Chat.Views.Partials.MessageBody"
-             VerticalOptions="FillAndExpand"                         
+                          
              >
     <ContentView.Resources>
         <converter:IsNullConverter x:Key="IsNullConverter"/>
@@ -22,20 +22,22 @@
         </Style>
 
         <ControlTemplate x:Key="ExpiredMessage">
-            <StackLayout VerticalOptions="FillAndExpand">           
+            <StackLayout VerticalOptions="Fill">          
                     <Label Text="Message Deleted." HorizontalOptions= "Start" Style="{StaticResource Key=MessageBodyStyle}" />                
             </StackLayout>
         </ControlTemplate>
         <ControlTemplate x:Key="NormalMessage">
-            <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="Center" >
                 <Image
                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
-                HeightRequest="100"
+               HeightRequest="100"
                 WidthRequest="100"
                 Aspect="AspectFit"
-                VerticalOptions="Center"
+                VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
+                    Margin="0"
                 IsVisible="False"
+                
                 >
                     <Image.Triggers>
                         <DataTrigger TargetType="Image" Binding="{TemplateBinding BindingContext.ImageThumbnail,Converter={StaticResource IsNullConverter}}" Value="false">
@@ -52,12 +54,14 @@
 
                 <Image 
                 Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
-                HeightRequest="100"
+               
                 WidthRequest="100"
                 VerticalOptions="Center"
-                    HorizontalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0"
                 Aspect="AspectFit"
                 IsVisible="False"
+                   
                 >
                     <Image.Triggers>
                         <DataTrigger TargetType="Image" Binding="{TemplateBinding BindingContext.PDFByte,Converter={StaticResource IsNullConverter}}" Value="false">
@@ -75,9 +79,22 @@
                     <controls:ExtendedMessageBody                        
                     HorizontalOptions= "Start"
                     Style="{StaticResource MessageBodyStyle}"
-                    LineBreakMode="WordWrap"
+                    LineBreakMode="WordWrap"                  
+                    IsVisible="false"
                     Text="{TemplateBinding BindingContext.Text}">
-                               
+                      
+                            <controls:ExtendedMessageBody.Triggers>
+                                
+                                <DataTrigger TargetType="controls:ExtendedMessageBody" Binding="{TemplateBinding BindingContext.Text, Converter={StaticResource IsNullConverter}}" Value="false">
+                                    
+                                    
+                                    <Setter Property="IsVisible" Value="true"/>
+                                </DataTrigger>
+                                
+                            </controls:ExtendedMessageBody.Triggers>
+                            
+                            
+                        
                                                      
                     </controls:ExtendedMessageBody>
 
