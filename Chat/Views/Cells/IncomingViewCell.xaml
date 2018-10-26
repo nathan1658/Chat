@@ -50,7 +50,7 @@
                     TextColor="{Binding User,Converter={StaticResource NameColorConverter}}"
                     FontAttributes="Bold" />
 
-                <partials:MessageBody Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
+                <partials:MessageBody IsVisible="false" Grid.Row="1" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="Start"/>
 
 
                 <Grid Grid.Row="2" >

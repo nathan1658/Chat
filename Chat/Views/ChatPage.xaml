@@ -42,10 +42,10 @@
             </Image>
         <controls:ExtendedListView            
             ItemTemplate="{StaticResource MessageTemplateSelector}"
-     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-            ItemsSource="{Binding Messages}"
+            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding GroupedMessages}"
             Margin="0"
-            ItemTapped="OnListTapped"
+            ItemTapped="OnListTapped"                
             HasUnevenRows="true"
             BackgroundColor ="Transparent"                        
             SeparatorColor="Transparent"                    
@@ -54,7 +54,32 @@
             ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
             IsPullToRefreshEnabled="true" 
             RefreshCommand="{Binding RefreshCommand}" 
-            IsRefreshing ="{Binding IsRefreshing}">
+            Header="12345679"
+            IsRefreshing ="{Binding IsRefreshing}"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding DateTime}"
+                GroupShortNameBinding="asdf"                
+                >
+                <controls:ExtendedListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <!-- Row height is not working...-->
+                        <controls:ExtendedGroupHeaderViewCell >
+                            <StackLayout VerticalOptions="Center">                                
+                      <Frame  CornerRadius="5"
+        BackgroundColor="Yellow" HasShadow="false" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
+                            <Label Text="{Binding DateTime, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                        </Frame>  
+                        </StackLayout>
+                        </controls:ExtendedGroupHeaderViewCell>
+                      
+                    </DataTemplate>
+                    
+                    
+                </controls:ExtendedListView.GroupHeaderTemplate>
+                        
+                        
+                        
+                        
         </controls:ExtendedListView>
         
         </Grid>
@@ -65,11 +90,16 @@
             HasShadow="false"
             Grid.Row="1"
             HeightRequest="30"
-            WidthRequest="30"
-            CornerRadius="25"
+            WidthRequest="30"           
             Padding="1"
             BackgroundColor="White"
             IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
+            <Frame.CornerRadius>
+                <OnPlatform x:TypeArguments="x:Single">
+                    <On Platform="iOS" Value="15"></On>
+                    <On Platform="Android" Value="25"></On>                                        
+                </OnPlatform>                                
+            </Frame.CornerRadius>                        
             <StackLayout
                 Spacing="3">
                 <Label

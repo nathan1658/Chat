@@ -112,6 +112,7 @@
     <Compile Include="Renderers\ExtendedWebViewRenderer.cs" />
     <Compile Include="Renderers\ExtendedCountDownPickerRenderer.cs" />
     <Compile Include="Renderers\ExtendedMessageBodyRenderer.cs" />
+    <Compile Include="Renderers\ExtendedGroupHeaderViewCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

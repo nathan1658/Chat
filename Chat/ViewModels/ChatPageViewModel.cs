@@ -8,11 +8,22 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Timers;
 using Rg.Plugins.Popup.Services;
-using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chat.ViewModels
 {
+
+    public class GroupedMessage : ObservableCollection<Message>
+    {
+        public DateTime DateTime {get;set;}
+        public GroupedMessage(IEnumerable<Message> msg):base(msg)
+        {}
+
+        public GroupedMessage(){}
+    }
+
+
     public class ChatPageViewModel : INotifyPropertyChanged
     {
         static Random random = new Random();
@@ -91,6 +102,24 @@ namespace Chat.ViewModels
 
         }
 
+        void FormGroupMessages(IList<Message> messages)
+        {
+            foreach(var msg in messages)
+            {
+                var date = msg.SubmittedDate.Date;
+                GroupedMessage targetMessageGroup = null;
+                targetMessageGroup = GroupedMessages.Where(x => x.DateTime == date).FirstOrDefault();
+                if(targetMessageGroup == null)
+                {
+                    targetMessageGroup = new GroupedMessage(){DateTime = date};
+                    GroupedMessages.Add(targetMessageGroup);
+                }
+                targetMessageGroup.Add(msg);
+                targetMessageGroup = new GroupedMessage(targetMessageGroup.OrderBy(x => x.SubmittedDate).ToList());
+            }
+            GroupedMessages = new ObservableCollection<GroupedMessage>(GroupedMessages.OrderBy(x => x.DateTime).ToList());
+        }
+
         public ChatPageViewModel(Conversation con)
         {
             _conversation = con;
@@ -103,6 +132,7 @@ namespace Chat.ViewModels
             });
             Messages = new ObservableCollection<Message>(_conversation.Messages);
             Messages = new ObservableCollection<Message>(Messages.OrderBy(x => x.SubmittedDate).ToList());
+            FormGroupMessages(Messages);
             var rnd = new Random();
             int rndInterval = 10 + rnd.Next(5);
             Timer timer = new Timer();
@@ -227,7 +257,7 @@ namespace Chat.ViewModels
             }
         }
 
-
+        public ObservableCollection<GroupedMessage> GroupedMessages { get; set; } = new ObservableCollection<GroupedMessage>();
 
         public ObservableCollection<Message> Messages
         {

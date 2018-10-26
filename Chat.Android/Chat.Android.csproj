@@ -74,6 +74,7 @@
     <Compile Include="DepedencyService\PhotoResizer_Android.cs" />
     <Compile Include="Renderers\ExtendedCountDownPickerRenderer.cs" />
     <Compile Include="Renderers\ExtendedMessageBodyRenderer.cs" />
+    <Compile Include="Renderers\ExtendedGroupHeaderViewCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\pdfjs\web\compressed.tracemonkey-pldi-09.pdf" />
