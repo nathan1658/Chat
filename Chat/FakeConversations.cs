@@ -52,7 +52,7 @@ namespace Chat
                 msg.SubmittedDate = DateTime.Now.Add(new TimeSpan(0, -i, 0));
                 Messages.Add(msg);
             }
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 result.Add(new Conversation() { Title = $"Conversation {i}" });
             }

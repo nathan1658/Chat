@@ -6,7 +6,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     x:Class="Chat.Views.Cells.IncomingViewCell"
-    Appearing="BaseMessageViewCell_Appearing"
     xmlns:converter="clr-namespace:Chat.Converter"
     
     >

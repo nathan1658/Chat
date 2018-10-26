@@ -8,7 +8,7 @@
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     x:Class="Chat.Views.Cells.OutgoingViewCell"    
-    Appearing="BaseMessageViewCell_Appearing"
+  
     >
     
     <Frame        
