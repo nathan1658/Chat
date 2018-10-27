@@ -69,10 +69,7 @@ namespace Chat.Views
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        while (vm.DelayedMessages.Count > 0)
-                        {
-                            vm.Messages.Insert(0, vm.DelayedMessages.Dequeue());
-                        }
+                     
                         vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
@@ -86,7 +83,7 @@ namespace Chat.Views
 
         void scrollToBottom()
         {           
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).Messages.Last(), ScrollToPosition.End, true);   
+            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);   
         }
 
         internal void FocusEntry()

@@ -16,7 +16,8 @@ namespace Chat.iOS.Renderers
     {
         public static double DisplayScale = UIScreen.MainScreen.Scale;
         public static int DispalyHeight = (int)UIScreen.MainScreen.NativeBounds.Height;
-        public static double DisplayWidth = (int)UIScreen.MainScreen.NativeBounds.Width*0.75;
+        //TODO fix this (maybe dynamic get parent view width?)
+        public static double DisplayWidth = 560;
 
         internal const int ComponentCount = 6;
 

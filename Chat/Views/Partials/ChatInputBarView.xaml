@@ -30,7 +30,7 @@
         RowSpacing="0"
         ColumnSpacing="0"
         Padding="0,5,0,5"
-        BackgroundColor="#f9f9f9"
+        BackgroundColor="#efefef"
         >
         <Grid.RowDefinitions>
             <RowDefinition
@@ -51,12 +51,13 @@
             Orientation="Horizontal"
             Grid.Row="0"
             Grid.Column="0"
-            VerticalOptions="End"
+            VerticalOptions="EndAndExpand"
             Margin="0,0,0,5"
             x:Name="itemsStackLayout"
             >
 
             <Image
+                VerticalOptions="Center"
                 Margin="5,0,0,0"
                 Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"
                 Style="{StaticResource Key=ToolImages}">
@@ -68,6 +69,7 @@
             </Image>
 
             <Image
+                  VerticalOptions="Center"
                 Source="{extensions:ImageResource Chat.Images.attach_250x250.png}"                 
                 Style="{StaticResource Key=ToolImages}" >
                 <Image.GestureRecognizers>

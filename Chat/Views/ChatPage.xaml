@@ -63,13 +63,24 @@
                 <controls:ExtendedListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <!-- Row height is not working...-->
-                        <controls:ExtendedGroupHeaderViewCell >
-                            <StackLayout VerticalOptions="Center">                                
-                      <Frame  CornerRadius="5"
-        BackgroundColor="Yellow" HasShadow="false" HorizontalOptions="Center" VerticalOptions="Center" Padding="5">
-                            <Label Text="{Binding DateTime, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                        </Frame>  
-                        </StackLayout>
+                        <controls:ExtendedGroupHeaderViewCell>
+                            <StackLayout
+                                VerticalOptions="Center">
+                                <Frame
+                                    CornerRadius="5"
+                                    BackgroundColor="#bbdadee6"
+                                    HasShadow="false"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Padding="5">
+                                    <Label
+                                        Text="{Binding DateTimeString}"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalOptions="Center"
+                                        HorizontalTextAlignment="Center" />
+                                </Frame>
+                            </StackLayout>
                         </controls:ExtendedGroupHeaderViewCell>
                       
                     </DataTemplate>
@@ -90,16 +101,23 @@
             HasShadow="false"
             Grid.Row="1"
             HeightRequest="30"
-            WidthRequest="30"           
+            WidthRequest="30"
             Padding="1"
             BackgroundColor="White"
             IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
             <Frame.CornerRadius>
-                <OnPlatform x:TypeArguments="x:Single">
-                    <On Platform="iOS" Value="15"></On>
-                    <On Platform="Android" Value="25"></On>                                        
-                </OnPlatform>                                
-            </Frame.CornerRadius>                        
+                <OnPlatform
+                    x:TypeArguments="x:Single">
+                    <On
+                        Platform="iOS"
+                        Value="15">
+                    </On>
+                    <On
+                        Platform="Android"
+                        Value="25">
+                    </On>
+                </OnPlatform>
+            </Frame.CornerRadius>
             <StackLayout
                 Spacing="3">
                 <Label
@@ -120,12 +138,16 @@
             </Frame.GestureRecognizers>
         </Frame>
         <partials:ChatButtonsBarView
-            Grid.Row="2" IsVisible="False">
+            Grid.Row="2"
+            IsVisible="False">
         </partials:ChatButtonsBarView>
-        <StackLayout Grid.Row="3" Padding="0,0.5,0,0" Margin="0" BackgroundColor="Gray"   >
-        <partials:ChatInputBarView            
-            x:Name="InputBar" />
-            
+        <StackLayout
+            Grid.Row="3"
+            Padding="0,0.5,0,0"
+            Margin="0"
+            BackgroundColor="Gray">
+            <partials:ChatInputBarView
+                x:Name="InputBar" />
         </StackLayout>
     </Grid>
 </ContentPage>
