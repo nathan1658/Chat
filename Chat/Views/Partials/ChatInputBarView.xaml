@@ -50,15 +50,16 @@
         <StackLayout
             Orientation="Horizontal"
             Grid.Row="0"
-            Grid.Column="0"
-            VerticalOptions="EndAndExpand"
-            Margin="0,0,0,5"
+            Grid.Column="0"                  
+            VerticalOptions="End"
+            Spacing="5"
+             Margin="5,0,5,0"
+            HeightRequest="30"
             x:Name="itemsStackLayout"
             >
 
             <Image
-                VerticalOptions="Center"
-                Margin="5,0,0,0"
+                VerticalOptions="Center"               
                 Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"
                 Style="{StaticResource Key=ToolImages}">
                 <Image.GestureRecognizers>
@@ -109,7 +110,7 @@
             FontSize="Medium"
             Text="Send"
             TextColor="#0080c0"
-            Margin="0,0,0,5"
+            
             Grid.Row="0"
             Grid.Column="2"
             x:Name="SendLabel"
