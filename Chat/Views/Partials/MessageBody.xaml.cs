@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Chat.Views.Partials
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class MessageBody : ContentView
     {
         public MessageBody()
