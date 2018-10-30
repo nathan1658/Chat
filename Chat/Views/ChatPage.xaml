@@ -16,6 +16,7 @@
     </ContentPage.Resources>
     <Grid
         RowSpacing="0"
+        VerticalOptions="FillAndExpand"
         ColumnSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition
@@ -31,35 +32,33 @@
             Grid.Row="0"
             x:Name="MessageBoard"
             IsVisible="false">
-            
         </partials:MessageBoard>
-        <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-            <Image Source="{extensions:ImageResource Chat.Images.ChatBg.png}"                                      
-                   Aspect="Fill"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"                   
-                   BackgroundColor="Transparent">
+        <Grid
+            Grid.Row="1"
+            HorizontalOptions="FillAndExpand">
+            <Image
+                Source="{extensions:ImageResource Chat.Images.ChatBg.png}"
+                Aspect="Fill"
+                HorizontalOptions="CenterAndExpand"
+                BackgroundColor="Transparent">
             </Image>
-        <controls:ExtendedListView            
-            ItemTemplate="{StaticResource MessageTemplateSelector}"
-            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-            ItemsSource="{Binding GroupedMessages}"
-            Margin="0"
-            ItemTapped="OnListTapped"                
-            HasUnevenRows="true"
-            BackgroundColor ="Transparent"                        
-            SeparatorColor="Transparent"                    
-            x:Name="ChatList"
-            ItemAppearingCommand="{Binding MessageAppearingCommand}"
-            ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
-            IsPullToRefreshEnabled="true" 
-            RefreshCommand="{Binding RefreshCommand}" 
-            Header="12345679"
-            IsRefreshing ="{Binding IsRefreshing}"
+            <controls:ExtendedListView
+                ItemTemplate="{StaticResource MessageTemplateSelector}"
+                HorizontalOptions="FillAndExpand"
+                ItemsSource="{Binding GroupedMessages}"
+                Margin="0"
+                ItemTapped="OnListTapped"
+                HasUnevenRows="true"
+                BackgroundColor="Transparent"
+                SeparatorColor="Transparent"
+                x:Name="ChatList"
+                ItemAppearingCommand="{Binding MessageAppearingCommand}"
+                ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
+                IsPullToRefreshEnabled="true"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}"
                 IsGroupingEnabled="true"
-                GroupDisplayBinding="{Binding DateTime}"
-                GroupShortNameBinding="asdf"                
-                >
+                GroupDisplayBinding="{Binding DateTime}">
                 <controls:ExtendedListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <!-- Row height is not working...-->
@@ -82,24 +81,14 @@
                                 </Frame>
                             </StackLayout>
                         </controls:ExtendedGroupHeaderViewCell>
-                      
                     </DataTemplate>
-                    
-                    
                 </controls:ExtendedListView.GroupHeaderTemplate>
-                        
-                        
-                        
-                        
-        </controls:ExtendedListView>
-        
-        </Grid>
-        <Frame
+            </controls:ExtendedListView>
+            <Frame
             HorizontalOptions="EndAndExpand"
             Margin="0,0,2,15"
             VerticalOptions="End"
-            HasShadow="false"
-            Grid.Row="1"
+            HasShadow="false"          
             HeightRequest="30"
             WidthRequest="30"
             Padding="1"
@@ -137,17 +126,24 @@
                     Tapped="ScrollTap" />
             </Frame.GestureRecognizers>
         </Frame>
+        </Grid>
+        
         <partials:ChatButtonsBarView
             Grid.Row="2"
             IsVisible="False">
-        </partials:ChatButtonsBarView>
-        <StackLayout
-            Grid.Row="3"
-            Padding="0,0.5,0,0"
-            Margin="0"
-            BackgroundColor="Gray">
-            <partials:ChatInputBarView
-                x:Name="InputBar" />
-        </StackLayout>
+            
+          
+        </partials:ChatButtonsBarView>    
+        
+            <StackLayout
+            IsVisible="true"
+                Grid.Row="3"
+                Padding="0,0.5,0,0"
+                Margin="0"
+                BackgroundColor="Gray">
+           
+                <partials:ChatInputBarView
+                    x:Name="InputBar" />
+            </StackLayout>
     </Grid>
 </ContentPage>

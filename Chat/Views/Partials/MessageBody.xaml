@@ -6,7 +6,7 @@
              xmlns:helpers ="clr-namespace:Chat.Helpers"
              xmlns:controls = "clr-namespace:Chat.Controls"
              x:Class="Chat.Views.Partials.MessageBody"
-                          
+              
              >
     <ContentView.Resources>
         <converter:IsNullConverter x:Key="IsNullConverter"/>
@@ -22,13 +22,19 @@
         </Style>
 
         <ControlTemplate x:Key="ExpiredMessage">
-            <StackLayout VerticalOptions="Fill">          
-                    <Label Text="Message Deleted." HorizontalOptions= "Start" Style="{StaticResource Key=MessageBodyStyle}" />                
-            </StackLayout>
+            <!--<Grid VerticalOptions="Fill">          -->
+                    <Label  Text="Message Deleted." MinimumHeightRequest="50" HorizontalOptions= "Start" Style="{StaticResource Key=MessageBodyStyle}" />                
+            <!--</StackLayout>-->
         </ControlTemplate>
         <ControlTemplate x:Key="NormalMessage">
-            <StackLayout HorizontalOptions="Center" >
+            <Grid  HorizontalOptions="Center" MinimumHeightRequest="50" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>                    
+                </Grid.RowDefinitions>
                 <Image
+                    Grid.Row="0"
                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
                HeightRequest="100"
                 WidthRequest="100"
@@ -53,6 +59,7 @@
                 </Image>
 
                 <Image 
+                    Grid.Row="1"
                 Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
                
                 WidthRequest="100"
@@ -77,6 +84,7 @@
                 </Image>
                
                     <controls:ExtendedMessageBody                        
+                    Grid.Row="2"
                     HorizontalOptions= "Start"
                     Style="{StaticResource MessageBodyStyle}"
                     LineBreakMode="WordWrap"                  
@@ -98,15 +106,16 @@
                                                      
                     </controls:ExtendedMessageBody>
 
-            </StackLayout>
+            </Grid>
 
         </ControlTemplate>
 
 
     </ContentView.Resources>
-    <ContentView.Content>
-        <ContentView ControlTemplate="{StaticResource NormalMessage}" >
-            <ContentView.Triggers>
+    <ContentView.ControlTemplate  ControlTemplate="{StaticResource NormalMessage}"   >
+      
+    </ContentView.ControlTemplate>
+    <ContentView.Triggers>
                 <DataTrigger TargetType="ContentView" Binding="{Binding IsExpired}" Value="True">
                     <Setter Property="ControlTemplate" Value="{StaticResource ExpiredMessage}"/>
                 </DataTrigger>
@@ -114,6 +123,10 @@
                     <Setter Property="ControlTemplate" Value="{StaticResource NormalMessage}"/>
                 </DataTrigger>
             </ContentView.Triggers>
-        </ContentView>
-    </ContentView.Content>
+
+      <!--  <ContentView ControlTemplate="{StaticResource NormalMessage}" MinimumHeightRequest="50">
+          
+        </ContentView>-->
+     
+      
 </ContentView>

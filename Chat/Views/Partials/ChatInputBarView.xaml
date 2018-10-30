@@ -4,8 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Chat.Controls"
     x:Class="Chat.Views.Partials.ChatInputBarView"
-    xmlns:extensions="clr-namespace:Chat.Extensions"
-    >
+    xmlns:extensions="clr-namespace:Chat.Extensions">
     <ContentView.Resources>
         <Style
             TargetType="Image"
@@ -21,17 +20,11 @@
                 Value="30" />
         </Style>
     </ContentView.Resources>
-
-
-
-
     <Grid
-       
         RowSpacing="0"
         ColumnSpacing="0"
         Padding="0,5,0,5"
-        BackgroundColor="#efefef"
-        >
+        BackgroundColor="#efefef">
         <Grid.RowDefinitions>
             <RowDefinition
                 Height="auto" />
@@ -50,16 +43,14 @@
         <StackLayout
             Orientation="Horizontal"
             Grid.Row="0"
-            Grid.Column="0"                  
+            Grid.Column="0"
             VerticalOptions="End"
             Spacing="5"
-             Margin="5,0,5,0"
+            Margin="5,0,5,0"
             HeightRequest="30"
-            x:Name="itemsStackLayout"
-            >
-
+            x:Name="itemsStackLayout">
             <Image
-                VerticalOptions="Center"               
+                VerticalOptions="Center"
                 Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"
                 Style="{StaticResource Key=ToolImages}">
                 <Image.GestureRecognizers>
@@ -68,11 +59,10 @@
                     </TapGestureRecognizer>
                 </Image.GestureRecognizers>
             </Image>
-
             <Image
-                  VerticalOptions="Center"
-                Source="{extensions:ImageResource Chat.Images.attach_250x250.png}"                 
-                Style="{StaticResource Key=ToolImages}" >
+                VerticalOptions="Center"
+                Source="{extensions:ImageResource Chat.Images.attach_250x250.png}"
+                Style="{StaticResource Key=ToolImages}">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                         Tapped="AttatchmentTapped">
@@ -80,12 +70,12 @@
                 </Image.GestureRecognizers>
             </Image>
         </StackLayout>
-        <Frame           
-            
-            
+                 
+        <Frame
+            IsVisible="true"
             CornerRadius="5"
             Grid.Column="1"
-            Grid.Row="0"            
+            Grid.Row="0"
             HasShadow="False"
             BackgroundColor="White"
             Padding="0"
@@ -102,15 +92,16 @@
                 IsExpandable="true"
                 HorizontalOptions="FillAndExpand"
                 PlaceholderColor="LightGray"
-                Placeholder="Type your message here" />
+                Placeholder="Type your message here"                 
+            />
         </Frame>
         <Label
             VerticalOptions="End"
+            HeightRequest="30"
             HorizontalTextAlignment="Center"
             FontSize="Medium"
             Text="Send"
             TextColor="#0080c0"
-            
             Grid.Row="0"
             Grid.Column="2"
             x:Name="SendLabel"
