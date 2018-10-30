@@ -64,6 +64,9 @@
     <PackageReference Include="XLabs.Serialization.JSON">
       <Version>2.0.5782</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.CrossPlatformTintedImage">
+      <Version>1.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -377,6 +380,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\layout\TimePicker.axml" />
+    <AndroidResource Include="Resources\layout\stopwatch_250x250.png">
+      <LogicalName>Chat.iOS.Resources.stopwatch_250x250.png</LogicalName>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
