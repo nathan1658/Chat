@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Chat.Converter
+namespace Chat.Converters
 {
     public class IsNullConverter : IValueConverter
     {

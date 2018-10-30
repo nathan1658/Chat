@@ -15,7 +15,7 @@ namespace Chat.Views.Partials
     public partial class ChatInputBarView : ContentView
     {
 
-        ChatPage chatPage; 
+        ChatPage chatPage;
 
         public ChatInputBarView()
         {
@@ -23,7 +23,6 @@ namespace Chat.Views.Partials
 
             if (Device.RuntimePlatform == Device.iOS)
             {
-                //  this.SetBinding(HeightRequestProperty, new Binding("Height", BindingMode.OneWay, null, null, null, chatTextInput));
             }
 
             this.SizeChanged += (s, e) =>
@@ -39,8 +38,8 @@ namespace Chat.Views.Partials
                   }
                   chatPage = g as ChatPage;
               };
-            
-            
+
+
 
             chatTextInput.Focused += (s, e) =>
             {
@@ -51,7 +50,7 @@ namespace Chat.Views.Partials
 
         private void setParent()
         {
-          
+
 
         }
 
@@ -62,7 +61,7 @@ namespace Chat.Views.Partials
         protected void SendTapped(object sender, System.EventArgs e)
         {
             (this.BindingContext as ChatPageViewModel).OnSendCommand.Execute(null);
-            if(chatPage == null)
+            if (chatPage == null)
             {
                 setParent();
             }
@@ -99,8 +98,8 @@ namespace Chat.Views.Partials
                 setParent();
             }
 
-            var action  = await chatPage.DisplayActionSheet("Select an action", "Cancel", null,"Camera","Library","PDF","File");
-            switch(action)
+            var action = await chatPage.DisplayActionSheet("Select an action", "Cancel", null, "Camera", "Library", "PDF", "File");
+            switch (action)
             {
                 case "Camera":
                     takePhoto();
@@ -113,7 +112,7 @@ namespace Chat.Views.Partials
                     break;
                 default:
                     //TODO
-                    chatPage.DisplayAlert("Error", "Sosad not yet implement","Cancel");
+                    chatPage.DisplayAlert("Error", "Sosad not yet implement", "Cancel");
                     break;
             }
         }
@@ -122,7 +121,7 @@ namespace Chat.Views.Partials
         {
             //TODO Think the mechanism here, cache it or download it everytime?
             var vm = (this.BindingContext as ChatPageViewModel);
-            if(vm!=null)
+            if (vm != null)
             {
                 var webClient = new WebClient();
                 var data = webClient.DownloadData("http://www.africau.edu/images/default/sample.pdf");
@@ -137,7 +136,7 @@ namespace Chat.Views.Partials
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-              //  DisplayAlert("No Camera", ":( No camera available.", "OK");
+                //  DisplayAlert("No Camera", ":( No camera available.", "OK");
                 return;
             }
 
@@ -146,7 +145,7 @@ namespace Chat.Views.Partials
                 Directory = "Temp",
                 Name = "test.jpg",
                 SaveToAlbum = false
-                
+
             });
 
             if (file == null)
@@ -154,15 +153,15 @@ namespace Chat.Views.Partials
 
             // await DisplayAlert("File Location", file.Path, "OK");
             var vm = this.BindingContext as ChatPageViewModel;
-           
+
 
             var stream = file.GetStream();
             var imageByteArr = readFully(stream);
             stream.Dispose();
             file.Dispose();
-            vm.SubmitMessage(null,imageByteArr, null);
-          
-           
+            vm.SubmitMessage(null, imageByteArr, null);
+
+
         }
 
         private byte[] readFully(Stream input)
@@ -177,7 +176,7 @@ namespace Chat.Views.Partials
 
         async void pickFromLibrary()
         {
-            if (!CrossMedia.Current.IsPickPhotoSupported )
+            if (!CrossMedia.Current.IsPickPhotoSupported)
             {
                 //  DisplayAlert("No Camera", ":( No camera available.", "OK");
                 return;
@@ -196,7 +195,7 @@ namespace Chat.Views.Partials
             var imageByteArr = readFully(stream);
             file.Dispose();
             stream.Dispose();
-            vm.SubmitMessage(null,imageByteArr, null);
+            vm.SubmitMessage(null, imageByteArr, null);
         }
 
 

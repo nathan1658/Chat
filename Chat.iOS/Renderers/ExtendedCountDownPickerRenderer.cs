@@ -39,9 +39,7 @@ namespace Chat.iOS.Renderers
 
                 var customModelPickerView = new UIPickerView
                 {
-                    Model = new TimeCountdownPickerView(timeCountdownPicker),
-                    BackgroundColor = UIColor.Red
-
+                    Model = new TimeCountdownPickerView(timeCountdownPicker)
                 };
               
                 SelectPickerValue(customModelPickerView, timeCountdownPicker);

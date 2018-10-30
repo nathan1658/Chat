@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Plugin.CrossPlatformTintedImage.iOS;
 using UIKit;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
@@ -29,6 +30,7 @@ namespace Chat.iOS
             Rg.Plugins.Popup.Popup.Init();
             Stormlion.PhotoBrowser.iOS.Platform.Init();
             XLabsInit();
+            TintedImageRenderer.Init();
             #endregion
 
             Xamarin.Calabash.Start();

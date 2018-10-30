@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Chat.Converter
+namespace Chat.Converters
 {
     public class NameToColorConverter:IValueConverter
     {

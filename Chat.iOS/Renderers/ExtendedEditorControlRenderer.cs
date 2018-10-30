@@ -9,10 +9,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 
-[assembly: ExportRenderer(typeof(ExtendedEditorControl), typeof(CustomEditorRenderer))]
+[assembly: ExportRenderer(typeof(ExtendedEditorControl), typeof(ExtendedEditorControlRenderer))]
 namespace Chat.iOS.Renderers
 {
-    public class CustomEditorRenderer:EditorRenderer
+    public class ExtendedEditorControlRenderer:EditorRenderer
     {
         UILabel _placeholderLabel;
         double previousHeight = -1;
@@ -26,6 +26,7 @@ namespace Chat.iOS.Renderers
                 if (_placeholderLabel == null)
                 {
                     CreatePlaceholder();
+                   
                 }
 
             }
@@ -43,7 +44,6 @@ namespace Chat.iOS.Renderers
                     Control.Layer.CornerRadius = 5;
                 else
                     Control.Layer.CornerRadius = 0;
-
                 Control.InputAccessoryView = new UIView(CGRect.Empty);
                 Control.ReloadInputViews();
 
@@ -54,7 +54,6 @@ namespace Chat.iOS.Renderers
 
             }
         }
-
 
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
