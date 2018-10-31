@@ -7,6 +7,7 @@
     xmlns:converter="clr-namespace:Chat.Converters"
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:partials="clr-namespace:Chat.Views.Partials"
+    xmlns:controls="clr-namespace:Chat.Controls" 
     x:Class="Chat.Views.Cells.OutgoingViewCell">
     <Frame
         BackgroundColor="#effdde"
@@ -31,10 +32,157 @@
                     Height="auto">
                 </RowDefinition>
             </Grid.RowDefinitions>
-            <partials:MessageBody
+       <ContentView
                 Grid.Row="0"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="End" />
+                Grid.Column="0"
+                xmlns:controls="clr-namespace:Chat.Controls"
+                xmlns:extensions="clr-namespace:Chat.Extensions">
+                <ContentView.Resources>
+                    <converter:IsNullConverter
+                        x:Key="IsNullConverter" />
+                    <Style
+                        TargetType="Label"
+                        x:Key="MessageBodyStyle">
+                        <Setter
+                            Property="FontSize"
+                            Value="Medium" />
+                        <Setter
+                            Property="FontFamily"
+                            Value="Lucida Grande" />
+                        <Setter
+                            Property="TextColor"
+                            Value="Black" />
+                        <Style.Triggers>
+                            <DataTrigger
+                                TargetType="Label"
+                                Binding="{TemplateBinding BindingContext.OutgoingMessage}"
+                                Value="True">
+                                <Setter
+                                    Property="HorizontalOptions"
+                                    Value="End" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <ControlTemplate
+                        x:Key="ExpiredMessage">
+                        <!--<Grid VerticalOptions="Fill">          -->
+                        <Label
+                            Text="Message Deleted."
+                            MinimumHeightRequest="50"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource Key=MessageBodyStyle}" />
+                        <!--</StackLayout>-->
+                    </ControlTemplate>
+                    <ControlTemplate                        
+                        x:Key="NormalMessage">
+                        <Grid
+                            BackgroundColor="Red"
+                            HorizontalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="auto" />
+                                <RowDefinition
+                                    Height="auto" />
+                                <RowDefinition
+                                    Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Image
+                                Grid.Row="0"
+                                Source="{TemplateBinding BindingContext.ImageThumbnail}"
+                                HeightRequest="100"
+                                WidthRequest="100"
+                                Aspect="AspectFit"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="Center"
+                                Margin="0"
+                                IsVisible="False">
+                                <Image.Triggers>
+                                    <DataTrigger
+                                        TargetType="Image"
+                                        Binding="{TemplateBinding BindingContext.ImageThumbnail,Converter={StaticResource IsNullConverter}}"
+                                        Value="false">
+                                        <Setter
+                                            Property="IsVisible"
+                                            Value="True" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                                <Image.GestureRecognizers>
+                                    <!--TODO make use of command here-->
+                                    <TapGestureRecognizer
+                                        Tapped="ImageThumbnail_Tapped">
+                                    </TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image
+                                Grid.Row="1"
+                                Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
+                                WidthRequest="100"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Margin="0"
+                                Aspect="AspectFit"
+                                IsVisible="False">
+                                <Image.Triggers>
+                                    <DataTrigger
+                                        TargetType="Image"
+                                        Binding="{TemplateBinding BindingContext.PDFByte,Converter={StaticResource IsNullConverter}}"
+                                        Value="false">
+                                        <Setter
+                                            Property="IsVisible"
+                                            Value="True" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                                <Image.GestureRecognizers>
+                                    <!--TODO make use of command here-->
+                                    <TapGestureRecognizer
+                                        Tapped="PDFIcon_Tapped">
+                                    </TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <controls:ExtendedMessageBody
+                                Grid.Row="2"
+                                HorizontalOptions="Start"
+                                BackgroundColor="Blue"
+                                Style="{StaticResource MessageBodyStyle}"
+                                LineBreakMode="WordWrap"
+                                IsVisible="false"
+                                Text="{TemplateBinding BindingContext.Text}">
+                                <controls:ExtendedMessageBody.Triggers>
+                                    <DataTrigger
+                                        TargetType="controls:ExtendedMessageBody"
+                                        Binding="{TemplateBinding BindingContext.Text, Converter={StaticResource IsNullConverter}}"
+                                        Value="false">
+                                        <Setter
+                                            Property="IsVisible"
+                                            Value="true" />
+                                    </DataTrigger>
+                                </controls:ExtendedMessageBody.Triggers>
+                            </controls:ExtendedMessageBody>
+                        </Grid>
+                    </ControlTemplate>
+                </ContentView.Resources>
+                <ContentView.ControlTemplate
+                    ControlTemplate="{StaticResource NormalMessage}">
+                </ContentView.ControlTemplate>
+                <ContentView.Triggers>
+                    <DataTrigger
+                        TargetType="ContentView"
+                        Binding="{Binding IsExpired}"
+                        Value="True">
+                        <Setter
+                            Property="ControlTemplate"
+                            Value="{StaticResource ExpiredMessage}" />
+                    </DataTrigger>
+                    <DataTrigger
+                        TargetType="ContentView"
+                        Binding="{Binding IsExpired}"
+                        Value="false">
+                        <Setter
+                            Property="ControlTemplate"
+                            Value="{StaticResource NormalMessage}" />
+                    </DataTrigger>
+                </ContentView.Triggers>
+            </ContentView>
             <Grid
                 Grid.Row="1">
                 <Grid.ColumnDefinitions>

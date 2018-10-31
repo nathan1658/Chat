@@ -23,6 +23,8 @@
 - [ ] Attatchment 真機唔work
 - [ ] Attatchment(圖)無clip到
 - [ ] Message loading/retry animation
-- [ ] Message width issue
+- [ ] Message width issue(Related to RecycleElement)
 - [ ] Loading animation of Message
 - [ ] How to store tmp image/pdf (for display)
+- [ ] Resend failed message
+- [ ] Loading spinner when loading messages

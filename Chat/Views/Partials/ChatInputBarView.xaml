@@ -79,11 +79,19 @@
                 </Image.GestureRecognizers>
             </Image>
         </StackLayout>
-       
-            <controls:ExtendedEditorControl
-            Grid.Row="0"
+        <Frame
+            IsVisible="true"
+            CornerRadius="5"
             Grid.Column="1"
-                IsVisible="true"                
+            Grid.Row="0"
+            HasShadow="False"
+            BackgroundColor="White"
+            Padding="0"
+            Margin="0"
+            VerticalOptions="Center">
+            <controls:ExtendedEditorControl
+                IsVisible="true"
+                VerticalOptions="EndAndExpand"
                 x:Name="chatTextInput"
                 Text="{Binding TextToSend}"
                 TextColor="Black"
@@ -93,7 +101,7 @@
                 HorizontalOptions="FillAndExpand"
                 PlaceholderColor="LightGray"
                 Placeholder="Type your message here" />
-  
+        </Frame>
         <StackLayout
             Grid.Row="0"
             Grid.Column="2">

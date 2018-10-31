@@ -237,7 +237,7 @@ namespace Chat.ViewModels
             var text = chatExample[random.Next(chatExample.Count)];
             var user = userExample[random.Next(userExample.Count)];
             var expiryTime = TimeSpan.FromSeconds(10 + random.Next(10));
-            if (expiryTime.TotalSeconds % 2 == 0)
+            if (expiryTime.TotalSeconds % 7 == 0)
             {
                 msg = new Message() { Text = text, User = user, SubmittedDate = DateTime.Now, TimeOutValue = expiryTime };
             }
