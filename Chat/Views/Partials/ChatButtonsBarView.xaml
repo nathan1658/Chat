@@ -2,40 +2,83 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Chat.Views.Partials.ChatButtonsBarView"
+    x:Class="Chat.Views.Partials.ChatButtonsBarView"    
+    BackgroundColor="#efefef"
     
-    BackgroundColor="Purple"
     >
+    
     <ContentView.Content>
         <Grid>
-          <Grid  VerticalOptions="Fill" x:Name="ButtonsGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition>
-                        </ColumnDefinition>
-                        <ColumnDefinition>
-                        </ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-            
-                    <Button
-                            Margin="5"
-                        Grid.Column="0"
-                        BackgroundColor="Green"
-                        TextColor="White"
-                        Clicked="OK_ButtonClicked" 
-                    FontSize="Small"
-                        Text="Yes">
-                    </Button>
-                    <Button
+            <FlexLayout Wrap="Wrap"  VerticalOptions="StartAndExpand" x:Name="ButtonFlexLayout">
+                <FlexLayout.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="HeightRequest" Value="20"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="BackgroundColor" Value="AliceBlue"/>
+                        <Setter Property="FontSize" Value="Small"/>
+                        <Setter Property="FlexLayout.Basis" Value="50%"/>
+                    </Style>
+                </FlexLayout.Resources>
+
+                
+                <Button
                     Margin="5"
-                        Grid.Column="1"
+                      FlexLayout.Basis="20%"
                         TextColor="White"                     
                         BackgroundColor="Red"
                     FontSize="Small"
                         Text="NO">
-                    </Button>
-            
-            
-                </Grid>
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+                <Button
+                    Margin="5"
+                      FlexLayout.Basis="20%"
+                        TextColor="White"                     
+                        BackgroundColor="Red"
+                    FontSize="Small"
+                        Text="NO">
+                </Button>
+
+            </FlexLayout>
                 <Label x:Name="ButtonResultLabel" IsVisible="false" Text="You Have Selected YES">
           
             

@@ -8,21 +8,23 @@
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:controls="clr-namespace:Chat.Controls"
     x:Class="Chat.Views.ChatPage">
-    <ContentPage.Resources>
-        <ResourceDictionary> 
+    <ContentPage.Resources> 
+        <ResourceDictionary>
             <localHelpers:ChatTemplateSelector
                 x:Key="MessageTemplateSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid
+    <Grid  
         RowSpacing="0"
-        VerticalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand" 
         ColumnSpacing="0">
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="auto" />
-            <RowDefinition
+            <RowDefinition 
+                Height="auto" /> 
+            <RowDefinition 
                 Height="*" />
+            <RowDefinition
+                Height="0.5" />
             <RowDefinition
                 Height="auto" />
             <RowDefinition
@@ -94,21 +96,11 @@
                 HasShadow="false"
                 HeightRequest="30"
                 WidthRequest="30"
-                Padding="1"
+                Padding="1" 
                 BackgroundColor="White"
                 IsVisible="{Binding ShowScrollTap,Mode=TwoWay}">
                 <Frame.CornerRadius>
-                    <OnPlatform
-                        x:TypeArguments="x:Single">
-                        <On
-                            Platform="iOS"
-                            Value="15">
-                        </On>
-                        <On
-                            Platform="Android"
-                            Value="25">
-                        </On>
-                    </OnPlatform>
+                    <OnPlatform x:TypeArguments="x:Single" iOS="15" Android="25"/>
                 </Frame.CornerRadius>
                 <StackLayout
                     Spacing="3">
@@ -130,17 +122,23 @@
                 </Frame.GestureRecognizers>
             </Frame>
         </Grid>
-        <partials:ChatButtonsBarView
+        <BoxView
             Grid.Row="2"
-            IsVisible="False">
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="0.5"
+            BackgroundColor="Gray" />
+        <partials:ChatButtonsBarView
+            x:Name="ChatButtonsBar"
+            Grid.Row="3"
+            IsVisible="True">
         </partials:ChatButtonsBarView>
         <BoxView
-            Grid.Row="3"
+            Grid.Row="4"
             HorizontalOptions="FillAndExpand"
             HeightRequest="0.5"
             BackgroundColor="Gray" />
         <partials:ChatInputBarView
-            Grid.Row="4"
+            Grid.Row="5"
             x:Name="InputBar" />
     </Grid>
 </ContentPage>

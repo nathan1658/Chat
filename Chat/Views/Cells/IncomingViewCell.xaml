@@ -83,19 +83,7 @@
                     </ControlTemplate>
                     <ControlTemplate
                         x:Key="NormalMessage">
-                        <Grid
-                            Padding="0"
-                            Margin="0"
-                            HorizontalOptions="Start"
-                            BackgroundColor="Red">
-                            <Grid.RowDefinitions>
-                                <RowDefinition
-                                    Height="auto" />
-                                <RowDefinition
-                                    Height="auto" />
-                                <RowDefinition
-                                    Height="auto" />
-                            </Grid.RowDefinitions>
+                        <StackLayout>
                             <Image
                                 Grid.Row="0"
                                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
@@ -152,6 +140,7 @@
                             <controls:ExtendedMessageBody
                                 Grid.Row="2"
                                 HorizontalOptions="Start"
+                                BackgroundColor="Green"
                                 VerticalOptions="Start"                                
                                 Style="{StaticResource MessageBodyStyle}"
                                 LineBreakMode="WordWrap"
@@ -168,7 +157,7 @@
                                     </DataTrigger>
                                 </controls:ExtendedMessageBody.Triggers>
                             </controls:ExtendedMessageBody>
-                        </Grid>
+                        </StackLayout>
                     </ControlTemplate>
                 </ContentView.Resources>
                 <ContentView.ControlTemplate

@@ -75,19 +75,8 @@
                     </ControlTemplate>
                     <ControlTemplate                        
                         x:Key="NormalMessage">
-                        <Grid
-                            BackgroundColor="Red"
-                            HorizontalOptions="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition
-                                    Height="auto" />
-                                <RowDefinition
-                                    Height="auto" />
-                                <RowDefinition
-                                    Height="auto" />
-                            </Grid.RowDefinitions>
+                        <StackLayout>
                             <Image
-                                Grid.Row="0"
                                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
                                 HeightRequest="100"
                                 WidthRequest="100"
@@ -114,7 +103,6 @@
                                 </Image.GestureRecognizers>
                             </Image>
                             <Image
-                                Grid.Row="1"
                                 Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
                                 WidthRequest="100"
                                 VerticalOptions="Center"
@@ -140,7 +128,6 @@
                                 </Image.GestureRecognizers>
                             </Image>
                             <controls:ExtendedMessageBody
-                                Grid.Row="2"
                                 HorizontalOptions="Start"
                                 BackgroundColor="Blue"
                                 Style="{StaticResource MessageBodyStyle}"
@@ -158,7 +145,7 @@
                                     </DataTrigger>
                                 </controls:ExtendedMessageBody.Triggers>
                             </controls:ExtendedMessageBody>
-                        </Grid>
+                        </StackLayout>
                     </ControlTemplate>
                 </ContentView.Resources>
                 <ContentView.ControlTemplate

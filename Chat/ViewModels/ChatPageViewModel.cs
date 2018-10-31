@@ -8,17 +8,19 @@ using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Timers;
 using System.Threading.Tasks;
+using Chat.Interfaces;
 
 namespace Chat.ViewModels
 {
 
     public class GroupedMessage : ObservableCollection<Message>
     {
-        public DateTime DateTime {get;set;}
+        public DateTime DateTime { get; set; }
 
         public string DateTimeString
         {
-            get{
+            get
+            {
 
                 if (DateTime != null)
                 {
@@ -57,7 +59,7 @@ namespace Chat.ViewModels
                         }
 
                         return string.Format("{0}{1} {2:MMMM} {3}", DateTime.Day, suffix, DateTime, DateTime.Year);
-                        }
+                    }
                 }
                 else//Null datetime
                 {
@@ -67,10 +69,10 @@ namespace Chat.ViewModels
             }
         }
 
-        public GroupedMessage(IEnumerable<Message> msg):base(msg)
-        {}
+        public GroupedMessage(IEnumerable<Message> msg) : base(msg)
+        { }
 
-        public GroupedMessage(){}
+        public GroupedMessage() { }
     }
 
 
@@ -125,11 +127,11 @@ namespace Chat.ViewModels
         private int refreshCount = 0;
         async Task<List<Message>> RefreshData()
         {
-        
-            await Task.Delay(1500);
-                //Each time get n old messages..
 
-                List<Message> oldMessages = new List<Message>();
+            await Task.Delay(1500);
+            //Each time get n old messages..
+
+            List<Message> oldMessages = new List<Message>();
             if (refreshCount < 3)
             {
                 for (int i = 0; i < LOAD_MESSAGE_COUNT; i++)
@@ -137,7 +139,7 @@ namespace Chat.ViewModels
                     oldMessages.Add(GenRandomMessage());
                 }
 
-                var oldestDateTime = GroupedMessages.Where(x=>x.DateTime == GroupedMessages.Min(y=>y.DateTime)).First().Min(x => x.SubmittedDate);
+                var oldestDateTime = GroupedMessages.Where(x => x.DateTime == GroupedMessages.Min(y => y.DateTime)).First().Min(x => x.SubmittedDate);
 
                 var index = 1;
                 foreach (var msg in oldMessages)
@@ -148,13 +150,13 @@ namespace Chat.ViewModels
                 oldMessages = new List<Message>(oldMessages.OrderByDescending(x => x.SubmittedDate.ToBinary()));
             }
             refreshCount++;
-                return oldMessages;
+            return oldMessages;
 
         }
 
         void FormGroupMessages(IList<Message> messages)
         {
-            foreach(var msg in messages)
+            foreach (var msg in messages)
             {
                 addMessage(msg);
             }
@@ -179,7 +181,7 @@ namespace Chat.ViewModels
                     {
                         if (date > GroupedMessages[i].DateTime)
                         {
-                            GroupedMessages.Insert(i+1, targetMessageGroup);
+                            GroupedMessages.Insert(i + 1, targetMessageGroup);
                             break;
                         }
                         if (i == 0)//Last
@@ -192,7 +194,41 @@ namespace Chat.ViewModels
             targetMessageGroup.Add(msg);
             targetMessageGroup = new GroupedMessage(targetMessageGroup.OrderBy(x => x.SubmittedDate).ToList());
         }
-
+        private IChatPage _view;
+        public IChatPage View
+        {
+            get
+            {
+                return _view;
+            }
+            set
+            {
+                _view = value;
+                if (_view != null)
+                {
+                    //TODO init Buttons..
+                    List<Button> buttons = new List<Button>() {
+            new Button()
+            {
+                BackgroundColor = Color.LightGreen,
+                TextColor= Color.White,
+                Text = "Yes"
+            },
+             new Button()
+            {
+                BackgroundColor = Color.Red,
+                TextColor = Color.White,
+                Text = "No"
+            } ,  new Button()
+            {
+                BackgroundColor = Color.Purple,
+                TextColor= Color.White,
+                Text = "DIU"
+            }};
+                    View.GenerateButtons(buttons);
+                }
+            }
+        }
         public ChatPageViewModel(Conversation con)
         {
             _conversation = con;
@@ -200,10 +236,10 @@ namespace Chat.ViewModels
             {
                 if (!string.IsNullOrEmpty(TextToSend))
                 {
-                    SubmitMessage(TextToSend,null,null);
+                    SubmitMessage(TextToSend, null, null);
                 }
             });
-          
+
             FormGroupMessages(_conversation.Messages);
             var rnd = new Random();
             int rndInterval = 10 + rnd.Next(5);
@@ -227,6 +263,9 @@ namespace Chat.ViewModels
             //timer.Start();
             MessageAppearingCommand = new Command<Message>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<Message>(OnMessageDisappearing);
+
+
+
 
         }
 
@@ -274,7 +313,7 @@ namespace Chat.ViewModels
             SubmitMessage(msgToSend);
         }
 
-   
+
 
         void SubmitMessage(Message msg)
         {
@@ -293,7 +332,7 @@ namespace Chat.ViewModels
         {
             //TODO this is slow omg~
             var idx = GroupedMessages.SelectMany(x => x).ToList().IndexOf(msg);
-            if (idx >= GroupedMessages.SelectMany(x => x).ToList().Count-6)
+            if (idx >= GroupedMessages.SelectMany(x => x).ToList().Count - 6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -312,8 +351,8 @@ namespace Chat.ViewModels
         }
         void OnMessageDisappearing(Message message)
         {
-            var idx = GroupedMessages.SelectMany(x=>x).ToList().IndexOf(message);
-            if (idx <= GroupedMessages.SelectMany(x => x).ToList().Count- 6)
+            var idx = GroupedMessages.SelectMany(x => x).ToList().IndexOf(message);
+            if (idx <= GroupedMessages.SelectMany(x => x).ToList().Count - 6)
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -343,12 +382,13 @@ namespace Chat.ViewModels
         public bool PendingMessageCountVisible { get { return PendingMessageCount > 0; } }
         public bool IsRefreshing { get; set; } = false;
         public readonly int LOAD_MESSAGE_COUNT = 5;
-       // public Queue<Message> DelayedMessages { get; set; } = new Queue<Message>();
+        // public Queue<Message> DelayedMessages { get; set; } = new Queue<Message>();
         public ICommand MessageAppearingCommand { get; set; }
         public ICommand MessageDisappearingCommand { get; set; }
         public ICommand RefreshCommand
         {
-            get {
+            get
+            {
                 return new Command(async () =>
                 {
                     IsRefreshing = true;
@@ -363,7 +403,8 @@ namespace Chat.ViewModels
 
                             addMessage(msg);
                         }
-                    }else
+                    }
+                    else
                     {
                         App.Current.MainPage.DisplayAlert("Alert", "No more message to load!", "OK");
                     }

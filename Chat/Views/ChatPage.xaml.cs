@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Chat.Interfaces;
 using Chat.Models;
 using Chat.ViewModels;
 using Xamarin.Forms;
 
 namespace Chat.Views
 {
-    public partial class ChatPage : ContentPage
+    public partial class ChatPage : ContentPage, IChatPage
     {
 
         public ICommand ScrollListCommand { get; set; }
@@ -35,8 +36,10 @@ namespace Chat.Views
      
         public ChatPage(Conversation con):this()
         {
+            var vm = new Chat.ViewModels.ChatPageViewModel(con);
+            vm.View = this;
+            this.BindingContext = vm;
             
-            this.BindingContext = new Chat.ViewModels.ChatPageViewModel(con);
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
@@ -91,6 +94,24 @@ namespace Chat.Views
                 InputBar.FocusEntry();          
         }
 
+        public void GenerateButtons(IList<Button> buttonList)
+        {
+            var fl = ChatButtonsBar.FindByName<FlexLayout>("ButtonFlexLayout");
+            if(fl!=null)
+            {
+                foreach(var btn in buttonList)
+                {
+                    //TODO maybe set on click binding here
+                    fl.Children.Add(btn);                    
+                }
+            }
+            
+            fl.ForceLayout();
+        }
 
+        public void GenerateMessageBoard(string s)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

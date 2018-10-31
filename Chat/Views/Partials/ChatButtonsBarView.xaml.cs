@@ -26,14 +26,14 @@ namespace Chat.Views.Partials
                     vm.SubmitMessage("You clicked yes", null, null);
 
 
-                    ButtonsGrid.IsVisible = false;
+                 
                     ButtonResultLabel.IsVisible = true;
 
                     Task.Delay(5 * 1000).ContinueWith((x) =>
                       {
                           Device.BeginInvokeOnMainThread(() =>
                           {
-                              ButtonsGrid.IsVisible = true;
+                           
                               ButtonResultLabel.IsVisible = false;
                           });
                       });
