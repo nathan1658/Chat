@@ -1,18 +1,28 @@
 # To do
 - [ ] Go to bottom Circle button(Text and color) 
 - [ ] Amend table with buttons
-- [ ] Scroll to top to get more
+- [X] Scroll to top to get more
 - [ ] Send Message smoothless and bugs..
 - [X] Timeout spinner
 - [X] Navigation Bar(?)
-- [ ] 上拉load message
+- [X] 上拉load message
 - [X] MessageBoard with button
-- [ ] Attatchment
+- [X] Attatchment
 - [X] listview 回彈
 - [ ] Copy Message 
 - [ ] Scroll down messageboard
 - [ ] Retain scroll position when height of UITableview change
-- [ ] Remove [DONE] button of picker
-- [ ] Build做Shared project後Navigation/要init既野點擺位
+- [X] Remove [DONE] button of picker
+- [X] Build做Shared project後Navigation/要init既野點擺位
 - [ ] IOS UITableViewCell Rendering 問題
 - [ ] Pdf document name
+- [ ] IQKeyboard manager extra space at bottom
+- [ ] IQKeyboard manager 用左 IOS打多過五行， bottom 會變左置中
+- [ ] IQKeyboard manager Navigation 會痴左
+- [ ] Message Scroll to bottom not smooth
+- [ ] Attatchment 真機唔work
+- [ ] Attatchment(圖)無clip到
+- [ ] Message loading/retry animation
+- [ ] Message width issue
+- [ ] Loading animation of Message
+- [ ] How to store tmp image/pdf (for display)
