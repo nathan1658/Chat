@@ -44,6 +44,7 @@
                 FontAttributes="Bold" />
             <ContentView
                 Grid.Row="1"
+                HorizontalOptions="StartAndExpand"
                 Grid.Column="0"
                 xmlns:controls="clr-namespace:Chat.Controls"
                 xmlns:extensions="clr-namespace:Chat.Extensions">
@@ -76,8 +77,7 @@
                     <ControlTemplate
                         x:Key="ExpiredMessage">
                         <Label
-                            Text="Message Deleted."
-                            BackgroundColor="Blue"
+                            Text="Message Deleted."                   
                             HorizontalOptions="Start"
                             Style="{StaticResource Key=MessageBodyStyle}" />
                     </ControlTemplate>
@@ -140,7 +140,6 @@
                             <controls:ExtendedMessageBody
                                 Grid.Row="2"
                                 HorizontalOptions="Start"
-                                BackgroundColor="Green"
                                 VerticalOptions="Start"                                
                                 Style="{StaticResource MessageBodyStyle}"
                                 LineBreakMode="WordWrap"
@@ -182,22 +181,13 @@
                     </DataTrigger>
                 </ContentView.Triggers>
             </ContentView>
-            <Grid
-                Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="auto" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="auto" />
-                </Grid.ColumnDefinitions>
+           <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Grid.Row="2">
                 <Label
                     Text="{Binding RemainingTimeString}"
                     IsVisible="false"
                     HorizontalOptions="Start"
                     FlexLayout.AlignSelf="Start"
-                    Grid.Column="0">
+                    Margin="0,0,5,0">
                     <Label.Triggers>
                         <DataTrigger
                             Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
@@ -209,14 +199,12 @@
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
-                <Label
-                    Grid.Column="2"
+                <Label    
                     HorizontalTextAlignment="End"
-                    FlexLayout.AlignSelf="End"
                     Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}"
                     TextColor="#abb7c0">
                 </Label>
-            </Grid>
+            </StackLayout>
         </Grid>
     </Frame>
 </cells:BaseMessageViewCell>

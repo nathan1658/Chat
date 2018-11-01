@@ -35,7 +35,7 @@
         <partials:MessageBoard
             Grid.Row="0"
             x:Name="MessageBoard"
-            IsVisible="false">
+            IsVisible="true">
         </partials:MessageBoard>
         <Grid
             Grid.Row="1"
@@ -64,6 +64,10 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 IsGroupingEnabled="true"
                 GroupDisplayBinding="{Binding DateTime}">
+                <controls:ExtendedListView.GestureRecognizers>
+                   <TapGestureRecognizer
+                        Tapped="ScrollTap" />
+                </controls:ExtendedListView.GestureRecognizers>
                 <controls:ExtendedListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <!-- Row height is not working...-->

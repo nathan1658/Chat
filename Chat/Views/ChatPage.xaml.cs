@@ -33,19 +33,19 @@ namespace Chat.Views
 
 
 
-     
-        public ChatPage(Conversation con):this()
+
+        public ChatPage(Conversation con) : this()
         {
             var vm = new Chat.ViewModels.ChatPageViewModel(con);
             vm.View = this;
             this.BindingContext = vm;
-            
+
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
                 Device.BeginInvokeOnMainThread(scrollToBottom);
             });
-            if(!string.IsNullOrEmpty(con.HTMLTable))
+            if (!string.IsNullOrEmpty(con.HTMLTable))
             {
                 var webView = MessageBoard.FindByName<WebView>("webView");
                 webView.Source = new HtmlWebViewSource
@@ -53,7 +53,7 @@ namespace Chat.Views
                     Html = con.HTMLTable
                 };
             }
-                   
+
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)
@@ -72,7 +72,7 @@ namespace Chat.Views
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                     
+
                         vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
@@ -85,27 +85,39 @@ namespace Chat.Views
         }
 
         void scrollToBottom()
-        {           
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);   
+        {
+            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);
         }
 
         internal void FocusEntry()
-        {            
-                InputBar.FocusEntry();          
+        {
+            InputBar.FocusEntry();
         }
 
         public void GenerateButtons(IList<Button> buttonList)
         {
             var fl = ChatButtonsBar.FindByName<FlexLayout>("ButtonFlexLayout");
-            if(fl!=null)
+            if (fl != null)
             {
-                foreach(var btn in buttonList)
+                foreach (var btn in buttonList)
                 {
+                    EventHandler bb = null;
+                    bb = new EventHandler(delegate (object o, EventArgs e)
+                    {
+
+                        var newBtn = new Button();
+                        newBtn.Text = "NEW";
+                        newBtn.BackgroundColor = Color.Yellow;
+                          newBtn.Clicked += bb;
+                        fl.Children.Add(newBtn);
+                    });
+
+                    btn.Clicked += bb;
                     //TODO maybe set on click binding here
-                    fl.Children.Add(btn);                    
+                    fl.Children.Add(btn);
                 }
             }
-            
+
             fl.ForceLayout();
         }
 

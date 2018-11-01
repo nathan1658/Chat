@@ -219,12 +219,7 @@ namespace Chat.ViewModels
                 BackgroundColor = Color.Red,
                 TextColor = Color.White,
                 Text = "No"
-            } ,  new Button()
-            {
-                BackgroundColor = Color.Purple,
-                TextColor= Color.White,
-                Text = "DIU"
-            }};
+                        } };
                     View.GenerateButtons(buttons);
                 }
             }

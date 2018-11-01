@@ -45,17 +45,7 @@
         </ControlTemplate>
         <ControlTemplate
             x:Key="NormalMessage">
-            <Grid
-                HorizontalOptions="Center"
-                MinimumHeightRequest="50">
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="auto" />
-                    <RowDefinition
-                        Height="auto" />
-                    <RowDefinition
-                        Height="auto" />
-                </Grid.RowDefinitions>
+            <StackLayout>
                 <Image
                     Grid.Row="0"
                     Source="{TemplateBinding BindingContext.ImageThumbnail}"
@@ -128,7 +118,7 @@
                         </DataTrigger>
                     </controls:ExtendedMessageBody.Triggers>
                 </controls:ExtendedMessageBody>
-            </Grid>
+          </StackLayout>
         </ControlTemplate>
     </ContentView.Resources>
     <ContentView.ControlTemplate

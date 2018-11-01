@@ -8,7 +8,7 @@
     >
     
     <ContentView.Content>
-        <Grid>
+        <StackLayout>
             <FlexLayout Wrap="Wrap"  VerticalOptions="StartAndExpand" x:Name="ButtonFlexLayout">
                 <FlexLayout.Resources>
                     <Style TargetType="Button">
@@ -21,69 +21,14 @@
                 </FlexLayout.Resources>
 
                 
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
-                <Button
-                    Margin="5"
-                      FlexLayout.Basis="20%"
-                        TextColor="White"                     
-                        BackgroundColor="Red"
-                    FontSize="Small"
-                        Text="NO">
-                </Button>
+         
 
             </FlexLayout>
                 <Label x:Name="ButtonResultLabel" IsVisible="false" Text="You Have Selected YES">
           
             
         </Label>
-        </Grid>
+        </StackLayout>
         
     </ContentView.Content>
 </ContentView>
