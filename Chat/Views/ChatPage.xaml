@@ -53,7 +53,6 @@
                 Margin="0"
                 ItemTapped="OnListTapped"
                 HasUnevenRows="true"
-                
                 BackgroundColor="Transparent"
                 SeparatorColor="Transparent"
                 x:Name="ChatList"
@@ -66,7 +65,7 @@
                 GroupDisplayBinding="{Binding DateTime}">
                 <controls:ExtendedListView.GestureRecognizers>
                    <TapGestureRecognizer
-                        Tapped="ScrollTap" />
+                        Tapped="OnListTapped" />
                 </controls:ExtendedListView.GestureRecognizers>
                 <controls:ExtendedListView.GroupHeaderTemplate>
                     <DataTemplate>

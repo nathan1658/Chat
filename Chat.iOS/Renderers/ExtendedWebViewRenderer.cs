@@ -19,7 +19,7 @@ namespace Chat.iOS.Renderers
                 var webView = (UIWebView)NativeView;
 
                 webView.Opaque = false;
-                webView.BackgroundColor = UIColor.Green;
+                //webView.BackgroundColor = UIColor.Green;
             }
         }
     }

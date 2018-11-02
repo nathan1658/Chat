@@ -3,50 +3,53 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Chat.Views.Partials.MessageBoard"
-    xmlns:controls = "clr-namespace:Chat.Controls"
-    BackgroundColor="Blue">
+    xmlns:controls="clr-namespace:Chat.Controls"
+   >
     <ContentView.Content>
-         <Frame x:Name="FrameExtContainer" Padding="1" Margin="1" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="0" OutlineColor="Purple" >
-        <StackLayout x:Name="MessageBoardBody">
-            <StackLayout
-                Orientation="Vertical"
-                    IsClippedToBounds="true"
-                    VerticalOptions="FillAndExpand"
-                x:Name="CollapsableLayout">
-                <Frame
-                        Margin="0"
-                        Padding="0"
-                        
-                    HasShadow="false">
-                    <controls:ExtendedWebView
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
-                            
-                        HeightRequest="100"
-                        x:Name="webView"
-                        BackgroundColor="Red">
-                    </controls:ExtendedWebView>
-                </Frame>
-              
-            </StackLayout>
+        <StackLayout>
             <Frame
-                Margin="0"
+                x:Name="FrameExtContainer"
                 Padding="0"
-                   
-                    CornerRadius="0"
-                    >
-                <Button
-                        x:Name="CollapseButton"
-                    HeightRequest="30"
-                        CornerRadius="0"
-                        BorderRadius="0"
-                    Text="⬆️"
+                Margin="0"
+                HasShadow="False"
+                HorizontalOptions="FillAndExpand"
+                CornerRadius="0">
+                <StackLayout
                     Margin="0"
                     Padding="0"
-                    Clicked="Handle_Clicked">
-                </Button>
+                    Spacing="0"
+                    x:Name="MessageBoardBody">
+                    <StackLayout
+                        Orientation="Vertical"
+                        IsClippedToBounds="true"
+                        VerticalOptions="FillAndExpand"
+                      MinimumHeightRequest="100"
+                        x:Name="CollapsableLayout">
+                        <controls:ExtendedWebView
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="100"
+                            x:Name="webView"
+                          >
+                        </controls:ExtendedWebView>
+                    </StackLayout>
+                   
+                    <BoxView HeightRequest="0.5" Color="Gray"/>
+                        <Button
+                            BackgroundColor="#efefef"
+                          
+                            x:Name="CollapseButton"
+                     HeightRequest="23"      
+                            CornerRadius="0"
+                            BorderRadius="0"
+                            Text="⬆️"
+                            Margin="0"
+                            Padding="0"
+                            Clicked="Handle_Clicked">
+                        </Button>
+                   <BoxView HeightRequest="0.5" Color="Gray"/>
+                </StackLayout>
             </Frame>
         </StackLayout>
-            </Frame>
     </ContentView.Content>
 </ContentView>
