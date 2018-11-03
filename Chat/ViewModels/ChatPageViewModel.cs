@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Timers;
 using System.Threading.Tasks;
 using Chat.Interfaces;
+using Chat.Views;
 
 namespace Chat.ViewModels
 {
@@ -259,8 +260,15 @@ namespace Chat.ViewModels
             MessageAppearingCommand = new Command<Message>(OnMessageAppearing);
             MessageDisappearingCommand = new Command<Message>(OnMessageDisappearing);
 
-
-
+            //Subscribe MessageCenter for button clicked event
+            MessagingCenter.Subscribe<ChatPage, string>(this, "ButtonPressed", (s,e)=>
+            {
+                Message msg = new Message();
+                msg.SubmittedDate = DateTime.Now;
+                msg.User = "";
+                msg.Text = "You clicked " + e;
+                this.addMessage(msg);
+            });
 
         }
 

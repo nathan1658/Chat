@@ -15,7 +15,7 @@
         HasShadow="False"
         VerticalOptions="StartAndExpand"
         HorizontalOptions="Start"
-        Margin="10"
+        Margin="10,5,10,5"
         Padding="5">
         <Frame.Resources>
             <converter:IsNullConverter

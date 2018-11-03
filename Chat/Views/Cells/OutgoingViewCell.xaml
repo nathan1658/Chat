@@ -11,7 +11,7 @@
     <Frame
         BackgroundColor="#effdde"
         Padding="5"
-        Margin="10"
+        Margin="10,5,10,5"
         CornerRadius="5"
         HasShadow="False"
         VerticalOptions="StartAndExpand"
@@ -77,8 +77,8 @@
                         <StackLayout>
                             <Image
                                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
-                                HeightRequest="100"
-                                WidthRequest="100"
+                                MinimumHeightRequest="100"
+                                MinimumWidthRequest="100"
                                 Aspect="AspectFit"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="Center"
@@ -127,8 +127,7 @@
                                 </Image.GestureRecognizers>
                             </Image>
                             <controls:ExtendedMessageBody
-                                HorizontalOptions="Start"
-                                BackgroundColor="Blue"
+                                HorizontalOptions="Start"                                
                                 Style="{StaticResource MessageBodyStyle}"
                                 LineBreakMode="WordWrap"
                                 IsVisible="false"

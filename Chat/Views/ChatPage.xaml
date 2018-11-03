@@ -52,7 +52,7 @@
                 ItemsSource="{Binding GroupedMessages}"
                 Margin="0"
                 ItemTapped="OnListTapped"
-                HasUnevenRows="true"
+                HasUnevenRows="true"                
                 BackgroundColor="Transparent"
                 SeparatorColor="Transparent"
                 x:Name="ChatList"

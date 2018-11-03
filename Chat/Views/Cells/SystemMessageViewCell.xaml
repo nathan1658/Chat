@@ -4,38 +4,40 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Chat.Views.Cells.SystemMessageViewCell"
       xmlns:cells="clr-namespace:Chat.Views.Cells">
-     <Frame
+    <Frame
     FlowDirection="LeftToRight" 
-
-      BackgroundColor=" Yellow"
+Opacity="0.8"
+      BackgroundColor="Gray"
         Padding="10"        
         Margin="10,10,10,10"
        CornerRadius="5" 
     HasShadow="False">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
                 Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
 
-            <RowDefinition
+                <RowDefinition
                 Height="auto" />
-            <RowDefinition
+                <RowDefinition
                 Height="auto" />
-        </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
-        <Label
+            <Label
             Grid.Row="0"
+            TextColor="white"
             Grid.Column="0"
             HorizontalTextAlignment="Center"
             Text="{Binding Text}" />
 
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"           
-            HorizontalTextAlignment="End"
-            Text="{Binding SubmittedDate, StringFormat='{}{0:MM/dd/yyyy h:mm tt}'}" />
+            <Label
+                TextColor="White"
+                Grid.Row="1"
+                Grid.Column="0"           
+                HorizontalTextAlignment="End"
+                Text="{Binding SubmittedDate, StringFormat='{}{0:MM/dd/yyyy h:mm tt}'}" />
 
         </Grid>
     </Frame>

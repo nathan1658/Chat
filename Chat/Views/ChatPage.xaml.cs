@@ -89,9 +89,11 @@ namespace Chat.Views
             ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);
         }
 
-        internal void FocusEntry()
+        internal async Task FocusEntryAsync()
         {
+            await Task.Delay(500);
             InputBar.FocusEntry();
+
         }
 
         public void GenerateButtons(IList<Button> buttonList)
@@ -101,18 +103,22 @@ namespace Chat.Views
             {
                 foreach (var btn in buttonList)
                 {
-                    EventHandler bb = null;
-                    bb = new EventHandler(delegate (object o, EventArgs e)
-                    {
+                    //EventHandler bb = null;
+                    //bb = new EventHandler(delegate (object o, EventArgs e)
+                    //{
+                    //    var newBtn = new Button();
+                    //    newBtn.Text = "NEW";
+                    //    newBtn.BackgroundColor = Color.Yellow;
+                    //    newBtn.Clicked += bb;
+                    //    fl.Children.Add(newBtn);
+                    //});                   
+                    // btn.Clicked += bb;
 
-                        var newBtn = new Button();
-                        newBtn.Text = "NEW";
-                        newBtn.BackgroundColor = Color.Yellow;
-                          newBtn.Clicked += bb;
-                        fl.Children.Add(newBtn);
-                    });
+                    btn.Clicked += (s, e) =>
+                     {
+                         MessagingCenter.Send<ChatPage, string>(this,"ButtonPressed", btn.Text);
+                     };
 
-                    btn.Clicked += bb;
                     //TODO maybe set on click binding here
                     fl.Children.Add(btn);
                 }

@@ -56,11 +56,11 @@
                 VerticalOptions="Center"
                 Source="stopwatch_250x250.png"
                 Style="{StaticResource Key=ToolImages}"
-                TintColor="Transparent">                          
+                TintColor="Transparent">
                 <tcontrols:TintedImage.Triggers>
                     <DataTrigger TargetType="tcontrols:TintedImage" Binding="{Binding CountDownValue,Converter={StaticResource timeSpanConverter}}" Value="true">
                         <Setter Property="TintColor" Value="#e92b34"/>
-                    </DataTrigger>                                       
+                    </DataTrigger>
                 </tcontrols:TintedImage.Triggers>
                 <tcontrols:TintedImage.GestureRecognizers>
                     <TapGestureRecognizer
@@ -84,41 +84,44 @@
             CornerRadius="5"
             Grid.Column="1"
             Grid.Row="0"
+            MinimumHeightRequest="30"
             HasShadow="False"
             BackgroundColor="White"
             Padding="0"
             Margin="0"
-            VerticalOptions="Center">
+            VerticalOptions="CenterAndExpand">
             <controls:ExtendedEditorControl
                 IsVisible="true"
+                MinimumHeightRequest="30"
                 VerticalOptions="EndAndExpand"
                 x:Name="chatTextInput"
                 Text="{Binding TextToSend}"
-                TextColor="Black"
-                Keyboard="Chat"
+                TextColor="Black"                
+                FontSize="Small"
+                Keyboard="Chat"                
                 HasRoundedCorner="True"
                 IsExpandable="true"
                 HorizontalOptions="FillAndExpand"
                 PlaceholderColor="LightGray"
                 Placeholder="Type your message here" />
         </Frame>
-        <StackLayout
+
+        <Label
             Grid.Row="0"
-            Grid.Column="2">
-            <Label
-                VerticalOptions="CenterAndExpand"
-                HorizontalTextAlignment="Center"
-                FontSize="Medium"
-                Text="Send"
-                TextColor="#0080c0"
-                x:Name="SendLabel"
-                VerticalTextAlignment="End">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer
+            Grid.Column="2"
+            VerticalOptions="EndAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="Medium"
+            Text="Send"
+            TextColor="#0080c0"
+            x:Name="SendLabel"
+            VerticalTextAlignment="End">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
                         Tapped="SendTapped">
-                    </TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
+                </TapGestureRecognizer>
+            </Label.GestureRecognizers>
+        </Label>
+
     </Grid>
 </ContentView>
