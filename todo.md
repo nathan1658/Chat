@@ -28,3 +28,10 @@
 - [ ] How to store tmp image/pdf (for display)
 - [ ] Resend failed message
 - [ ] Loading spinner when loading messages
+- [X] (Android) Disable listview click effect
+- [X] (Android) Editor and toolbar item height issue
+- [ ] (Android) scroll up listview when keyboard show(https://stackoverflow.com/questions/16133706/push-listview-when-keyboard-appears-without-adjustpan)
+- [ ] (Android) Keep keyboard focus
+- [ ] (Android) Very slow when scrolling
+- [ ] (Android) System MessageCell alignment sometimes error
+- [ ] (Android) Test FFimage and fast list view
