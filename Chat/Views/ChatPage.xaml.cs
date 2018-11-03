@@ -125,5 +125,11 @@ namespace Chat.Views
         {
             throw new NotImplementedException();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            OnListTapped(null,null);
+        }
+
     }
 }

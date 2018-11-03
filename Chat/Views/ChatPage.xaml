@@ -65,7 +65,7 @@
                 GroupDisplayBinding="{Binding DateTime}">
                 <controls:ExtendedListView.GestureRecognizers>
                    <TapGestureRecognizer
-                        Tapped="OnListTapped" />
+                        Tapped="TapGestureRecognizer_Tapped" />
                 </controls:ExtendedListView.GestureRecognizers>
                 <controls:ExtendedListView.GroupHeaderTemplate>
                     <DataTemplate>
