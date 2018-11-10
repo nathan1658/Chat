@@ -1,37 +1,62 @@
 # To do
-- [ ] Go to bottom Circle button(Text and color) 
-- [ ] Amend table with buttons
-- [X] Scroll to top to get more
-- [ ] Send Message smoothless and bugs..
+- [ ] Go to bottom Circle button
+    - [ ] Position
+    - [ ] When appear(maybe use on appearing view cell index to calculate?)
+    - [ ] New Message counter on above the button
+- [ ] Send Message UI smoothless and bugs..
+    - [ ] Scroll to latest send message SMOOTHLY
+    - [ ] Send -> 半透明message -> 收到call back先至變返實色(望落順D)
+- [X] Amend table with buttons
+- [ ] Scroll to top to load old message
+    - [ ] Counter 200 -> 50
+- [ ] Press NavigationBar to scroll to top
 - [X] Timeout spinner
-- [X] Navigation Bar(?)
-- [X] 上拉load message
-- [X] MessageBoard with button
-- [X] Attatchment
-- [X] listview 回彈
+- [ ] MessageBoard with button
+    - [ ] MessageBoard sizing(mininize, 1/3, Maximize)
+    - [ ] Button style after pressed(Amended)
+    - [ ] Double comfirm screen when press button(touch ID?)
+- [ ] Attachment
+    - [ ] Compress image before send
+    - [ ] Cache loaded attachment
+    - [ ] Camera sometimes not working
+- [ ] IOS 有時個listview無左回彈
+- [ ] Scroll to bottom
+    - [ ] Android very poor performance
+- [ ] 一開始直接SHOW最底而唔係Scroll落去
 - [ ] Copy Message 
-- [ ] Scroll down messageboard
-- [ ] Retain scroll position when height of UITableview change
+- [ ] (IOS) Retain scroll position when height of UITableview change
+- [ ] (IOS)WheelPicker spinner size and  h:m:s label position wrong
 - [X] Remove [DONE] button of picker
-- [X] Build做Shared project後Navigation/要init既野點擺位
+- [ ] Attachment thumbnail
+    - [ ] Sizing
+    - [ ] Orientation is wrong in thumbnail
 - [ ] IOS UITableViewCell Rendering 問題
-- [ ] Pdf document name
-- [ ] IQKeyboard manager extra space at bottom
-- [ ] IQKeyboard manager 用左 IOS打多過五行， bottom 會變左置中
-- [ ] IQKeyboard manager Navigation 會痴左
-- [ ] Message Scroll to bottom not smooth
-- [ ] Attatchment 真機唔work
-- [ ] Attatchment(圖)無clip到
+    - [ ] 唔識自已resize
+    - [ ] Not sizing to content
+- [ ] (IOS) Sometimes WheelPicker will crash the app
+- [ ] Loading animation of ChatPage
+- [ ] (IOS)IQKeyboard manager keyboard移上後listview下方會多左虛位
+- [ ] (IOS)IQKeyboard manager 用左 IOS打多過五行， bottom 會變左置中
+- [ ] (IOS)IQKeyboard manager Navigation Bar會飛走左
 - [ ] Message loading/retry animation
-- [ ] Message width issue(Related to RecycleElement)
-- [ ] Loading animation of Message
-- [ ] How to store tmp image/pdf (for display)
+- [ ] (IOS) Message Cell set max widthwidth issue(Related to RecycleElement)
+- [ ] ListView Use RecycleElement will result in error view cell size and text alignment
+- [ ] How to store tmp image/pdf attachment(for display) 因為個plugin 只支援URL, 現時係寫入temp folder 再用個temp file path pass比個plugin 去preview, 但就缺少左清Tempfile既機制
+    - [ ] Mechanism to delete the image/pdf after view
 - [ ] Resend failed message
-- [ ] Loading spinner when loading messages
 - [X] (Android) Disable listview click effect
 - [X] (Android) Editor and toolbar item height issue
 - [ ] (Android) scroll up listview when keyboard show(https://stackoverflow.com/questions/16133706/push-listview-when-keyboard-appears-without-adjustpan)
-- [ ] (Android) Keep keyboard focus
+- [ ] (Android) 打多過五行 再長按edittext, 成個view會跟住移位
+- [ ] (Android) Keep EditText focus after send message
 - [ ] (Android) Very slow when scrolling
 - [ ] (Android) System MessageCell alignment sometimes error
 - [ ] (Android) Test FFimage and fast list view
+
+- [ ] PeerToPeer Conversatoin Incoming Cell要收埋人名
+- [ ] Caching service for PersonnelID<->FullNameEn, Conversation
+- [ ] 試PeerToPeer 雙方都0 Message, send 完對面收唔收到
+
+
+- [ ] 阿文果度有時receive message 個conversation info係null
+- [ ]  MR LEE easter egg 
