@@ -7,11 +7,14 @@
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:controls="clr-namespace:Chat.Controls"
+    xmlns:converters="clr-namespace:Chat.Converters"
     x:Class="Chat.Views.ChatPage">
     <ContentPage.Resources> 
         <ResourceDictionary>
             <localHelpers:ChatTemplateSelector
                 x:Key="MessageTemplateSelector" />
+            <converters:IsNullConverter x:Key="isNullConverter"/>
+            <converters:IsGreaterThanZeroConverter x:Key="isGreaterThanZeroConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid  
@@ -92,6 +95,17 @@
                     </DataTemplate>
                 </controls:ExtendedListView.GroupHeaderTemplate>
             </controls:ExtendedListView>
+            <Frame Margin="10" HasShadow="False" BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Center" Opacity="0.7" IsVisible="True">
+                <StackLayout>
+                    <Image Source="{extensions:ImageResource Chat.Images.inbox-mail-empty.png}" HeightRequest="70" WidthRequest="70" Aspect="AspectFit"/>
+                    <Label VerticalOptions="Center" HorizontalOptions="Center">No message in this conversation.</Label>
+                </StackLayout>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference ChatList},Path=ItemsSource.Count , Converter={StaticResource isGreaterThanZeroConverter}}" Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
             <Frame
                 HorizontalOptions="EndAndExpand"
                 Margin="0,0,2,15"

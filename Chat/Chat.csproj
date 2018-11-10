@@ -19,6 +19,7 @@
     <None Remove="Images\attach_250x250.png" />
     <None Remove="Images\ChatBg.png" />
     <None Remove="Images\ic_scrolldown.png" />
+    <None Remove="Images\inbox-mail-empty.png" />
     <None Remove="Images\pdfIcon.png" />
     <None Remove="Images\stopwatch.png" />
     <None Remove="Images\stopwatch_100x100.png" />
@@ -33,6 +34,7 @@
     <EmbeddedResource Include="Images\attach_250x250.png" />
     <EmbeddedResource Include="Images\ChatBg.png" />
     <EmbeddedResource Include="Images\ic_scrolldown.png" />
+    <EmbeddedResource Include="Images\inbox-mail-empty.png" />
     <EmbeddedResource Include="Images\pdfIcon.png" />
     <EmbeddedResource Include="Images\stopwatch.png" />
     <EmbeddedResource Include="Images\stopwatch_100x100.png" />
