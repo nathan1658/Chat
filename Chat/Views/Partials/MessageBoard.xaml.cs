@@ -8,62 +8,80 @@ namespace Chat.Views.Partials
 {
     public partial class MessageBoard : ContentView
     {
+        enum ScreenState
+        {
+            Mininize = 0,
+            OneThird = 1,
+            Maximize = 2 
+        }
 
-        private bool isExpanded = true;
-        private double expandedHeight = -1;
+        Grid parentGrid = null;
+        double oneThirdHeight = Application.Current.MainPage.Height/3.2;
+        double parentGridHeight = 0;
+        private uint animateLength = 500;
+        private ScreenState screenState =  ScreenState.OneThird;        
         public MessageBoard()
         {
             InitializeComponent();
-        
+            CollapsableLayout.HeightRequest = oneThirdHeight;
+        }
+
+        protected override void OnParentSet()
+        {
+            base.OnParentSet();
+      
         }
 
         void Handle_Clicked(object sender, System.EventArgs e)
         {
-            expandedHeight = 100;
-            //Get Rendered Height..
-            var parentGrid = this.Parent as Xamarin.Forms.Grid;
 
-            if (parentGrid!=null)
+            //Get Rendered Height..
+            parentGrid = this.Parent as Grid;
+
+            if (parentGrid != null)
             {
-                expandedHeight = parentGrid.Height ;
+                parentGridHeight = parentGrid.Height;                    
             }
-            //TODO Fix ios bugs (height issue..)
-            if(expandedHeight == -1)
+            switch (screenState)
             {
-                expandedHeight = CollapsableLayout.Height;
+                case ScreenState.Mininize://Go to 1/3 size
+                    CollapsableLayout.Animate("inv", (x) => { CollapsableLayout.HeightRequest = x; }, this.Height, oneThirdHeight, 16, animateLength, Easing.CubicOut);
+                    CollapseButton.Text = "⬆️";
+                    updateChildVisibility(true);
+                    this.screenState = ScreenState.OneThird;
+                    break;
+                case ScreenState.OneThird: //Go full size
+                    CollapsableLayout.Animate("inv", (x) => { CollapsableLayout.HeightRequest = x; }, this.Height, parentGridHeight, 16, animateLength, Easing.CubicOut);
+                    CollapseButton.Text = "⬆️";
+                    updateChildVisibility(false);
+                    this.screenState = ScreenState.Maximize;
+                    break;
+                case ScreenState.Maximize:
+                    CollapsableLayout.Animate("inv", (x) => { CollapsableLayout.HeightRequest = x; }, this.Height, 0, 16, animateLength, Easing.CubicOut);
+                    CollapseButton.Text = "⬆️";
+                    updateChildVisibility(true);
+                    this.screenState = ScreenState.Mininize;
+                    break;
             }
-            Action<bool> updateChildVisibility = new Action<bool>((x) =>
-             {
-                 if(parentGrid!=null)
-                 {
-                     foreach(var child in parentGrid.Children)
-                     {
-                         if(child!=this && child as ListView==null)
-                         {
-                             child.IsVisible = x;
-                         }
-                     }
-                 }
-             });
-           
-            uint length = 500;
-            if (isExpanded)
-            {
-                CollapsableLayout.Animate("inv", (x) => { CollapsableLayout.HeightRequest = x; }, expandedHeight, 0, 16, length, Easing.CubicOut);
-                CollapseButton.Text = "⬇️";
-                updateChildVisibility(true);
-            }
-            else
-            {
-                CollapsableLayout.Animate("inv", (x) => { CollapsableLayout.HeightRequest = x; }, 0, expandedHeight, 16, length, Easing.CubicOut);
-                CollapseButton.Text = "⬆️";
-                updateChildVisibility(false);
-            }
-            isExpanded = !isExpanded;
+
+                       
 
         }
 
-
+        void updateChildVisibility(bool x)
+        {
+            var parentGrid = this.Parent as Xamarin.Forms.Grid;            
+            if (parentGrid != null)
+            {
+                foreach (var child in parentGrid.Children)
+                {
+                    if (child != this && child as ListView == null)
+                    {
+                        child.IsVisible = x;
+                    }
+                }
+            }
+        }
     }
 
 }

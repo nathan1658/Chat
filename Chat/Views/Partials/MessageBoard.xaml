@@ -19,35 +19,35 @@
                     Padding="0"
                     Spacing="0"
                     x:Name="MessageBoardBody">
+                    <BoxView HeightRequest="0.5" Color="Gray"/>
+                    <Button
+                            BackgroundColor="#efefef"                          
+                            x:Name="CollapseButton"
+                            HeightRequest="23"      
+                            CornerRadius="0"
+                            BorderRadius="0"
+                            Text="三"
+                            Margin="0"
+                            Padding="0"
+                            Clicked="Handle_Clicked">
+                    </Button>
+                    <BoxView HeightRequest="0.5" Color="Gray"/>
                     <StackLayout
                         Orientation="Vertical"
                         IsClippedToBounds="true"
                         VerticalOptions="FillAndExpand"
-                      MinimumHeightRequest="100"
+               
                         x:Name="CollapsableLayout">
                         <controls:ExtendedWebView
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
-                            HeightRequest="100"
+                            
                             x:Name="webView"
                           >
                         </controls:ExtendedWebView>
                     </StackLayout>
-                   
                     <BoxView HeightRequest="0.5" Color="Gray"/>
-                        <Button
-                            BackgroundColor="#efefef"
-                          
-                            x:Name="CollapseButton"
-                     HeightRequest="23"      
-                            CornerRadius="0"
-                            BorderRadius="0"
-                            Text="⬆️"
-                            Margin="0"
-                            Padding="0"
-                            Clicked="Handle_Clicked">
-                        </Button>
-                   <BoxView HeightRequest="0.5" Color="Gray"/>
+
                 </StackLayout>
             </Frame>
         </StackLayout>

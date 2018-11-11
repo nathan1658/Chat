@@ -106,40 +106,46 @@
                     </DataTrigger>
                 </Frame.Triggers>
             </Frame>
-            <StackLayout Spacing="0" Margin="0,0,2,15" HorizontalOptions="EndAndExpand"               
-                VerticalOptions="End">
-
-
-                <Frame BackgroundColor="#007EE5" Margin="0,-10,0,0" Padding="1" HorizontalOptions="Center" HasShadow="False">
-                    <Label
-                        Text="8888"
-                        HorizontalOptions="CenterAndExpand"
-                        IsVisible="True"
-                        VerticalTextAlignment="Center"
-                        TextColor="White" />
-                </Frame>
-                <Frame
-                    HorizontalOptions="Center"
-                HasShadow="false"
-                HeightRequest="30"
-                WidthRequest="30"
-                Padding="1" 
-                BackgroundColor="White"
-                IsVisible="True">
-                    <Frame.CornerRadius>
-                        <OnPlatform x:TypeArguments="x:Single" iOS="15" Android="25"/>
-                    </Frame.CornerRadius>
-                    <Image
+            <Grid  Margin="0,0,0,15" HorizontalOptions="End" BackgroundColor="Transparent" VerticalOptions="End" x:Name="abc" WidthRequest="70">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                    <Frame        
+                        
+                        HorizontalOptions="Center"
+                    Grid.Row="1"
+                    HasShadow="false"                    
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    Padding="1" 
+                    BackgroundColor="White"
+                    IsVisible="True">
+                        <Frame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single" iOS="15" Android="25"/>
+                        </Frame.CornerRadius>
+                        <Image
                         Source="{extensions:ImageResource Chat.Images.Arrow_250x250.png}"
                         WidthRequest="30"
                         HeightRequest="30"
                         VerticalOptions="CenterAndExpand" />
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
                         Tapped="ScrollTap" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-            </StackLayout>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                <Frame BackgroundColor="#007EE5"  x:Name="UnreadCountFrame" TranslationY="10" Margin="0" Padding="1" HorizontalOptions="Center" HasShadow="False" Grid.Row="0" >
+                        <Label                        
+                        x:Name="UnreadCountLabel"                        
+                        Text="1235"
+                        HorizontalOptions="CenterAndExpand"
+                        IsVisible="True"
+                        VerticalTextAlignment="Center"
+                        TextColor="White" />
+                    </Frame>
+       
+            </Grid>
         </Grid>
         <BoxView
             Grid.Row="2"

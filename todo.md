@@ -1,8 +1,9 @@
 # To do
+- [X] Message when listview is empty
 - [ ] Go to bottom Circle button
-    - [ ] Position
+    - [X] Position
     - [ ] When appear(maybe use on appearing view cell index to calculate?)
-    - [ ] New Message counter on above the button
+    - [X] New Message counter on above the button
 - [ ] Send Message UI smoothless and bugs..
     - [ ] Scroll to latest send message SMOOTHLY
     - [ ] Send -> 半透明message -> 收到call back先至變返實色(望落順D)
@@ -13,7 +14,9 @@
 - [X] Timeout spinner
 - [ ] MessageBoard with button
     - [ ] MessageBoard sizing(mininize, 1/3, Maximize)
+        - https://forums.xamarin.com/discussion/25967/setting-height-of-webview-dynamically
     - [ ] Button style after pressed(Amended)
+        - Maybe remove all button except the one being pressed and greyed it?
     - [ ] Double comfirm screen when press button(touch ID?)
 - [ ] Attachment
     - [ ] Compress image before send
@@ -37,7 +40,7 @@
 - [ ] Loading animation of ChatPage
 - [ ] (IOS)IQKeyboard manager keyboard移上後listview下方會多左虛位
 - [ ] (IOS)IQKeyboard manager 用左 IOS打多過五行， bottom 會變左置中
-- [ ] (IOS)IQKeyboard manager Navigation Bar會飛走左
+- [ ] (IOS)IQKeyboard manager Navigation Bar會飛走左 (https://forums.xamarin.com/discussion/69802/keyboard-entry-pushes-listview-item-off-the-screen-help)
 - [ ] Message loading/retry animation
 - [ ] (IOS) Message Cell set max widthwidth issue(Related to RecycleElement)
 - [ ] ListView Use RecycleElement will result in error view cell size and text alignment
@@ -59,4 +62,4 @@
 
 
 - [ ] 阿文果度有時receive message 個conversation info係null
-- [ ]  MR LEE easter egg 
+- [ ] MR LEE easter egg 
