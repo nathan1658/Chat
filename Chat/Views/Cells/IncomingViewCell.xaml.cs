@@ -64,5 +64,31 @@ namespace Chat.Views.Cells
             }
         }
 
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Message msg = this.BindingContext as Message;
+            if(msg!=null)
+            {
+                msg.IsMasked = false;
+                this.ForceUpdateSize();
+            }                    
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            var msg = this.BindingContext as Message;
+            msg.PropertyChanged += (s, e) =>
+              {
+
+                  //Maybe add old value checking here to prevent called multiple times..
+                  if(e.PropertyName == "IsMasked")
+                  {
+                      this.ForceUpdateSize();
+                  }
+              };
+        }
+
     }
 }

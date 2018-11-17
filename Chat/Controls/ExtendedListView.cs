@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Chat.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -11,10 +13,11 @@ namespace Chat.Controls
     {
 
 
-        public ExtendedListView() : this(ListViewCachingStrategy.RecycleElement)
+        public ExtendedListView() : this(ListViewCachingStrategy.RetainElement)
         {
 
         }
+        
 
 
         public ExtendedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
@@ -117,12 +120,12 @@ namespace Chat.Controls
             {
                 try
                 {
-                    if (ItemsSource != null && ItemsSource.Cast<object>().Count() > 0)
+                    if (ItemsSource != null)
                     {
-                        var msg = ItemsSource.Cast<object>().LastOrDefault();
+                        var msg = ItemsSource as ObservableCollection<GroupedMessage>;
                         if (msg != null)
                         {
-                            ScrollTo(msg, ScrollToPosition.End, false);
+                            ScrollTo(msg.Last().Last(), ScrollToPosition.End, false);
                         }
 
                     }

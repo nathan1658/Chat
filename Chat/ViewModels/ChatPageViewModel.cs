@@ -82,31 +82,10 @@ namespace Chat.ViewModels
         static Random random = new Random();
         private Conversation _conversation;
         private static readonly List<string> chatExample = new List<string>{
-            @"你幾時拍拖呀？",
-            @"你幾時結婚呀？",
-            @"成3X歲人都重逗利是？",
-            @"幾時生番個嚟玩下？",
-            @"你好似肥咗喎！",
-            @"你做緊邊行呀？",
-            @"你有冇睇《愛．回家》？",
-            @"我個仔好叻呀，早排佢先考第1，你讀書讀成點呀？",
-            @"我近排先換咗架Tesla，快過之前架Audi幾多呀，0至100乜乜乜……",
-            @"而家啲後生仔真係唔似樣，有書唔讀，走去罷課……",
-            "今日lunch食咩好？",
-            "幾時請食飯？",
-            "幾時比家用？",
-            "仲唔起身返工？",
-            "關你咩事？",
-            "你同我講野呀？",
-            "收聲喇",
-            "一人少句啦！！！！",
-            "幾時開追悼會？",
-            "留返拜山先講ok?",
-            "派咁少不如唔好派",
-            "😂😂😂😂😂",
-            "😂😂😂😂",
-            "😂😂😂",
-            "😂"
+           @"A",
+           "B\nBB",
+           "C\nCC\nCCC",
+           "D\nDD\nDDD\nDDDD"
             };
 
         private static readonly List<string> userExample = new List<string>

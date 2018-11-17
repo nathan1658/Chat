@@ -20,23 +20,30 @@ namespace Chat.Views
         public ChatPage()
         {
             InitializeComponent();
-            ChatList.ItemAppearing += (sender, e) =>
-            {
-                Message msg = e.Item as Message;
-                var itemSource = ChatList.ItemsSource as ObservableCollection<Message>;
-                if (msg != null && itemSource != null && msg.OutgoingMessage && msg == (itemSource.Last()))
-                {
-                    ChatList.ScrollTo(e.Item, ScrollToPosition.MakeVisible, false);
-                }
-            };
+            this.ChatList.ScrollToLast();
+            //ChatList.ItemAppearing += (sender, e) =>
+            //{
+            //    Message msg = e.Item as Message;
+            //    var itemSource = ChatList.ItemsSource as ObservableCollection<Message>;
+            //    if (msg != null && itemSource != null && msg.OutgoingMessage && msg == (itemSource.Last()))
+            //    {
+            //        ChatList.ScrollTo(e.Item, ScrollToPosition.MakeVisible, false);
+            //    }
+            //};
+            
         }
 
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+         
+        }
 
 
         public ChatPage(Conversation con) : this()
         {
             var vm = new Chat.ViewModels.ChatPageViewModel(con);
+            
             vm.View = this;
             this.BindingContext = vm;
 
@@ -91,7 +98,7 @@ namespace Chat.Views
 
         internal async Task FocusEntryAsync()
         {
-            await Task.Delay(500);
+            await Task.Delay(1);
             InputBar.FocusEntry();
 
         }

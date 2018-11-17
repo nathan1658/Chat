@@ -8,9 +8,14 @@
     x:Class="Chat.Views.Cells.IncomingViewCell"
     xmlns:controls="clr-namespace:Chat.Controls"
     xmlns:extensions="clr-namespace:Chat.Extensions"
-    xmlns:converter="clr-namespace:Chat.Converters">
+    xmlns:converter="clr-namespace:Chat.Converters" >
+
+    <Grid VerticalOptions="Start">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
     <Frame
-        CornerRadius="5"
+        CornerRadius="5" 
         BackgroundColor="White"
         HasShadow="False"
         VerticalOptions="StartAndExpand"
@@ -45,11 +50,11 @@
             <ContentView
                 Grid.Row="1"
                 HorizontalOptions="StartAndExpand"
-                Grid.Column="0"
+                Grid.Column="0"                
                 xmlns:controls="clr-namespace:Chat.Controls"
                 xmlns:extensions="clr-namespace:Chat.Extensions">
-                <ContentView.Resources>
-                    <converter:IsNullConverter
+                    <ContentView.Resources>
+                        <converter:IsNullConverter
                         x:Key="IsNullConverter" />
                     <Style
                         TargetType="Label"
@@ -81,6 +86,17 @@
                             HorizontalOptions="Start"
                             Style="{StaticResource Key=MessageBodyStyle}" />
                     </ControlTemplate>
+                    <ControlTemplate x:Key="MaskedMessage">
+
+                            <Image Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"  HeightRequest="100" WidthRequest="{Binding Path=Width, Source={x:Reference TimeStackLayout}}" HorizontalOptions="Center">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                      
+                        </ControlTemplate>
+
+
                     <ControlTemplate
                         x:Key="NormalMessage">
                         <StackLayout>
@@ -137,7 +153,7 @@
                                     </TapGestureRecognizer>
                                 </Image.GestureRecognizers>
                             </Image>
-                            <controls:ExtendedMessageBody
+                            <Label
                                 Grid.Row="2"
                                 HorizontalOptions="Start"
                                 VerticalOptions="Start"                                
@@ -145,17 +161,17 @@
                                 LineBreakMode="WordWrap"
                                 IsVisible="false"
                                 Text="{TemplateBinding BindingContext.Text}">
-                                <controls:ExtendedMessageBody.Triggers>
+                                <Label.Triggers>
                                     <DataTrigger
-                                        TargetType="controls:ExtendedMessageBody"
+                                        TargetType="Label"
                                         Binding="{TemplateBinding BindingContext.Text, Converter={StaticResource IsNullConverter}}"
                                         Value="false">
                                         <Setter
                                             Property="IsVisible"
                                             Value="true" />
                                     </DataTrigger>
-                                </controls:ExtendedMessageBody.Triggers>
-                            </controls:ExtendedMessageBody>
+                                </Label.Triggers>
+                            </Label>
                         </StackLayout>
                     </ControlTemplate>
                 </ContentView.Resources>
@@ -163,28 +179,41 @@
                     ControlTemplate="{StaticResource NormalMessage}">
                 </ContentView.ControlTemplate>
                 <ContentView.Triggers>
-                    <DataTrigger
-                        TargetType="ContentView"
-                        Binding="{Binding IsExpired}"
-                        Value="True">
-                        <Setter
+                    <MultiTrigger TargetType="ContentView">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding IsExpired}" Value="True"/>
+                            <BindingCondition Binding="{Binding IsMasked}" Value="False"/>
+                        </MultiTrigger.Conditions>
+                        <MultiTrigger.Setters>
+                            <Setter
                             Property="ControlTemplate"
                             Value="{StaticResource ExpiredMessage}" />
-                    </DataTrigger>
-                    <DataTrigger
-                        TargetType="ContentView"
-                        Binding="{Binding IsExpired}"
-                        Value="false">
-                        <Setter
+                        </MultiTrigger.Setters>
+                    </MultiTrigger>
+                    <MultiTrigger TargetType="ContentView">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding IsExpired}" Value="False"/>
+                            <BindingCondition Binding="{Binding IsMasked}" Value="False"/>
+                        </MultiTrigger.Conditions>
+                        <MultiTrigger.Setters>
+                            <Setter
                             Property="ControlTemplate"
                             Value="{StaticResource NormalMessage}" />
+                        </MultiTrigger.Setters>
+                    </MultiTrigger>
+
+                    <DataTrigger TargetType="ContentView" Binding="{Binding IsMasked}" Value="True">
+                        <Setter
+                            Property="ControlTemplate"
+                            Value="{StaticResource MaskedMessage}" />
                     </DataTrigger>
                 </ContentView.Triggers>
             </ContentView>
-           <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Grid.Row="2">
-                <Label
-                    Text="{Binding RemainingTimeString}"
-                    IsVisible="false"
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Grid.Row="2" x:Name="TimeStackLayout">
+                    <!--Text="{Binding RemainingTimeString}"-->
+                    <Label
+                    Text="11:11:11"
+                    IsVisible="true"
                     HorizontalOptions="Start"
                     FlexLayout.AlignSelf="Start"
                     Margin="0,0,5,0">
@@ -207,4 +236,5 @@
             </StackLayout>
         </Grid>
     </Frame>
+    </Grid>
 </cells:BaseMessageViewCell>

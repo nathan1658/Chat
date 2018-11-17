@@ -11,6 +11,8 @@ namespace Chat.Models
     public class Message : INotifyPropertyChanged
     {
 
+        public bool IsMasked { get; set; } = true;
+
         private string _text;
         public string Text
         {
