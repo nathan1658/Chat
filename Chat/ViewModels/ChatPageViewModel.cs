@@ -249,6 +249,37 @@ namespace Chat.ViewModels
                 this.addMessage(msg);
             });
 
+            MessagingCenter.Subscribe<IncomingViewCell,Message>(this, "IsMaskedUpdate", (x,_msg) =>
+              {
+                  //get target message:
+                  int oneD = -1;
+                  int twoD = -1;
+                  for(int i=0;i<GroupedMessages.Count;i++)
+                  {
+                      for(int j=0;j<GroupedMessages[i].Count;j++)
+                      {
+                          var msg = GroupedMessages[i][j];
+                          if(msg == _msg)
+                          {
+                              oneD = i;
+                              twoD = j;
+                              break;
+                          }
+                      }
+                      if (oneD > 0 || twoD > 0)
+                          break;
+                  }
+                  var sourceMsg = GroupedMessages[oneD][twoD];
+                  var newMsg = JsonConvert.DeserializeObject<Message>(JsonConvert.SerializeObject(sourceMsg));
+                  newMsg.IsMasked = false;
+//                GroupedMessages[oneD][twoD] = newMsg;
+                  sourceMsg.IsMasked = false;
+                  GroupedMessages[oneD][twoD] = sourceMsg;
+
+
+              });
+
+
         }
 
         public static Message GenRandomMessage()

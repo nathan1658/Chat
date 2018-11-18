@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using System.Threading.Tasks;
 
 namespace Chat.Views.Cells
 {
@@ -70,25 +70,43 @@ namespace Chat.Views.Cells
             if(msg!=null)
             {
                 msg.IsMasked = false;
-                this.ForceUpdateSize();
+
+                //MessagingCenter.Subscribe<IncomingViewCell, Message>(this, "IsMaskedUpdate", (x, _msg) =>
+                MessagingCenter.Send<IncomingViewCell, Message>(this, "IsMaskedUpdate", msg);
+
+
             }                    
         }
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
+        //protected override void OnBindingContextChanged()
+        //{
+        //    base.OnBindingContextChanged();
 
-            var msg = this.BindingContext as Message;
-            msg.PropertyChanged += (s, e) =>
-              {
-
-                  //Maybe add old value checking here to prevent called multiple times..
-                  if(e.PropertyName == "IsMasked")
-                  {
-                      this.ForceUpdateSize();
-                  }
-              };
-        }
+        //    var msg = this.BindingContext as Message;
+        //    msg.PropertyChanged += (s, e) =>
+        //      {
+                  
+        //          //Maybe add old value checking here to prevent called multiple times..
+        //          if(e.PropertyName == "IsMasked"||e.PropertyName == "IsExpired")
+        //          {
+        //              Device.BeginInvokeOnMainThread(async () =>
+        //              {
+        //                  await Task.Delay(1);
+        //                  this.ForceUpdateSize();
+        //              });
+                     
+        //              //var listView = this.Parent as ExtendedListView;
+        //              //if(listView !=null)
+        //              //{
+        //              //    Device.BeginInvokeOnMainThread(async () =>
+        //              //    {
+        //              //        await Task.Delay(1);
+        //              //        listView.RefreshList();
+        //              //    });
+        //              //}
+        //          }
+        //      };
+        //}
 
     }
 }
