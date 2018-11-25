@@ -78,7 +78,7 @@
                                 VerticalOptions="Center">
                                 <Frame
                                     CornerRadius="5"
-                                    BackgroundColor="#bbdadee6"
+                                    BackgroundColor="#c8A9B3BC"
                                     HasShadow="false"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
@@ -88,7 +88,10 @@
                                         VerticalOptions="Center"
                                         VerticalTextAlignment="Center"
                                         HorizontalOptions="Center"
-                                        HorizontalTextAlignment="Center" />
+                                        HorizontalTextAlignment="Center"
+                                        TextColor="White"
+                                        FontSize="Micro"
+                                        />
                                 </Frame>
                             </StackLayout>
                         </controls:ExtendedGroupHeaderViewCell>
@@ -155,7 +158,7 @@
         <partials:ChatButtonsBarView
             x:Name="ChatButtonsBar"
             Grid.Row="3"
-            IsVisible="True">
+            IsVisible="False">
         </partials:ChatButtonsBarView>
         <BoxView
             Grid.Row="4"

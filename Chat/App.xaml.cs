@@ -4,6 +4,8 @@ using Xamarin.Forms.Xaml;
 using Chat.Views;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Chat.ViewModels;
+using DLToolkit.Forms.Controls;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Chat
@@ -18,11 +20,16 @@ namespace Chat
 #if DEBUG
               LiveReload.Init();
 #endif
-
+            FlowListView.Init();
             InitializeComponent();
             App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-            MainPage = new NavigationPage(new ConversationSelector());
+            //MainPage = new NavigationPage(new ConversationSelector());
+            var nav = new NavigationPage();
+            MainPage = nav;
+
+            //nav.PushAsync(new ChatPage(FakeConversations.GenerateFakeConversations()[0]));
             //MainPage = new NavigationPage(new PickerTest());
+            MainPage = new KeyboardTest();
             Navigation = MainPage.Navigation;
         }
 

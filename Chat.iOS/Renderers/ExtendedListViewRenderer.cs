@@ -1,5 +1,7 @@
 ﻿using Chat.Controls;
 using Chat.iOS.Renderers;
+using System;
+using System.ComponentModel;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -15,6 +17,8 @@ namespace Chat.iOS.Renderers
 
             if (e.NewElement != null)
             {
+                if(e.NewElement as ExtendedListView!=null)
+
                 if (Control != null)
                 {        
                     Control.AllowsSelection = false;
@@ -22,10 +26,11 @@ namespace Chat.iOS.Renderers
                     Control.Bounces = true;
                     Control.ScrollsToTop = true;
 
-                    Control.RowHeight = UITableView.AutomaticDimension;
-                    Control.EstimatedRowHeight = 100;
+                   // Control.RowHeight = UITableView.AutomaticDimension;
+                   // Control.EstimatedRowHeight = 100;
                 }
             }
+
         }
     }
 }

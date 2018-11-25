@@ -10,6 +10,8 @@ using System.Timers;
 using System.Threading.Tasks;
 using Chat.Interfaces;
 using Chat.Views;
+using Chat.Views.Cells;
+using Newtonsoft.Json;
 
 namespace Chat.ViewModels
 {
@@ -142,6 +144,7 @@ namespace Chat.ViewModels
             }
             GroupedMessages = new ObservableCollection<GroupedMessage>(GroupedMessages.OrderBy(x => x.DateTime).ToList());
         }
+        
 
         void addMessage(Message msg)
         {

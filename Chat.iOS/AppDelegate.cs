@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using Plugin.CrossPlatformTintedImage.iOS;
 using UIKit;
 using XLabs.Ioc;
@@ -24,6 +25,10 @@ namespace Chat.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
+
+            
+
+        
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             #region plugin init
@@ -36,7 +41,7 @@ namespace Chat.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            KeyboardOverlapRenderer.Init();
             return base.FinishedLaunching(app, options);
         }
 
