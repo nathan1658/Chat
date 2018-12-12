@@ -20,11 +20,12 @@ namespace Chat.Views
         public ChatPage()
         {
             InitializeComponent();
-            this.ChatList.ScrollToLast();
+           
+            //this.ChatList.ScrollToLast();
             //ChatList.ItemAppearing += (sender, e) =>
             //{
             //    Message msg = e.Item as Message;
-            //    var itemSource = ChatList.ItemsSource as ObservableCollection<Message>;
+            //    var itemSource = ChatList.ItemsSource as ObservableCollection<GroupedMessage>;
             //    if (msg != null && itemSource != null && msg.OutgoingMessage && msg == (itemSource.Last()))
             //    {
             //        ChatList.ScrollTo(e.Item, ScrollToPosition.MakeVisible, false);
@@ -36,7 +37,7 @@ namespace Chat.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-         
+        //    ChatList.ScrollToLast();
         }
 
 
@@ -50,7 +51,7 @@ namespace Chat.Views
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
-                Device.BeginInvokeOnMainThread(scrollToBottom);
+                ChatList.ScrollToLast();
             });
             if (!string.IsNullOrEmpty(con.HTMLTable))
             {
@@ -60,7 +61,14 @@ namespace Chat.Views
                     Html = con.HTMLTable
                 };
             }
+            // ChatList.Opacity = 0;
+            //var itemSource = ChatList.ItemsSource as ObservableCollection<GroupedMessage>;
+            //var lastMessage = itemSource.Last().Last();
 
+            ChatList.ScrollToLast();
+            //ChatList.ScrollToLast();
+            //ChatList.ScrollTo(lastMessage, ScrollToPosition.MakeVisible, false);
+           // ChatList.Opacity = 1;
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)
@@ -84,17 +92,12 @@ namespace Chat.Views
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
 
-                        scrollToBottom();
+                        ChatList.ScrollToLast();
                     });
                 }
 
             }
-        }
-
-        void scrollToBottom()
-        {
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);
-        }
+        }        
 
         internal async Task FocusEntryAsync()
         {

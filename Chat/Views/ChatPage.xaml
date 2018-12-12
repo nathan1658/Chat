@@ -7,23 +7,23 @@
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     xmlns:extensions="clr-namespace:Chat.Extensions"
     xmlns:controls="clr-namespace:Chat.Controls"
-    xmlns:converters="clr-namespace:Chat.Converters"
-    x:Class="Chat.Views.ChatPage">
-    <ContentPage.Resources>
+    xmlns:converters="clr-namespace:Chat.Converters" 
+    x:Class="Chat.Views.ChatPage">  
+    <ContentPage.Resources>  
         <ResourceDictionary>
             <localHelpers:ChatTemplateSelector
-                x:Key="MessageTemplateSelector" />
+                x:Key="MessageTemplateSelector" /> 
             <converters:IsNullConverter x:Key="isNullConverter"/>
-            <converters:IsGreaterThanZeroConverter x:Key="isGreaterThanZeroConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+            <converters:IsGreaterThanZeroConverter x:Key="isGreaterThanZeroConverter"/> 
+        </ResourceDictionary>    
+    </ContentPage.Resources> 
     <Grid  
-        RowSpacing="0"
-        VerticalOptions="FillAndExpand" 
+        RowSpacing="0" 
+        VerticalOptions="FillAndExpand"   
         ColumnSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition 
-                Height="auto" />
+                Height="auto" /> 
             <RowDefinition 
                 Height="*" />
             <RowDefinition
@@ -38,10 +38,10 @@
         <partials:MessageBoard
             Grid.Row="0"
             x:Name="MessageBoard"
-            IsVisible="true">
+            IsVisible="false">
         </partials:MessageBoard>
         <Grid
-            Grid.Row="1"
+            Grid.Row="1" 
             HorizontalOptions="FillAndExpand">
             <Image
                 Source="{extensions:ImageResource Chat.Images.ChatBg.png}"
@@ -151,11 +151,12 @@
             Grid.Row="2"
             HorizontalOptions="FillAndExpand"
             HeightRequest="0.5"
+            IsVisible="False"
             BackgroundColor="Gray" />
         <partials:ChatButtonsBarView
             x:Name="ChatButtonsBar"
             Grid.Row="3"
-            IsVisible="True">
+            IsVisible="False">
         </partials:ChatButtonsBarView>
         <BoxView
             Grid.Row="4"
