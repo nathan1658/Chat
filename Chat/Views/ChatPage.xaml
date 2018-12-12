@@ -38,7 +38,7 @@
         <partials:MessageBoard
             Grid.Row="0"
             x:Name="MessageBoard"
-            IsVisible="true">
+            IsVisible="false">
         </partials:MessageBoard>
         <Grid
             Grid.Row="1"
@@ -55,6 +55,7 @@
                 ItemsSource="{Binding GroupedMessages}"
                 Margin="0"
                 ItemTapped="OnListTapped"
+                Opacity="0"
                 HasUnevenRows="true"            
                 SeparatorColor="Transparent"
                 BackgroundColor="Transparent"                

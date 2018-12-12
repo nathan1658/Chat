@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Chat.Controls
 {
-    public class ExtendedListView:ListView
+    public class ExtendedListView : ListView
     {
 
 
@@ -18,7 +19,7 @@ namespace Chat.Controls
         {
 
         }
-        
+
 
 
         public ExtendedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
@@ -115,28 +116,33 @@ namespace Chat.Controls
             });
         }
 
-        public void ScrollToLast()
+        public void ScrollToLast(bool animated = true)
         {
-            Device.BeginInvokeOnMainThread(() =>
+
+            try
             {
-                try
+                if (ItemsSource != null)
                 {
-                    if (ItemsSource != null)
+                    var msg = ItemsSource as ObservableCollection<GroupedMessage>;
+                    if (msg != null)
                     {
-                        var msg = ItemsSource as ObservableCollection<GroupedMessage>;
-                        if (msg != null)
-                        {
-                            ScrollTo(msg.Last().Last(), ScrollToPosition.End, false);
-                        }
+                        Device.BeginInvokeOnMainThread(async () => {
+                            ScrollTo(msg.Last().Last(), ScrollToPosition.End, animated);
+                            await Task.Delay(500);
+                            this.Opacity = 1;
+                        });
+
 
                     }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.ToString());
-                }
 
-            });
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+
         }
     }
 }

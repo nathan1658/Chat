@@ -203,14 +203,16 @@ namespace Chat.Views.Partials
 
         public void UnFocusEntry()
         {
-            chatTextInput?.Unfocus();
             KeepTextInputFocus = false;
+            chatTextInput?.Unfocus();
+        
         }
 
         public void FocusEntry()
         {
-            chatTextInput?.Focus();
             KeepTextInputFocus = true;
+            chatTextInput?.Focus();
+           
         }
 
 

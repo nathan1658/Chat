@@ -20,7 +20,7 @@ namespace Chat.Views
         public ChatPage()
         {
             InitializeComponent();
-            this.ChatList.ScrollToLast();
+        
             //ChatList.ItemAppearing += (sender, e) =>
             //{
             //    Message msg = e.Item as Message;
@@ -50,7 +50,7 @@ namespace Chat.Views
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
-                Device.BeginInvokeOnMainThread(scrollToBottom);
+                ChatList.ScrollToLast();
             });
             if (!string.IsNullOrEmpty(con.HTMLTable))
             {
@@ -60,6 +60,8 @@ namespace Chat.Views
                     Html = con.HTMLTable
                 };
             }
+
+            this.ChatList.ScrollToLast(false);
 
         }
 
@@ -71,30 +73,21 @@ namespace Chat.Views
 
         public void ScrollTap(object sender, System.EventArgs e)
         {
-            lock (new object())
-            {
+            
                 if (BindingContext != null)
                 {
                     var vm = BindingContext as ChatPageViewModel;
 
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-
+                    
                         vm.ShowScrollTap = false;
                         vm.LastMessageVisible = true;
                         vm.PendingMessageCount = 0;
 
-                        scrollToBottom();
-                    });
-                }
-
-            }
+                        ChatList.ScrollToLast();
+                    
+                }                
         }
 
-        void scrollToBottom()
-        {
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);
-        }
 
         internal async Task FocusEntryAsync()
         {
