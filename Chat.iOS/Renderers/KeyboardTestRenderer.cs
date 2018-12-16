@@ -18,9 +18,7 @@ namespace Chat.iOS.Renderers
             base.ViewDidLoad();
 
             notificationToken = NSNotificationCenter.DefaultCenter.AddObserver(UIKeyboard.FrameBeginUserInfoKey, keyboardShow);
-            Xamarin.IQKeyboardManager.SharedManager.EnableAutoToolbar = false;
-            Xamarin.IQKeyboardManager.SharedManager.ShouldResignOnTouchOutside = true;
-            Xamarin.IQKeyboardManager.SharedManager.Enable = true;
+  
         }
 
         protected override void OnElementChanged(VisualElementChangedEventArgs e)

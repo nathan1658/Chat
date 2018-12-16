@@ -23,14 +23,14 @@ namespace Chat
             FlowListView.Init();
             InitializeComponent();
             App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-            //MainPage = new NavigationPage(new ConversationSelector());
-            var nav = new NavigationPage();
-            MainPage = nav;
+            MainPage = new NavigationPage(new ConversationSelector());
+            //var nav = new NavigationPage();
+           // MainPage = nav;
 
             //nav.PushAsync(new ChatPage(FakeConversations.GenerateFakeConversations()[0]));
             //MainPage = new NavigationPage(new PickerTest());
-            MainPage = new KeyboardTest();
-            Navigation = MainPage.Navigation;
+          //  MainPage = new KeyboardTest();
+           // Navigation = MainPage.Navigation;
         }
 
         protected override void OnStart()
