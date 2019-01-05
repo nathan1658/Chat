@@ -20,6 +20,11 @@ namespace Chat.Views
         {
 
             var conversation = e.Item as Conversation;
+            int aa = 0;
+            foreach (var msg in conversation.Messages)
+            {
+                System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1}", aa++, msg.Text));
+            }
             await Navigation.PushAsync(new ChatPage(conversation));
 
 

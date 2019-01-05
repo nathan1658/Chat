@@ -46,7 +46,7 @@ namespace Chat
 
 
             var Messages = result[0].Messages;
-            for (int i = 0,j=0; i < 50; i++)
+            for (int i = 0,j=0; i < 70; i++)
             {
                 var msg = ChatPageViewModel.GenRandomMessage();
                 msg.SubmittedDate = DateTime.Now.Add(new TimeSpan((24*j*-1), -i, 0));
@@ -57,8 +57,11 @@ namespace Chat
                     msg.Text += txt;
                     msg.Text += txt;
                     msg.Text += txt;
-                }                
+                }
+                
                 msg.IsMasked = false;
+                if (i % 3 == 0)
+                    msg.IsMasked = true;
                 Messages.Add(msg);
             }
             for (int i = 0; i < 10; i++)
