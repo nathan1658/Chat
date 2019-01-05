@@ -10,6 +10,8 @@ using System.Timers;
 using System.Threading.Tasks;
 using Chat.Interfaces;
 using Chat.Views;
+using Chat.Views.Cells;
+using Newtonsoft.Json;
 
 namespace Chat.ViewModels
 {
@@ -142,6 +144,7 @@ namespace Chat.ViewModels
             }
             GroupedMessages = new ObservableCollection<GroupedMessage>(GroupedMessages.OrderBy(x => x.DateTime).ToList());
         }
+        
 
         void addMessage(Message msg)
         {
@@ -207,6 +210,12 @@ namespace Chat.ViewModels
         public ChatPageViewModel(Conversation con)
         {
             _conversation = con;
+            for (int i = 0; i < con.Messages.Count; i++)
+            {
+                var msg = con.Messages[i];
+                System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", i, msg.Text));
+            }
+            
             OnSendCommand = new Command(() =>
             {
                 if (!string.IsNullOrEmpty(TextToSend))
@@ -254,12 +263,12 @@ namespace Chat.ViewModels
                   //get target message:
                   int oneD = -1;
                   int twoD = -1;
-                  for(int i=0;i<GroupedMessages.Count;i++)
+                  for (int i = 0; i < GroupedMessages.Count; i++)
                   {
-                      for(int j=0;j<GroupedMessages[i].Count;j++)
+                      for (int j = 0; j < GroupedMessages[i].Count; j++)
                       {
                           var msg = GroupedMessages[i][j];
-                          if(msg == _msg)
+                          if (msg == _msg)
                           {
                               oneD = i;
                               twoD = j;
@@ -272,7 +281,7 @@ namespace Chat.ViewModels
                   var sourceMsg = GroupedMessages[oneD][twoD];
                   var newMsg = JsonConvert.DeserializeObject<Message>(JsonConvert.SerializeObject(sourceMsg));
                   newMsg.IsMasked = false;
-//                GroupedMessages[oneD][twoD] = newMsg;
+                  //                GroupedMessages[oneD][twoD] = newMsg;
                   sourceMsg.IsMasked = false;
                   GroupedMessages[oneD][twoD] = sourceMsg;
 

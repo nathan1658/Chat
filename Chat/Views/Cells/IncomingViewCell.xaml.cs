@@ -70,13 +70,32 @@ namespace Chat.Views.Cells
             if(msg!=null)
             {
                 msg.IsMasked = false;
-
+                ForceUpdateSize();
                 //MessagingCenter.Subscribe<IncomingViewCell, Message>(this, "IsMaskedUpdate", (x, _msg) =>
-                MessagingCenter.Send<IncomingViewCell, Message>(this, "IsMaskedUpdate", msg);
+                //MessagingCenter.Send<IncomingViewCell, Message>(this, "IsMaskedUpdate", msg);
 
-
+               // ForceUpdateSize();
             }                    
         }
+
+
+        //protected override void OnBindingContextChanged()
+        //{
+        //    lblBody.Text = "";
+        //    var msg = this.BindingContext as Message;
+        //    if(msg == null)
+        //    {
+        //        return;
+        //    }
+        //    if(msg.Text=="")
+        //    {
+
+        //    }
+                  
+        //    lblBody.Text = msg.Text;    
+
+        //    base.OnBindingContextChanged();
+        //}
 
         //protected override void OnBindingContextChanged()
         //{
@@ -85,7 +104,7 @@ namespace Chat.Views.Cells
         //    var msg = this.BindingContext as Message;
         //    msg.PropertyChanged += (s, e) =>
         //      {
-                  
+
         //          //Maybe add old value checking here to prevent called multiple times..
         //          if(e.PropertyName == "IsMasked"||e.PropertyName == "IsExpired")
         //          {
@@ -94,7 +113,7 @@ namespace Chat.Views.Cells
         //                  await Task.Delay(1);
         //                  this.ForceUpdateSize();
         //              });
-                     
+
         //              //var listView = this.Parent as ExtendedListView;
         //              //if(listView !=null)
         //              //{

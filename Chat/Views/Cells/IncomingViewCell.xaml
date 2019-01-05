@@ -5,73 +5,65 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     x:Class="Chat.Views.Cells.IncomingViewCell"    
+    xmlns:controls="clr-namespace:Chat.Controls"
     xmlns:converter="clr-namespace:Chat.Converters" 
     xmlns:extensions ="clr-namespace:Chat.Extensions">
 
     <Grid VerticalOptions="Start">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Frame
-        CornerRadius="5" 
-        BackgroundColor="White"
-        HasShadow="False"
-        VerticalOptions="StartAndExpand"
-        HorizontalOptions="Start"
-        Margin="10,5,10,5"
-        Padding="5">
-            <Frame.Resources>
-                <converter:IsNullConverter
+        <Grid.Resources>
+            <converter:IsNullConverter
                 x:Key="IsNullConverter" />
-                <converter:NameToColorConverter
+            <converter:NameToColorConverter
                 x:Key="NameColorConverter" />
-                <Style
+            <Style
                         TargetType="Label"
                         x:Key="MessageBodyStyle">
-                    <Setter
+                <Setter
                             Property="FontSize"
                             Value="Medium" />
-                    <Setter
+                <Setter
                             Property="FontFamily"
                             Value="Lucida Grande" />
-                    <Setter
+                <Setter
                             Property="TextColor"
                             Value="Black" />
-                    <Style.Triggers>
-                        <DataTrigger
+                <Style.Triggers>
+                    <DataTrigger
                                 TargetType="Label"
                                 Binding="{TemplateBinding BindingContext.OutgoingMessage}"
                                 Value="True">
-                            <Setter
+                        <Setter
                                     Property="HorizontalOptions"
                                     Value="End" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Frame.Resources>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                    Width="auto" />
-                </Grid.ColumnDefinitions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Frame BackgroundColor="white" HorizontalOptions="Start"  Margin="5" Padding="0" HasShadow="False" CornerRadius="10">
+            <Grid Margin="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                    Height="auto" />
-                    <RowDefinition
-                    Height="auto" />
-                    <RowDefinition
-                    Height="auto" />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{Binding User}"
                 TextColor="{Binding User,Converter={StaticResource NameColorConverter}}"
-                FontAttributes="Bold" />
+                FontAttributes="Bold" 
+                    />
 
-                <StackLayout   Grid.Row="1">
+                <StackLayout  Grid.Row="1">
 
-                    <Image Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}" IsVisible="False" HeightRequest="100" WidthRequest="{Binding Path=Width, Source={x:Reference TimeStackLayout}}" HorizontalOptions="Center">
+                    <Image Source="{extensions:ImageResource Chat.Images.stopwatch_250x250.png}"  IsVisible="False" HeightRequest="100" WidthRequest="{Binding Path=Width, Source={x:Reference TimeStackLayout}}" HorizontalOptions="Center">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                         </Image.GestureRecognizers>
@@ -83,13 +75,14 @@
                     </Image>
 
 
-                    <StackLayout IsVisible="False">
+                    <StackLayout IsVisible="False" >
                         <StackLayout.Triggers>
                             <DataTrigger TargetType="StackLayout" Binding="{Binding IsMasked}" Value="false">
                                 <Setter Property="IsVisible" Value="True"/>
                             </DataTrigger>
                         </StackLayout.Triggers>
                         <Image
+                      
                                 Grid.Row="0"
                                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
                                 HeightRequest="100"
@@ -117,6 +110,7 @@
                             </Image.GestureRecognizers>
                         </Image>
                         <Image
+                 
                                 Grid.Row="1"
                                 Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
                                 WidthRequest="100"
@@ -142,15 +136,14 @@
                                 </TapGestureRecognizer>
                             </Image.GestureRecognizers>
                         </Image>
-                        <Label
-                                Grid.Row="2"
+                        <Label                              
+                                x:Name="lblBody"
+                                Grid.Row="2"                                
                                 HorizontalOptions="Start"
                                 VerticalOptions="Start"                                
-                                Style="{StaticResource MessageBodyStyle}"
-                                LineBreakMode="WordWrap"
+                                Style="{StaticResource MessageBodyStyle}"                                
                                 IsVisible="True"
                                 Text="{Binding Text}">
-
                         </Label>
 
                     </StackLayout>

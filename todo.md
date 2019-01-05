@@ -1,8 +1,8 @@
 # To do
 - [X] Message when listview is empty
-- [ ] Go to bottom Circle button
+- [X] Go to bottom Circle button
     - [X] Position
-    - [ ] When appear(maybe use on appearing view cell index to calculate?)
+    - [X] When appear(maybe use on appearing view cell index to calculate?)
     - [X] New Message counter on above the button
 - [ ] Send Message UI smoothless and bugs..
     - [ ] Scroll to latest send message SMOOTHLY
@@ -22,6 +22,8 @@
     - [ ] Compress image before send
     - [ ] Cache loaded attachment
     - [ ] Camera sometimes not working
+    - [ ] Orientation is wrong in thumbnail
+    - [ ] Thumbnail sizing
 - [ ] IOS 有時個listview無左回彈
 - [ ] Scroll to bottom
     - [ ] Android very poor performance
@@ -30,9 +32,6 @@
 - [ ] (IOS) Retain scroll position when height of UITableview change
 - [ ] (IOS)WheelPicker spinner size and  h:m:s label position wrong
 - [X] Remove [DONE] button of picker
-- [ ] Attachment thumbnail
-    - [ ] Sizing
-    - [ ] Orientation is wrong in thumbnail
 - [ ] IOS UITableViewCell Rendering 問題
     - [ ] 唔識自已resize
     - [ ] Not sizing to content

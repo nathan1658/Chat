@@ -13,6 +13,11 @@ namespace Chat.ViewModels
         public ConversationViewModel()
         {
             ConversationList = new ObservableCollection<Conversation>(FakeConversations.GenerateFakeConversations());
+            int aa = 0;
+            foreach(var msg in ConversationList[0].Messages)
+            {
+                System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1}", aa++, msg.Text));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
