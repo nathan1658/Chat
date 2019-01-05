@@ -11,7 +11,7 @@
     </pages:PopupPage.Animation>
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20, 20, 20, 20">
         <StackLayout BackgroundColor="White" >
-            <controls:ExtendedCountDownPicker HorizontalOptions="CenterAndExpand" x:Name="picker" IsVisible="true"  />
+            <controls:ExtendedCountDownPicker HorizontalOptions="FillAndExpand" x:Name="picker" IsVisible="true"  />
         </StackLayout>
         <Grid >
             <Grid.ColumnDefinitions>
