@@ -44,7 +44,7 @@ namespace Chat.iOS.Renderers
                     Model = new TimeCountdownPickerView(timeCountdownPicker)
                 };
 
-                SelectPickerValue(customModelPickerView, timeCountdownPicker);
+                //SelectPickerValue(customModelPickerView, timeCountdownPicker);
            
                 uiView = new UIView(new CGRect(0, 0, 300, 200));
                 uiView.BackgroundColor = UIColor.Red;
@@ -65,11 +65,11 @@ namespace Chat.iOS.Renderers
             };
 
             SelectPickerValue(customModelPickerView, timeCountdownPicker);
-            CreatePickerLabels(customModelPickerView);
+            CreatePickerLabels(uiView);
             uiView.BackgroundColor = UIColor.Green;
             uiView.Frame=new CGRect(0,0,DisplayWidth,DispalyHeight);
             uiView.Bounds = uiView.Frame;
-            SetNativeControl(customModelPickerView);
+          //  SetNativeControl(customModelPickerView);
         }
 
 
@@ -81,38 +81,56 @@ namespace Chat.iOS.Renderers
 
         private void SelectPickerValue(UIPickerView customModelPickerView, ExtendedCountDownPicker myTimePicker)
         {
-            if (myTimePicker == null)
-                return;
-            customModelPickerView.Select(new nint(myTimePicker.SelectedTime.Days), 0, false);
-            customModelPickerView.Select(new nint(myTimePicker.SelectedTime.Hours), 2, false);
-            customModelPickerView.Select(new nint(myTimePicker.SelectedTime.Minutes), 4, false);
-            customModelPickerView.Select(new nint(myTimePicker.SelectedTime.Seconds), 6, false);
+          
         }
 
-        private void CreatePickerLabels(UIPickerView customModelPickerView)
+        private void CreatePickerLabels(UIView customModelPickerView)
         {
             nfloat verticalPosition = ((nfloat)DispalyHeight / 2) - (_labelSize / 2);
             nfloat componentWidth = new nfloat(DisplayWidth / ComponentCount );
+
+
+            var tmp1= new UIPickerView(new CGRect(0, 0, componentWidth, DispalyHeight))
+            {
+                Model = new TimeCountdownPickerView(timeCountdownPicker)
+            };
+            var tmp2 = new UIPickerView(new CGRect(componentWidth*2, 0, componentWidth, DispalyHeight))
+            {
+                Model = new TimeCountdownPickerView(timeCountdownPicker)
+            };
+            var tmp3 = new UIPickerView(new CGRect(componentWidth * 4, 0, componentWidth, DispalyHeight))
+            {
+                Model = new TimeCountdownPickerView(timeCountdownPicker)
+            };
+            var tmp4 = new UIPickerView(new CGRect(componentWidth * 6, 0, componentWidth, DispalyHeight))
+            {
+                Model = new TimeCountdownPickerView(timeCountdownPicker)
+            };
+
 
             var daysLabel = new UILabel(new CGRect(componentWidth, verticalPosition, _labelSize, _labelSize));
             daysLabel.TextAlignment = UITextAlignment.Center;
 
             daysLabel.Text = "d";
 
-            var hoursLabel = new UILabel(new CGRect((componentWidth * 3) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+            var hoursLabel = new UILabel(new CGRect((componentWidth * 3) , verticalPosition, _labelSize, _labelSize));
             hoursLabel.TextAlignment = UITextAlignment.Center;
 
             hoursLabel.Text = "h";
 
-            var minutesLabel = new UILabel(new CGRect((componentWidth * 5) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+            var minutesLabel = new UILabel(new CGRect((componentWidth * 5) , verticalPosition, _labelSize, _labelSize));
             minutesLabel.TextAlignment = UITextAlignment.Center;
 
             minutesLabel.Text = "m";
 
-            var secondsLabel = new UILabel(new CGRect((componentWidth * 7) + (componentWidth / 2), verticalPosition, _labelSize, _labelSize));
+            var secondsLabel = new UILabel(new CGRect((componentWidth * 7) , verticalPosition, _labelSize, _labelSize));
             secondsLabel.TextAlignment = UITextAlignment.Center;
 
             secondsLabel.Text = "s";
+            customModelPickerView.AddSubview(tmp1);
+            customModelPickerView.AddSubview(tmp2);
+            customModelPickerView.AddSubview(tmp3);
+            customModelPickerView.AddSubview(tmp4);
 
             customModelPickerView.AddSubview(daysLabel);
             customModelPickerView.AddSubview(hoursLabel);
@@ -159,9 +177,23 @@ namespace Chat.iOS.Renderers
 
             public override nint GetComponentCount(UIPickerView pickerView)
             {
-                return new nint(ComponentCount);
+                return new nint(1);
             }
 
+            public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+            {
+                var label = new UILabel();
+                label.Text = row+1+"";
+                //label.AutosizesSubviews = false;
+                //label.ClipsToBounds = false;
+                label.TextAlignment = UITextAlignment.Center;
+                //label.SetContentHuggingPriority(252, UILayoutConstraintAxis.Horizontal);
+                return label;
+
+                //return base.GetView(pickerView, row, component, view);
+
+
+            }
 
 
             public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
@@ -218,38 +250,41 @@ namespace Chat.iOS.Renderers
 
             public override void Selected(UIPickerView pickerView, nint row, nint component)
             {
-                var selectedHours = pickerView.SelectedRowInComponent(0);
-                var selectedMinutes = pickerView.SelectedRowInComponent(2);
-                var selectedSeconds = pickerView.SelectedRowInComponent(4);
 
-                var time = new TimeSpan((int)selectedHours, (int)selectedMinutes, (int)selectedSeconds);
-
-                timeCountdownPicker.SelectedTime = time;
             }
 
             public override nfloat GetComponentWidth(UIPickerView pickerView, nint component)
             {
-                var screenWidth = DisplayWidth;
-
-                var componentWidth = screenWidth /
+            
+                var componentWidth = DisplayWidth /
                     ComponentCount;
 
                 return new nfloat(componentWidth);
+
             }
         }
     }
-    public class TestDelegate : IUIPickerViewDelegate
-    {
-        public IntPtr Handle => throw new NotImplementedException();
+    //public class TestDelegate : IUIPickerViewDelegate
+    //{
+    //    [Export("pickerView:viewForRow:forComponent:reusingView:")]
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+    //    public UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+    //    {
+    //        UILabel label = new UILabel
+    //        {
+    //            TextColor = UIColor.Blue,
+    //            Text = Element.Items[(int)row].ToString(),
+    //            TextAlignment = UITextAlignment.Center,
+    //        };
+    //        test = label.Text;
+
+    //        Console.WriteLine(Element.Items[(int)row]);
+
+    //        return label;
+    //    }
 
 
-
-    }
+    //}
 
 }
 
