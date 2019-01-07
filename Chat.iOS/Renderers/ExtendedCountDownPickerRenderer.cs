@@ -12,12 +12,12 @@ using Xamarin.Forms.Platform.iOS;
 namespace Chat.iOS.Renderers
 {
 
-    public class ExtendedCountDownPickerRenderer : ViewRenderer<ExtendedCountDownPicker, UIPickerView>
+    public class ExtendedCountDownPickerRenderer : ViewRenderer<ExtendedCountDownPicker, UIView>
     {
-        public static double DisplayScale = UIScreen.MainScreen.Scale;
-        public static int DispalyHeight = (int)UIScreen.MainScreen.NativeBounds.Height;
+        //public static double DisplayScale = UIScreen.MainScreen.Scale;
+        public static double DispalyHeight = 0;
         //TODO fix this (maybe dynamic get parent view width?)
-        public static double DisplayWidth = 560;
+        public static double DisplayWidth = 0;
 
         internal const int ComponentCount = 8;
 
@@ -25,6 +25,7 @@ namespace Chat.iOS.Renderers
 
         private ExtendedCountDownPicker timeCountdownPicker;
         UIPickerView customModelPickerView = null;
+        UIView uiView;
         protected override void OnElementChanged(ElementChangedEventArgs<ExtendedCountDownPicker> e)
         {
 
@@ -36,6 +37,7 @@ namespace Chat.iOS.Renderers
             {
 
                 timeCountdownPicker = e.NewElement as ExtendedCountDownPicker;
+                timeCountdownPicker.SizeChanged+= TimeCountdownPicker_SizeChanged;
                 //      var aa = this.Control.Frame.Width;
                 customModelPickerView = new UIPickerView
                 {
@@ -43,11 +45,31 @@ namespace Chat.iOS.Renderers
                 };
 
                 SelectPickerValue(customModelPickerView, timeCountdownPicker);
-
-
-                SetNativeControl(customModelPickerView);
+           
+                uiView = new UIView(new CGRect(0, 0, 300, 200));
+                uiView.BackgroundColor = UIColor.Red;
+                SetNativeControl(uiView);
             }
 
+        }
+
+        void TimeCountdownPicker_SizeChanged(object sender, EventArgs e)
+        {
+
+            var obj = sender as ExtendedCountDownPicker;
+            DispalyHeight = obj.Height;
+            DisplayWidth = obj.Width;
+            customModelPickerView = new UIPickerView
+            {
+                Model = new TimeCountdownPickerView(timeCountdownPicker)
+            };
+
+            SelectPickerValue(customModelPickerView, timeCountdownPicker);
+            CreatePickerLabels(customModelPickerView);
+            uiView.BackgroundColor = UIColor.Green;
+            uiView.Frame=new CGRect(0,0,DisplayWidth,DispalyHeight);
+            uiView.Bounds = uiView.Frame;
+            SetNativeControl(customModelPickerView);
         }
 
 
@@ -69,8 +91,8 @@ namespace Chat.iOS.Renderers
 
         private void CreatePickerLabels(UIPickerView customModelPickerView)
         {
-            nfloat verticalPosition = (customModelPickerView.Frame.Size.Height / 2) - (_labelSize / 2);
-            nfloat componentWidth = new nfloat(DisplayWidth / ComponentCount / DisplayScale);
+            nfloat verticalPosition = ((nfloat)DispalyHeight / 2) - (_labelSize / 2);
+            nfloat componentWidth = new nfloat(DisplayWidth / ComponentCount );
 
             var daysLabel = new UILabel(new CGRect(componentWidth, verticalPosition, _labelSize, _labelSize));
             daysLabel.TextAlignment = UITextAlignment.Center;
@@ -111,18 +133,18 @@ namespace Chat.iOS.Renderers
 
                 SelectPickerValue(customModelPickerView, timeCountdownPicker);
             }
-            if (e.PropertyName == VisualElement.WidthProperty.PropertyName ||
-           e.PropertyName == VisualElement.HeightProperty.PropertyName)
-            {
-                if (Element != null && Element.Bounds.Height > 0 && Element.Bounds.Width > 0)
-                {
-                    DisplayWidth = Element.Bounds.Width;
-                    DisplayWidth *= DisplayScale;
-                    SetNeedsDisplay();
-                    CreatePickerLabels(customModelPickerView);
+           // if (e.PropertyName == VisualElement.WidthProperty.PropertyName ||
+           //e.PropertyName == VisualElement.HeightProperty.PropertyName)
+            //{
+            //    if (Element != null && Element.Bounds.Height > 0 && Element.Bounds.Width > 0)
+            //    {
+            //        DisplayWidth = Element.Bounds.Width;
+            //        //DisplayWidth *= DisplayScale;
+                
+            //        CreatePickerLabels(customModelPickerView);
                     
-                }
-            }
+            //    }
+            //}
 
         }
 
@@ -210,14 +232,24 @@ namespace Chat.iOS.Renderers
                 var screenWidth = DisplayWidth;
 
                 var componentWidth = screenWidth /
-                    ComponentCount /
-                    DisplayScale;
+                    ComponentCount;
 
                 return new nfloat(componentWidth);
             }
         }
     }
+    public class TestDelegate : IUIPickerViewDelegate
+    {
+        public IntPtr Handle => throw new NotImplementedException();
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+    }
 
 }
 
