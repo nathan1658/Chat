@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Chat.Models;
 using Chat.ViewModels;
+using Chat.Views.Popups;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Chat.Views
@@ -13,8 +15,13 @@ namespace Chat.Views
         {
             InitializeComponent();
             this.BindingContext = new ConversationViewModel();
+           // test();
         }
 
+        async void test()
+        {
+            await PopupNavigation.Instance.PushAsync(new WheelPickerPopup(new TimeSpan()));
+        }
 
         async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {

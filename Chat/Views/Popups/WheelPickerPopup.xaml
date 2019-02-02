@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Chat.Controls"
     xmlns:animations="clr-namespace:Chat.Animations"
-      xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     x:Class="Chat.Views.Popups.WheelPickerPopup">
     <pages:PopupPage.Animation>
         <animations:UserAnimation/>

@@ -6,6 +6,7 @@ using Chat.ViewModels;
 using Chat.Views.Popups;
 using Plugin.Media;
 using Rg.Plugins.Popup.Services;
+using Stormlion.PhotoBrowser;
 using Xamarin.Forms;
 
 
@@ -86,7 +87,31 @@ namespace Chat.Views.Partials
 
             });
 
-            await PopupNavigation.Instance.PushAsync(new WheelPickerPopup((this.BindingContext as ChatPageViewModel).CountDownValue));
+            new PhotoBrowser
+            {
+                Photos = new List<Photo>
+                {
+                    new Photo
+                    {
+                        URL = "https://raw.githubusercontent.com/stfalcon-studio/FrescoImageViewer/v.0.5.0/images/posters/Vincent.jpg",
+                        Title = "Vincent"
+                    },
+                    new Photo
+                    {
+                        URL = "https://raw.githubusercontent.com/stfalcon-studio/FrescoImageViewer/v.0.5.0/images/posters/Jules.jpg",
+                        Title = "Jules"
+                    },
+                    new Photo
+                    {
+                        URL = "https://raw.githubusercontent.com/stfalcon-studio/FrescoImageViewer/v.0.5.0/images/posters/Korben.jpg",
+                        Title = "Korben"
+                    }
+                }
+
+            }.Show();
+
+
+            //  await PopupNavigation.Instance.PushAsync(new WheelPickerPopup((this.BindingContext as ChatPageViewModel).CountDownValue));
 
         }
         //TODO launch panel for selecting attatchment

@@ -5,11 +5,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     x:Class="Chat.Views.Cells.IncomingViewCell"    
+    xmlns:effects="clr-namespace:Chat"
     xmlns:controls="clr-namespace:Chat.Controls"
     xmlns:converter="clr-namespace:Chat.Converters" 
     xmlns:extensions ="clr-namespace:Chat.Extensions">
 
     <Grid VerticalOptions="Start">
+        <Grid.GestureRecognizers>
+
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+        </Grid.GestureRecognizers>
         <Grid.Resources>
             <converter:IsNullConverter
                 x:Key="IsNullConverter" />
@@ -141,9 +146,13 @@
                                 Grid.Row="2"                                
                                 HorizontalOptions="Start"
                                 VerticalOptions="Start"                                
-                                Style="{StaticResource MessageBodyStyle}"                                
+                                Style="{StaticResource MessageBodyStyle}"                   
+                            effects:LongPressedEffect.Command="{Binding ShowAlertCommand}" effects:LongPressedEffect.CommandParameter="{Binding .}"
                                 IsVisible="True"
                                 Text="{Binding Text}">
+                            <Label.Effects>
+                                <effects:LongPressedEffect />
+                            </Label.Effects>
                         </Label>
 
                     </StackLayout>

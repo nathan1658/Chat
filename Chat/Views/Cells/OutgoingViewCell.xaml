@@ -23,6 +23,9 @@
         <Grid
             VerticalOptions="StartAndExpand"
             HorizontalOptions="StartAndExpand">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
                 <RowDefinition
                     Height="auto">

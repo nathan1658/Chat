@@ -5,7 +5,9 @@ using System.Linq;
 using Foundation;
 using KeyboardOverlap.Forms.Plugin.iOSUnified;
 using Plugin.CrossPlatformTintedImage.iOS;
+using Stormlion.PhotoBrowser.iOS;
 using UIKit;
+using Xamarin.Forms;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
 using XLabs.Serialization;
@@ -33,11 +35,11 @@ namespace Chat.iOS
         {
             #region plugin init
             Rg.Plugins.Popup.Popup.Init();
-            Stormlion.PhotoBrowser.iOS.Platform.Init();
+            
             XLabsInit();
             TintedImageRenderer.Init();
             #endregion
-
+            DependencyService.Register<PhotoBrowserImplementation>();
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());

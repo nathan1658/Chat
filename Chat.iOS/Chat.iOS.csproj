@@ -104,6 +104,8 @@
     <Compile Include="DepedencyService\PhotoResizer_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="MyMWPhotoBrower.cs" />
+    <Compile Include="PhotoBrowserImplementation.cs" />
     <Compile Include="Renderers\BaseViewCellRenderer.cs" />
     <Compile Include="Renderers\ExtendedListViewRenderer.cs" />
     <Compile Include="Renderers\KeyboardTestRenderer.cs" />
@@ -174,6 +176,15 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Ricardo.MBProgressHUD.iOS">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Ricardo.MWPhotoBrowser.iOS">
+      <Version>2.1.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Ricardo.SDWebImage.iOS">
+      <Version>4.2.2.1</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Forms.KeyboardOverlap">
       <Version>1.0.0.4</Version>
     </PackageReference>

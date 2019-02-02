@@ -9,6 +9,8 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Services;
+using Chat.Views.Popups;
 
 namespace Chat.Views.Cells
 {
@@ -78,6 +80,14 @@ namespace Chat.Views.Cells
             }                    
         }
 
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await PopupNavigation.Instance.PushAsync(new TestPopup());
+            });
+        }
+
 
         //protected override void OnBindingContextChanged()
         //{
@@ -91,7 +101,7 @@ namespace Chat.Views.Cells
         //    {
 
         //    }
-                  
+
         //    lblBody.Text = msg.Text;    
 
         //    base.OnBindingContextChanged();

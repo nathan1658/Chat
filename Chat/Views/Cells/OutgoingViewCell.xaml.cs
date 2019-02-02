@@ -1,4 +1,6 @@
 ﻿using Chat.Models;
+using Chat.Views.Popups;
+using Rg.Plugins.Popup.Services;
 using Stormlion.PhotoBrowser;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,11 @@ namespace Chat.Views.Cells
         public OutgoingViewCell()
         {
             InitializeComponent();
+          
+
         }
 
-
+        
         //TODO Place in baseViewCell?
         //TODO use event?
         private void ImageThumbnail_Tapped(object sender, EventArgs e)
@@ -58,6 +62,18 @@ namespace Chat.Views.Cells
             {
                 App.Navigation.PushModalAsync(new NavigationPage(new PDFWebViewPage(msg.PDFByte)));
             }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
+            
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await PopupNavigation.Instance.PushAsync(new TestPopup());
+                });
+            
+
         }
     }
 }
