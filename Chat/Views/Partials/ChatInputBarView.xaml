@@ -21,7 +21,8 @@
                 Property="WidthRequest"
                 Value="30" />
         </Style>
-        <converters:IsZeroTimeSpanConverter x:Key="timeSpanConverter"/>
+        <converters:IsZeroTimeSpanConverter
+            x:Key="timeSpanConverter" />
     </ContentView.Resources>
     <Grid
         BackgroundColor="#efefef"
@@ -52,14 +53,19 @@
             Margin="5,0,5,0"
             HeightRequest="30"
             x:Name="itemsStackLayout">
-            <tcontrols:TintedImage 
+            <tcontrols:TintedImage
                 VerticalOptions="Center"
                 Source="stopwatch_250x250.png"
                 Style="{StaticResource Key=ToolImages}"
                 TintColor="Transparent">
                 <tcontrols:TintedImage.Triggers>
-                    <DataTrigger TargetType="tcontrols:TintedImage" Binding="{Binding CountDownValue,Converter={StaticResource timeSpanConverter}}" Value="true">
-                        <Setter Property="TintColor" Value="#e92b34"/>
+                    <DataTrigger
+                        TargetType="tcontrols:TintedImage"
+                        Binding="{Binding CountDownValue,Converter={StaticResource timeSpanConverter}}"
+                        Value="true">
+                        <Setter
+                            Property="TintColor"
+                            Value="#e92b34" />
                     </DataTrigger>
                 </tcontrols:TintedImage.Triggers>
                 <tcontrols:TintedImage.GestureRecognizers>
@@ -96,16 +102,15 @@
                 VerticalOptions="EndAndExpand"
                 x:Name="chatTextInput"
                 Text="{Binding TextToSend}"
-                TextColor="Black"                
+                TextColor="Black"
                 FontSize="Small"
-                Keyboard="Chat"                
+                Keyboard="Chat"
                 HasRoundedCorner="True"
                 IsExpandable="true"
                 HorizontalOptions="FillAndExpand"
                 PlaceholderColor="LightGray"
                 Placeholder="Type your message here" />
         </Frame>
-
         <Label
             Grid.Row="0"
             Grid.Column="2"
@@ -118,10 +123,9 @@
             VerticalTextAlignment="End">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer
-                        Tapped="SendTapped">
+                    Tapped="SendTapped">
                 </TapGestureRecognizer>
             </Label.GestureRecognizers>
         </Label>
-
     </Grid>
 </ContentView>

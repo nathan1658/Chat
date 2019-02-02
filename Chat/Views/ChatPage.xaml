@@ -64,6 +64,7 @@
                 x:Name="ChatList" 
                 ItemAppearingCommand="{Binding MessageAppearingCommand}" 
                 ItemDisappearingCommand="{Binding MessageDisappearingCommand}"
+                ReadMessageCommand="{Binding ReadMessageCommand}"
                 IsPullToRefreshEnabled="true" 
                 RefreshCommand="{Binding RefreshCommand}"   
                 IsRefreshing="{Binding IsRefreshing}" 

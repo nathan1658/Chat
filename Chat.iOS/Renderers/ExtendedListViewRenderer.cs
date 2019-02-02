@@ -22,17 +22,18 @@ namespace Chat.iOS.Renderers
 
             if (e.NewElement != null)
             {
-                if(e.NewElement as ExtendedListView!=null)
+                if (e.NewElement as ExtendedListView != null)
+                {
+                    if (Control != null)
+                    {
+                        Control.AllowsSelection = false;
+                        Control.AlwaysBounceVertical = false;
+                        Control.Bounces = true;
+                        Control.ScrollsToTop = true;
 
-                if (Control != null)
-                {        
-                    Control.AllowsSelection = false;
-                    Control.AlwaysBounceVertical = false;
-                    Control.Bounces = true;
-                    Control.ScrollsToTop = true;
-
-                   // Control.RowHeight = UITableView.AutomaticDimension;
-                   // Control.EstimatedRowHeight = 100;
+                        // Control.RowHeight = UITableView.AutomaticDimension;
+                        // Control.EstimatedRowHeight = 100;
+                    }
                 }
             }
 
@@ -41,6 +42,12 @@ namespace Chat.iOS.Renderers
             if (e.NewElement != null)
             {
                 RegisterForKeyboardNotifications();
+                (e.NewElement as ExtendedListView).IOSUPdateListView = new Action(() =>
+                {
+                    Control.BeginUpdates();
+                    Control.EndUpdates();
+                });
+
             }
 
             if (e.OldElement != null)

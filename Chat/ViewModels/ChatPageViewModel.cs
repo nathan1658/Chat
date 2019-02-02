@@ -12,6 +12,7 @@ using Chat.Interfaces;
 using Chat.Views;
 using Chat.Views.Cells;
 using Newtonsoft.Json;
+using XLabs;
 
 namespace Chat.ViewModels
 {
@@ -207,6 +208,9 @@ namespace Chat.ViewModels
                 }
             }
         }
+
+        public RelayCommand<object> ReadMessageCommand { get; set; }
+
         public ChatPageViewModel(Conversation con)
         {
             _conversation = con;
@@ -288,7 +292,7 @@ namespace Chat.ViewModels
 
               });
 
-
+            ReadMessageCommand = new RelayCommand<object>(async (Object obj) => { var asd = obj as Message; await Task.Delay(1000);asd.IsMasked = false; });
         }
 
         public static Message GenRandomMessage()

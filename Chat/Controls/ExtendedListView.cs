@@ -13,13 +13,14 @@ namespace Chat.Controls
     {
 
 
-        public ExtendedListView() : this(ListViewCachingStrategy.RecycleElement)
+        public ExtendedListView() : this(ListViewCachingStrategy.RetainElement)
         //public ExtendedListView() : this(ListViewCachingStrategy.RecycleElement)
         {
 
         }
-        
 
+
+        public Action IOSUPdateListView { get; set; }
 
         public ExtendedListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
@@ -57,6 +58,15 @@ namespace Chat.Controls
             set { SetValue(ItemDisappearingCommandProperty, value); }
         }
 
+        public static readonly BindableProperty ReadMessageCommandProperty =
+        BindableProperty.Create(nameof(ReadMessageCommandProperty), typeof(ICommand), typeof(ExtendedListView), default(ICommand));
+
+
+        public ICommand ReadMessageCommand
+        {
+            get { return (ICommand)GetValue(ReadMessageCommandProperty); }
+            set { SetValue(ReadMessageCommandProperty, value); }
+        }
 
         private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {

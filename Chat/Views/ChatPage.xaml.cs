@@ -30,6 +30,8 @@ namespace Chat.Views
             //        ChatList.ScrollTo(e.Item, ScrollToPosition.MakeVisible, false);
             //    }
             //};
+
+
             
         }
 

@@ -9,6 +9,8 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using Chat.Controls;
+using System.Runtime.CompilerServices;
 
 namespace Chat.Views.Cells
 {
@@ -17,6 +19,15 @@ namespace Chat.Views.Cells
         public IncomingViewCell()
         {
             InitializeComponent();
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += async (s, e) => {
+                TestLabel.IsVisible = !TestLabel.IsVisible;
+                (this.Parent as ExtendedListView).IOSUPdateListView();
+                //await Task.Delay(100);
+                //this.ForceUpdateSize();
+            };
+            cellFrame.GestureRecognizers.Add(tapGestureRecognizer);
+
         }
 
         //TODO Place in baseViewCell?
@@ -69,15 +80,19 @@ namespace Chat.Views.Cells
             Message msg = this.BindingContext as Message;
             if(msg!=null)
             {
-                msg.IsMasked = false;
-                ForceUpdateSize();
-                //MessagingCenter.Subscribe<IncomingViewCell, Message>(this, "IsMaskedUpdate", (x, _msg) =>
-                //MessagingCenter.Send<IncomingViewCell, Message>(this, "IsMaskedUpdate", msg);
-
-               // ForceUpdateSize();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    // msg.IsMasked = false;
+                    //  await Task.Delay(100);
+                    //(this.Parent as ExtendedListView).IOSUPdateListView();
+                    (this.Parent as ExtendedListView).ReadMessageCommand.Execute(this.BindingContext);
+                });
             }                    
         }
-
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+        }
 
         //protected override void OnBindingContextChanged()
         //{
@@ -91,41 +106,42 @@ namespace Chat.Views.Cells
         //    {
 
         //    }
-                  
+
         //    lblBody.Text = msg.Text;    
 
         //    base.OnBindingContextChanged();
         //}
 
-        //protected override void OnBindingContextChanged()
-        //{
-        //    base.OnBindingContextChanged();
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
 
-        //    var msg = this.BindingContext as Message;
-        //    msg.PropertyChanged += (s, e) =>
-        //      {
+            var msg = this.BindingContext as Message;
+            msg.PropertyChanged += (s, e) =>
+              {
 
-        //          //Maybe add old value checking here to prevent called multiple times..
-        //          if(e.PropertyName == "IsMasked"||e.PropertyName == "IsExpired")
-        //          {
-        //              Device.BeginInvokeOnMainThread(async () =>
-        //              {
-        //                  await Task.Delay(1);
-        //                  this.ForceUpdateSize();
-        //              });
-
-        //              //var listView = this.Parent as ExtendedListView;
-        //              //if(listView !=null)
-        //              //{
-        //              //    Device.BeginInvokeOnMainThread(async () =>
-        //              //    {
-        //              //        await Task.Delay(1);
-        //              //        listView.RefreshList();
-        //              //    });
-        //              //}
-        //          }
-        //      };
-        //}
+                  //Maybe add old value checking here to prevent called multiple times..
+                  if (e.PropertyName == "IsMasked" || e.PropertyName == "IsExpired")
+                  {
+                      Device.BeginInvokeOnMainThread(async () =>
+                      {
+                          msg.IsMasked = false;
+                          await Task.Delay(100);
+                          (this.Parent as ExtendedListView).IOSUPdateListView();
+                      });
+                  }
+              };
+                      //var listView = this.Parent as ExtendedListView;
+                      //if(listView !=null)
+                      //{
+                      //    Device.BeginInvokeOnMainThread(async () =>
+                      //    {
+                      //        await Task.Delay(1);
+                      //        listView.RefreshList();
+                      //    });
+                      //}
+           
+        }
 
     }
 }

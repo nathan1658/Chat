@@ -58,9 +58,9 @@ namespace Chat
                     msg.Text += txt;
                     msg.Text += txt;
                 }
-                
+                msg.Text = "I've been so occupied these few weeks. Goos to have you all to keep track and follow up on the app and users.";
                 msg.IsMasked = false;
-                if (i % 3 == 0)
+              //  if (i % 3 == 0)
                     msg.IsMasked = true;
                 Messages.Add(msg);
             }
