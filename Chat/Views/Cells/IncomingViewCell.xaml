@@ -96,10 +96,10 @@
                                 Grid.Row="0"
                                 Source="{Binding ImageThumbnail}"
                                 HeightRequest="300"
-                                WidthRequest="300"                            
+                                
                                 Aspect="AspectFill"
                                 VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="StartAndExpand"
                                 Margin="0"
                                 IsVisible="False">
                             <ffimageloading:CachedImage.Triggers>

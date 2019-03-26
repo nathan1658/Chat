@@ -8,6 +8,7 @@
     xmlns:partials="clr-namespace:Chat.Views.Partials"
     xmlns:controls="clr-namespace:Chat.Controls" 
     xmlns:effects="clr-namespace:Chat"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    
     x:Class="Chat.Views.Cells.OutgoingViewCell">
     <Frame
         BackgroundColor="#effdde"
@@ -18,7 +19,7 @@
         
         VerticalOptions="StartAndExpand"
         HorizontalOptions="EndAndExpand">
-        
+
         <Frame.Resources>
             <converter:IsNullConverter
                 x:Key="IsNullConverter" />
@@ -26,7 +27,7 @@
         <Grid
             VerticalOptions="StartAndExpand"
             HorizontalOptions="StartAndExpand">
-          
+
             <Grid.RowDefinitions>
                 <RowDefinition
                     Height="auto">
@@ -35,7 +36,7 @@
                     Height="auto">
                 </RowDefinition>
             </Grid.RowDefinitions>
-       <ContentView
+            <ContentView
                 Grid.Row="0"
                 Grid.Column="0"
                 xmlns:controls="clr-namespace:Chat.Controls"
@@ -79,32 +80,37 @@
                     <ControlTemplate                        
                         x:Key="NormalMessage">
                         <StackLayout>
-                            <Image
+                            <Frame Margin="5" Padding="1" HasShadow="False" Opacity="0.5" BackgroundColor="yellow">
+                                <Label Text="hihihi!"/>
+                            </Frame>
+                            <ffimageloading:CachedImage
+                                DownsampleToViewSize="True"
+                                Grid.Row="0"
                                 Source="{TemplateBinding BindingContext.ImageThumbnail}"
-                                MinimumHeightRequest="100"
-                                MinimumWidthRequest="100"
-                                Aspect="AspectFit"
+                                HeightRequest="300"
+                                WidthRequest="300"                            
+                                Aspect="AspectFill"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="Center"
                                 Margin="0"
                                 IsVisible="False">
-                                <Image.Triggers>
+                                <ffimageloading:CachedImage.Triggers>
                                     <DataTrigger
-                                        TargetType="Image"
+                                        TargetType="ffimageloading:CachedImage"
                                         Binding="{TemplateBinding BindingContext.ImageThumbnail,Converter={StaticResource IsNullConverter}}"
                                         Value="false">
                                         <Setter
                                             Property="IsVisible"
                                             Value="True" />
                                     </DataTrigger>
-                                </Image.Triggers>
-                                <Image.GestureRecognizers>
+                                </ffimageloading:CachedImage.Triggers>
+                                <ffimageloading:CachedImage.GestureRecognizers>
                                     <!--TODO make use of command here-->
                                     <TapGestureRecognizer
                                         Tapped="ImageThumbnail_Tapped">
                                     </TapGestureRecognizer>
-                                </Image.GestureRecognizers>
-                            </Image>
+                                </ffimageloading:CachedImage.GestureRecognizers>
+                            </ffimageloading:CachedImage>
                             <Image
                                 Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
                                 WidthRequest="100"

@@ -209,6 +209,7 @@ namespace Chat.ViewModels
                 }
             }
         }
+        byte[] fakeImageData;
         public ChatPageViewModel(Conversation con)
         {
             _conversation = con;
@@ -221,13 +222,13 @@ namespace Chat.ViewModels
             //Load fake image..
             var webClient = new WebClient();
             //image data..
-            var imageData = webClient.DownloadData(@"https://i.redd.it/oawi45ks82d11.jpg");
+             fakeImageData = webClient.DownloadData(@"https://i.redd.it/oawi45ks82d11.jpg");
 
             //limit message count to X
             _conversation.Messages = _conversation.Messages.Take(20).ToList();
             foreach(var msg in _conversation.Messages)
             {
-                msg.ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(imageData); });
+                msg.ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(fakeImageData); });
             }
 
 
@@ -345,8 +346,9 @@ namespace Chat.ViewModels
                 Text = formattedText,
                 PhotoByte = imageByteArr,
                 PDFByte = pdfByte,
-                OutgoingMessage = true
-            };
+                OutgoingMessage = true,
+                ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(fakeImageData); })
+        };
             SubmitMessage(msgToSend);
         }
 
@@ -358,10 +360,12 @@ namespace Chat.ViewModels
             msg.SubmittedDate = DateTime.Now;
             msg.User = App.User;
 
-
-
             addMessage(msg);
             TextToSend = string.Empty;
+
+            
+                _conversation.Messages.Last().ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(fakeImageData); });
+            
         }
 
 
