@@ -31,8 +31,13 @@ namespace Chat.Droid.Renderers
                     Control.SetSelector(Android.Resource.Color.Transparent);
                     Control.CacheColorHint = Xamarin.Forms.Color.Transparent.ToAndroid();
 
-                    Control.StackFromBottom = true;
-                    Control.TranscriptMode = TranscriptMode.AlwaysScroll;
+                   // Control.StackFromBottom = true;
+                    Control.TranscriptMode = TranscriptMode.Normal;
+                    e.NewElement.SizeChanged += (s1, e1) =>
+                    {
+                        var ss = s1 as ExtendedListView;
+                        var hh = ss.Height;
+                    };
                 }
             }
         }

@@ -6,15 +6,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     x:Class="Chat.Views.Cells.IncomingViewCell"    
     xmlns:effects="clr-namespace:Chat"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:controls="clr-namespace:Chat.Controls"
     xmlns:converter="clr-namespace:Chat.Converters" 
     xmlns:extensions ="clr-namespace:Chat.Extensions">
 
-    <Grid VerticalOptions="Start">
+    <Grid VerticalOptions="Start"
+          >
         <Grid.GestureRecognizers>
-
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
         </Grid.GestureRecognizers>
+      
         <Grid.Resources>
             <converter:IsNullConverter
                 x:Key="IsNullConverter" />
@@ -86,34 +88,37 @@
                                 <Setter Property="IsVisible" Value="True"/>
                             </DataTrigger>
                         </StackLayout.Triggers>
-                        <Image
-                      
+                        <Frame Margin="5" Padding="1" HasShadow="False" Opacity="0.5" BackgroundColor="yellow">
+                            <Label Text="hihihi!"/>
+                        </Frame>
+                        <ffimageloading:CachedImage
+                      DownsampleToViewSize="True"
                                 Grid.Row="0"
-                                Source="{TemplateBinding BindingContext.ImageThumbnail}"
-                                HeightRequest="100"
-                                WidthRequest="100"
-                                Aspect="AspectFit"
+                                Source="{Binding ImageThumbnail}"
+                                HeightRequest="300"
+                                WidthRequest="300"                            
+                                Aspect="AspectFill"
                                 VerticalOptions="CenterAndExpand"
                                 HorizontalOptions="Center"
                                 Margin="0"
                                 IsVisible="False">
-                            <Image.Triggers>
+                            <ffimageloading:CachedImage.Triggers>
                                 <DataTrigger
-                                        TargetType="Image"
-                                        Binding="{TemplateBinding BindingContext.ImageThumbnail,Converter={StaticResource IsNullConverter}}"
+                                        TargetType="ffimageloading:CachedImage"
+                                        Binding="{Binding ImageThumbnail,Converter={StaticResource IsNullConverter}}"
                                         Value="false">
                                     <Setter
                                             Property="IsVisible"
                                             Value="True" />
                                 </DataTrigger>
-                            </Image.Triggers>
-                            <Image.GestureRecognizers>
+                            </ffimageloading:CachedImage.Triggers>
+                            <ffimageloading:CachedImage.GestureRecognizers>
                                 <!--TODO make use of command here-->
                                 <TapGestureRecognizer
                                         Tapped="ImageThumbnail_Tapped">
                                 </TapGestureRecognizer>
-                            </Image.GestureRecognizers>
-                        </Image>
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                        </ffimageloading:CachedImage>
                         <Image
                  
                                 Grid.Row="1"
@@ -184,5 +189,9 @@
                 </StackLayout>
             </Grid>
         </Frame>
+
+        <Frame Opacity="0" x:Name="MaskFrame" BackgroundColor="Black" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" InputTransparent="True"></Frame>
+        
+        
     </Grid>
 </cells:BaseMessageViewCell>

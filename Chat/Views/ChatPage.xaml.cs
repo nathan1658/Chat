@@ -50,7 +50,7 @@ namespace Chat.Views
             this.Title = con.Title;
             ScrollListCommand = new Command(() =>
             {
-                Device.BeginInvokeOnMainThread(scrollToBottom);
+                Device.BeginInvokeOnMainThread(()=>scrollToBottom());
             });
             if (!string.IsNullOrEmpty(con.HTMLTable))
             {
@@ -60,7 +60,15 @@ namespace Chat.Views
                     Html = con.HTMLTable
                 };
             }
-
+            InputBar.ChatTextInputFocused += (s, e) =>
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Task.Delay(100);
+                    this.scrollToBottom(false);
+                });
+                
+            };
         }
 
         private void OnListTapped(object sender, ItemTappedEventArgs e)
@@ -91,9 +99,9 @@ namespace Chat.Views
             }
         }
 
-        void scrollToBottom()
+        void scrollToBottom(bool animated = true)
         {
-            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, true);
+            ChatList.ScrollTo((this.BindingContext as ChatPageViewModel).GroupedMessages.Last().Last(), ScrollToPosition.End, animated);
         }
 
         internal async Task FocusEntryAsync()

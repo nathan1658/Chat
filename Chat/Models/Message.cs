@@ -41,37 +41,11 @@ namespace Chat.Models
         public byte[] PhotoByte { get; set; }
 
 
-        private ImageSource _imageThumbnail;
+        //private ImageSource _imageThumbnail;
 
         public ImageSource ImageThumbnail
         {
-            get
-            {
-                if (PhotoByte != null && _imageThumbnail == null)
-                {                                     
-                    try
-                    {
-                        var compressedImage = DependencyService.Get<IPhotoResizer>().ResizeImage(PhotoByte, 150, 150, 75);
-                        //Generate compressed image..
-                        
-                        _imageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(compressedImage); });
-                    }
-                    catch(Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Error when generating image thumbnail, returning null, exception: "+ex.Message);
-                        return null;
-                    }
-                    
-                }
-                if(PhotoByte!=null)
-                {
-                    return _imageThumbnail;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get;set;
         }
 
 

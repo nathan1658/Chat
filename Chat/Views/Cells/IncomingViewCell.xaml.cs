@@ -11,6 +11,7 @@ using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Chat.Views.Popups;
+using Chat.Controls;
 
 namespace Chat.Views.Cells
 {
@@ -20,6 +21,10 @@ namespace Chat.Views.Cells
         {
             InitializeComponent();
         }
+
+
+
+
 
         //TODO Place in baseViewCell?
         //TODO use event?
@@ -72,7 +77,26 @@ namespace Chat.Views.Cells
             if(msg!=null)
             {
                 msg.IsMasked = false;
-                ForceUpdateSize();
+
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Task.Delay(100);
+                        var extendedListView = this.Parent as ExtendedListView;
+                        if (extendedListView != null)
+                        {
+                            extendedListView.iOSUpdateListViewAction();
+                        }
+                    });
+                    
+                }
+                else
+                {
+                    ForceUpdateSize();
+                }
+
+
                 //MessagingCenter.Subscribe<IncomingViewCell, Message>(this, "IsMaskedUpdate", (x, _msg) =>
                 //MessagingCenter.Send<IncomingViewCell, Message>(this, "IsMaskedUpdate", msg);
 
@@ -86,6 +110,12 @@ namespace Chat.Views.Cells
             {
                 await PopupNavigation.Instance.PushAsync(new TestPopup());
             });
+        }
+
+        private void TapGestureRecognizer_Tapped_2(object sender, EventArgs e)
+
+        {
+            MaskFrame.Opacity = MaskFrame.Opacity >0.1?0:0.5;
         }
 
 

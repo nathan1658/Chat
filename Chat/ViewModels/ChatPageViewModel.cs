@@ -12,6 +12,8 @@ using Chat.Interfaces;
 using Chat.Views;
 using Chat.Views.Cells;
 using Newtonsoft.Json;
+using System.Net;
+using System.IO;
 
 namespace Chat.ViewModels
 {
@@ -215,7 +217,20 @@ namespace Chat.ViewModels
                 var msg = con.Messages[i];
                 System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", i, msg.Text));
             }
-            
+
+            //Load fake image..
+            var webClient = new WebClient();
+            //image data..
+            var imageData = webClient.DownloadData(@"https://i.redd.it/oawi45ks82d11.jpg");
+
+            //limit message count to X
+            _conversation.Messages = _conversation.Messages.Take(20).ToList();
+            foreach(var msg in _conversation.Messages)
+            {
+                msg.ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(imageData); });
+            }
+
+
             OnSendCommand = new Command(() =>
             {
                 if (!string.IsNullOrEmpty(TextToSend))

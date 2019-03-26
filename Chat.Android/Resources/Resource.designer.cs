@@ -1204,6 +1204,7 @@ namespace Chat.Droid
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.submenuarrow = global::Chat.Droid.Resource.Id.submenuarrow;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.submit_area = global::Chat.Droid.Resource.Id.submit_area;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.tabMode = global::Chat.Droid.Resource.Id.tabMode;
+			global::Stormlion.PhotoBrowser.Droid.Resource.Id.tag_transition_group = global::Chat.Droid.Resource.Id.tag_transition_group;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.text = global::Chat.Droid.Resource.Id.text;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.text2 = global::Chat.Droid.Resource.Id.text2;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Id.textSpacerNoButtons = global::Chat.Droid.Resource.Id.textSpacerNoButtons;
@@ -2083,6 +2084,9 @@ namespace Chat.Droid
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamily_fontProviderPackage = global::Chat.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamily_fontProviderQuery = global::Chat.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont = global::Chat.Droid.Resource.Styleable.FontFamilyFont;
+			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_android_font = global::Chat.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle = global::Chat.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight = global::Chat.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_font = global::Chat.Droid.Resource.Styleable.FontFamilyFont_font;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_fontStyle = global::Chat.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
 			global::Stormlion.PhotoBrowser.Droid.Resource.Styleable.FontFamilyFont_fontWeight = global::Chat.Droid.Resource.Styleable.FontFamilyFont_fontWeight;

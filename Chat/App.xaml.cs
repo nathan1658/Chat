@@ -20,6 +20,7 @@ namespace Chat
 #if DEBUG
               LiveReload.Init();
 #endif
+            
             FlowListView.Init();
             InitializeComponent();
             App.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);

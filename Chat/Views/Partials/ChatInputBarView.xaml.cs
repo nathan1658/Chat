@@ -18,6 +18,8 @@ namespace Chat.Views.Partials
 
         ChatPage chatPage;
 
+        public event EventHandler ChatTextInputFocused;
+
         public ChatInputBarView()
         {
             InitializeComponent();
@@ -45,6 +47,7 @@ namespace Chat.Views.Partials
             chatTextInput.Focused += (s, e) =>
             {
                 KeepTextInputFocus = true;
+                ChatTextInputFocused(null,null);
             };
 
         }

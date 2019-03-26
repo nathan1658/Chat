@@ -35,7 +35,7 @@ namespace Chat.iOS
         {
             #region plugin init
             Rg.Plugins.Popup.Popup.Init();
-            
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             XLabsInit();
             TintedImageRenderer.Init();
             #endregion

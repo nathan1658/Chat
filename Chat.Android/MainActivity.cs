@@ -25,11 +25,12 @@ namespace Chat.Droid
 
             #region plugin init
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Stormlion.PhotoBrowser.Droid.Platform.Init(this);
             XlabsInit();
             #endregion
-
+            Window.SetSoftInputMode(SoftInput.AdjustPan| SoftInput.StateHidden);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

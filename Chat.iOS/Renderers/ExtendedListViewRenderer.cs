@@ -30,7 +30,11 @@ namespace Chat.iOS.Renderers
                     Control.AlwaysBounceVertical = false;
                     Control.Bounces = true;
                     Control.ScrollsToTop = true;
-
+                        (e.NewElement as ExtendedListView).iOSUpdateListViewAction = new Action(() =>
+                        {
+                            this.Control.BeginUpdates();
+                            this.Control.EndUpdates();
+                        });
                    // Control.RowHeight = UITableView.AutomaticDimension;
                    // Control.EstimatedRowHeight = 100;
                 }
