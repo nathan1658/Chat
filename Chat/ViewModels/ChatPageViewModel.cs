@@ -225,10 +225,12 @@ namespace Chat.ViewModels
              fakeImageData = webClient.DownloadData(@"https://i.redd.it/oawi45ks82d11.jpg");
 
             //limit message count to X
-            _conversation.Messages = _conversation.Messages.Take(20).ToList();
+            _conversation.Messages = _conversation.Messages.Take(20).ToList();            
+
             foreach(var msg in _conversation.Messages)
             {
                 msg.ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(fakeImageData); });
+                msg.OutgoingMessage = true;
             }
 
 

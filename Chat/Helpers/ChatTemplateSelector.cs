@@ -35,7 +35,7 @@ namespace Chat.Helpers
                 return systemMessageDataTemplate;
             }
 
-            return (messageVm.User == App.User) ? outgoingDataTemplate : incomingDataTemplate;
+            return (messageVm.OutgoingMessage ) ? outgoingDataTemplate : incomingDataTemplate;
 
 
         }

@@ -30,7 +30,7 @@ namespace Chat.Views.Cells
         //TODO use event?
         private void ImageThumbnail_Tapped(object sender, EventArgs e)
         {
-
+            return;
             Message msg = this.BindingContext as Message;
             if (msg != null)
             {

@@ -91,33 +91,19 @@
                         <Frame Margin="5" Padding="1" HasShadow="False" Opacity="0.5" BackgroundColor="yellow">
                             <Label Text="hihihi!"/>
                         </Frame>
-                        <ffimageloading:CachedImage
-                      DownsampleToViewSize="True"
-                                Grid.Row="0"
-                                Source="{Binding ImageThumbnail}"
-                                HeightRequest="300"
-                                
-                                Aspect="AspectFill"
-                                VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="StartAndExpand"
-                                Margin="0"
-                                IsVisible="False">
-                            <ffimageloading:CachedImage.Triggers>
-                                <DataTrigger
-                                        TargetType="ffimageloading:CachedImage"
-                                        Binding="{Binding ImageThumbnail,Converter={StaticResource IsNullConverter}}"
-                                        Value="false">
-                                    <Setter
-                                            Property="IsVisible"
-                                            Value="True" />
-                                </DataTrigger>
-                            </ffimageloading:CachedImage.Triggers>
-                            <ffimageloading:CachedImage.GestureRecognizers>
-                                <!--TODO make use of command here-->
-                                <TapGestureRecognizer
-                                        Tapped="ImageThumbnail_Tapped">
-                                </TapGestureRecognizer>
-                            </ffimageloading:CachedImage.GestureRecognizers>
+                       
+                        <ffimageloading:CachedImage                            
+                                        DownsampleToViewSize="True"
+                                        Source="{Binding ImageThumbnail}"
+                                        x:Name="ImageThumbnail"
+                                          HeightRequest="{Binding Width,Source={x:Reference ImageThumbnail}}"
+                                        WidthRequest="{Binding Width,Source={x:Reference MessageLabel}}"
+                                        MinimumWidthRequest="200"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFill"
+                              
+                                        IsVisible="True">
+
                         </ffimageloading:CachedImage>
                         <Image
                  

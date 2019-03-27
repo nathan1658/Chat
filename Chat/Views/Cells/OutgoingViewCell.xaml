@@ -4,214 +4,375 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converter="clr-namespace:Chat.Converters"
-    xmlns:extensions="clr-namespace:Chat.Extensions"
-    xmlns:partials="clr-namespace:Chat.Views.Partials"
-    xmlns:controls="clr-namespace:Chat.Controls" 
-    xmlns:effects="clr-namespace:Chat"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    
     x:Class="Chat.Views.Cells.OutgoingViewCell">
-    <Frame
-        BackgroundColor="#effdde"
-        Padding="5"
-        Margin="10,5,10,5"
-        CornerRadius="5"
-        HasShadow="False"
+    <Grid
+        x:Name="baseGrid"      
+        HorizontalOptions="Fill"
         
-        VerticalOptions="StartAndExpand"
-        HorizontalOptions="EndAndExpand">
+        VerticalOptions="StartAndExpand">
+        <Grid.Resources>
+            <converter:StringIsNullOrEmptyConverter
+                x:Key="stringIsNullOrEmptyConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="1*" />
+            <ColumnDefinition
+                Width="9*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="auto" />
+        </Grid.RowDefinitions>
 
-        <Frame.Resources>
-            <converter:IsNullConverter
-                x:Key="IsNullConverter" />
-        </Frame.Resources>
-        <Grid
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="StartAndExpand">
+        <StackLayout IsVisible="True"
+            Orientation="Horizontal"
+            Grid.Column="1"
+                     
+            HorizontalOptions="End">
+            <!--Fail to send/ sending indicator-->
+            <Frame
+                HasShadow="false"
+                Margin="0"
+                Padding="5,0"
+                BackgroundColor="Transparent"
+                IsVisible="true"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                HeightRequest="30"
+                WidthRequest="30">
+                <Frame.Triggers>
+                    <DataTrigger
+                        TargetType="Frame"
+                        Binding="{Binding IsFailedToSubmit}"
+                        Value="true">
+                        <Setter
+                            Property="IsVisible"
+                            Value="True" />
+                    </DataTrigger>
+                </Frame.Triggers>
+                <Grid>
+                    <ActivityIndicator
+                        Color="Gray"
+                        IsRunning="true"
+                        IsVisible="false">
+                        <ActivityIndicator.Triggers>
+                            <MultiTrigger
+                                TargetType="ActivityIndicator">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition
+                                        Binding="{Binding IsSubmitted}"
+                                        Value="false" />
+                                    <BindingCondition
+                                        Binding="{Binding IsFailedToSubmit}"
+                                        Value="false" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="IsVisible"
+                                        Value="True" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </ActivityIndicator.Triggers>
+                    </ActivityIndicator>
+                    <!--TODO click this to resend-->
+                    <!-- Source="{extensions:ImageResource Hksh.Platforms.Messenger.Core.Images.attach_250x250.png}"-->
+                    <Image                       
+                        HeightRequest="25"
+                        WidthRequest="25"
+                        Aspect="AspectFit"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="Center"
+                        Margin="0"
+                        IsVisible="false"
+                        >
+                        <Image.Triggers>
+                            <MultiTrigger
+                                TargetType="Image">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition
+                                        Binding="{Binding IsSubmitted}"
+                                        Value="false" />
+                                    <BindingCondition
+                                        Binding="{Binding IsFailedToSubmit}"
+                                        Value="true" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter
+                                        Property="IsVisible"
+                                        Value="True" />
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                        </Image.Triggers>
 
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="auto">
-                </RowDefinition>
-                <RowDefinition
-                    Height="auto">
-                </RowDefinition>
-            </Grid.RowDefinitions>
-            <ContentView
-                Grid.Row="0"
-                Grid.Column="0"
-                xmlns:controls="clr-namespace:Chat.Controls"
-                xmlns:extensions="clr-namespace:Chat.Extensions">
-                <ContentView.Resources>
+                    </Image>
+                </Grid>
+            </Frame>
+
+
+            <Frame
+                        BackgroundColor="#E1FFC7"
+                        Padding="5"
+                        x:Name="CellFrame"
+                        Margin="5,5,10,5"
+                        CornerRadius="10"
+                        HasShadow="False"
+                        HorizontalOptions="End">
+                <Frame.Triggers>
+                    <DataTrigger
+                                TargetType="Frame"
+                                Binding="{Binding IsSubmitted}"
+                                Value="false">
+                        <Setter
+                                    Property="Opacity"
+                                    Value="0.5" />
+                    </DataTrigger>
+                </Frame.Triggers>
+                <Frame.Resources>
                     <converter:IsNullConverter
-                        x:Key="IsNullConverter" />
+                                x:Key="IsNullConverter" />
                     <Style
-                        TargetType="Label"
-                        x:Key="MessageBodyStyle">
+                                TargetType="Label"
+                                x:Key="MessageBodyStyle">
                         <Setter
-                            Property="FontSize"
-                            Value="Medium" />
+                                    Property="FontSize"
+                                    Value="Medium" />
                         <Setter
-                            Property="FontFamily"
-                            Value="Lucida Grande" />
+                                    Property="FontFamily"
+                                    Value="Lucida Grande" />
                         <Setter
-                            Property="TextColor"
-                            Value="Black" />
+                                    Property="TextColor"
+                                    Value="Black" />
                         <Style.Triggers>
                             <DataTrigger
-                                TargetType="Label"
-                                Binding="{TemplateBinding BindingContext.OutgoingMessage}"
-                                Value="True">
+                                        TargetType="Label"
+                                        Binding="{Binding OutgoingMessage}"
+                                        Value="True">
                                 <Setter
-                                    Property="HorizontalOptions"
-                                    Value="End" />
+                                            Property="HorizontalOptions"
+                                            Value="End" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                    <ControlTemplate
-                        x:Key="ExpiredMessage">
-                        <!--<Grid VerticalOptions="Fill">          -->
-                        <Label
-                            Text="Message Deleted."
-                            MinimumHeightRequest="50"
-                            HorizontalOptions="Start"
-                            Style="{StaticResource Key=MessageBodyStyle}" />
-                        <!--</StackLayout>-->
-                    </ControlTemplate>
-                    <ControlTemplate                        
-                        x:Key="NormalMessage">
-                        <StackLayout>
-                            <Frame Margin="5" Padding="1" HasShadow="False" Opacity="0.5" BackgroundColor="yellow">
-                                <Label Text="hihihi!"/>
-                            </Frame>
-                            <ffimageloading:CachedImage
-                                DownsampleToViewSize="True"
-                                Grid.Row="0"
-                                Source="{TemplateBinding BindingContext.ImageThumbnail}"
-                                HeightRequest="300"
-                                WidthRequest="300"                            
-                                Aspect="AspectFill"
-                                VerticalOptions="CenterAndExpand"
-                                HorizontalOptions="Center"
-                                Margin="0"
-                                IsVisible="False">
-                                <ffimageloading:CachedImage.Triggers>
-                                    <DataTrigger
-                                        TargetType="ffimageloading:CachedImage"
-                                        Binding="{TemplateBinding BindingContext.ImageThumbnail,Converter={StaticResource IsNullConverter}}"
-                                        Value="false">
-                                        <Setter
-                                            Property="IsVisible"
-                                            Value="True" />
-                                    </DataTrigger>
-                                </ffimageloading:CachedImage.Triggers>
-                                <ffimageloading:CachedImage.GestureRecognizers>
-                                    <!--TODO make use of command here-->
-                                    <TapGestureRecognizer
-                                        Tapped="ImageThumbnail_Tapped">
-                                    </TapGestureRecognizer>
-                                </ffimageloading:CachedImage.GestureRecognizers>
-                            </ffimageloading:CachedImage>
-                            <Image
-                                Source="{extensions:ImageResource Chat.Images.pdfIcon.png}"
-                                WidthRequest="100"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                Margin="0"
-                                Aspect="AspectFit"
-                                IsVisible="False">
-                                <Image.Triggers>
-                                    <DataTrigger
-                                        TargetType="Image"
-                                        Binding="{TemplateBinding BindingContext.PDFByte,Converter={StaticResource IsNullConverter}}"
-                                        Value="false">
-                                        <Setter
-                                            Property="IsVisible"
-                                            Value="True" />
-                                    </DataTrigger>
-                                </Image.Triggers>
-                                <Image.GestureRecognizers>
-                                    <!--TODO make use of command here-->
-                                    <TapGestureRecognizer
-                                        Tapped="PDFIcon_Tapped">
-                                    </TapGestureRecognizer>
-                                </Image.GestureRecognizers>
-                            </Image>
-                            <controls:ExtendedMessageBody
-                                HorizontalOptions="Start"                                
-                                Style="{StaticResource MessageBodyStyle}"
-                                LineBreakMode="WordWrap"
+                </Frame.Resources>
+                <StackLayout
+                            VerticalOptions="Start"
+                            x:Name="CellStack"
+                            Spacing="0">
+
+                    <Label
+                            
+                                Text="Message self-destructed."
                                 IsVisible="false"
-                                Text="{TemplateBinding BindingContext.Text}">
-                                <controls:ExtendedMessageBody.Triggers>
-                                    <DataTrigger
-                                        TargetType="controls:ExtendedMessageBody"
-                                        Binding="{TemplateBinding BindingContext.Text, Converter={StaticResource IsNullConverter}}"
-                                        Value="false">
-                                        <Setter
+                                TextColor="Gray"
+                                FontAttributes="Italic"
+                                MinimumHeightRequest="50"
+                                HorizontalOptions="End"
+                                HorizontalTextAlignment="End"
+                                Style="{StaticResource Key=MessageBodyStyle}">
+                        <Label.Triggers>
+                            <DataTrigger
+                                        TargetType="Label"
+                                        Binding="{Binding IsExpired}"
+                                        Value="true">
+                                <Setter
                                             Property="IsVisible"
-                                            Value="true" />
-                                    </DataTrigger>
-                                </controls:ExtendedMessageBody.Triggers>
-                            </controls:ExtendedMessageBody>
-                        </StackLayout>
-                    </ControlTemplate>
-                </ContentView.Resources>
-                <ContentView.ControlTemplate
-                    ControlTemplate="{StaticResource NormalMessage}">
-                </ContentView.ControlTemplate>
-                <ContentView.Triggers>
-                    <DataTrigger
-                        TargetType="ContentView"
-                        Binding="{Binding IsExpired}"
-                        Value="True">
-                        <Setter
-                            Property="ControlTemplate"
-                            Value="{StaticResource ExpiredMessage}" />
-                    </DataTrigger>
-                    <DataTrigger
-                        TargetType="ContentView"
-                        Binding="{Binding IsExpired}"
-                        Value="false">
-                        <Setter
-                            Property="ControlTemplate"
-                            Value="{StaticResource NormalMessage}" />
-                    </DataTrigger>
-                </ContentView.Triggers>
-            </ContentView>
-            <Grid
-                Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="auto" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="auto" />
-                </Grid.ColumnDefinitions>
-                <Label
-                    Text="{Binding RemainingTimeString}"
-                    IsVisible="false"
-                    HorizontalOptions="Start"
-                    Grid.Column="0">
-                    <Label.Triggers>
-                        <DataTrigger
-                            Binding="{Binding RemainingTimeString,Converter={StaticResource IsNullConverter}}"
-                            Value="false"
-                            TargetType="Label">
-                            <Setter
-                                Property="IsVisible"
-                                Value="true" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                <Label
-                    Grid.Column="2"
-                    HorizontalTextAlignment="End"
-                    HorizontalOptions="End"
-                    Text="{Binding SubmittedDate, StringFormat='{}{0:h:mm tt}'}"
-                    TextColor="#6cc676">
-                </Label>
-            </Grid>
-        </Grid>
-    </Frame>
+                                            Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <StackLayout
+                         
+                                IsVisible="True">
+
+                        <!--Reply Message-->
+                        <Frame
+                                    Margin="0"
+                                    HasShadow="false"
+                                    Padding="5"
+                                    IsVisible="True"
+                                    BackgroundColor="#15000000"
+                                    x:Name="ReplyMessageFrame"
+                                    CornerRadius="5">
+
+
+                            <Grid
+                                        RowSpacing="0"
+                                        ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                                Height="auto" />
+                                    <RowDefinition
+                                                Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                                Width="auto" />
+                                    <ColumnDefinition
+                                                Width="auto" />
+                                    <ColumnDefinition
+                                                Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                            Grid.Column="0"
+                                            Grid.RowSpan="2"
+                                            WidthRequest="5"
+                                            Margin="0,0,2.5,0"
+                                            BackgroundColor="Red">
+                                </BoxView>
+                                <Label
+                                            Text="Peter Chan"
+                                            TextColor="Red"
+                                            Grid.Row="0"
+                                            Grid.Column="1" />
+                                <Image                                           
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            HorizontalOptions="Start"
+                                            IsVisible="True"
+                                            Aspect="AspectFit">
+
+                                </Image>
+
+                                <StackLayout
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center"
+                                            Spacing="5"
+                                            IsVisible="True"
+                                            Grid.Row="1"
+                                            Grid.Column="1">
+                                    <Label
+                                                Text="📷"
+                                                WidthRequest="30"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center"
+                                                IsVisible="True"
+                                                Margin="0,0,0,5">
+
+                                    </Label>
+                                    <Label
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center"
+                                                LineBreakMode="TailTruncation"
+                                                IsVisible="True"
+                                                WidthRequest="180"
+                                                Text="1234567891234567891234596789">
+
+                                    </Label>
+                                </StackLayout>
+                                <ffimageloading:CachedImage
+                                            Grid.Column="2"
+                                            Grid.RowSpan="2"
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            DownsampleToViewSize="true"                                        
+                                            Aspect="AspectFit"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"
+                                            Margin="5,0"
+                                            BackgroundColor="Blue"
+                                            IsVisible="True">
+
+                                </ffimageloading:CachedImage>
+                            </Grid>
+                        </Frame>
+
+                        <ffimageloading:CachedImage   
+                                    DownsampleToViewSize="True"
+                                        Source="{Binding ImageThumbnail}"
+                                        x:Name="ImageThumbnail"                                        
+                                        BackgroundColor="Red"
+                                        HeightRequest="{Binding Width,Source={x:Reference ImageThumbnail}}"
+                                        WidthRequest="{Binding Width,Source={x:Reference MessageLabel}}"
+                                        MinimumWidthRequest="200"
+                                        Aspect="AspectFill"
+                                        Margin="5"
+                                        IsVisible="True">
+
+                        </ffimageloading:CachedImage>
+
+
+                        <Label
+                                    HorizontalOptions="End"
+                                    x:Name="MessageLabel"
+                                    HorizontalTextAlignment="Start"
+                                    Style="{StaticResource MessageBodyStyle}"
+                                    IsVisible="true"
+                                    Text="{Binding Text}">
+
+                        </Label>
+                    </StackLayout>
+
+                    <Grid
+                                Grid.Row="1"
+                                HeightRequest="23"
+                                VerticalOptions="Center"
+                                MinimumHeightRequest="23"
+                                ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                        Width="auto" />
+                            <ColumnDefinition
+                                        Width="*" />
+                            <ColumnDefinition
+                                        Width="auto" />
+                            <ColumnDefinition
+                                        Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                                    Text="00:00:88"
+                                    HeightRequest="23"
+                                    IsVisible="True"
+                                    HorizontalOptions="Start"
+                                    TextColor="DarkOrange"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center"
+                                    Grid.Column="0"
+                                    Margin="0,0,5,0">
+                            <Label.Triggers>
+                                <DataTrigger
+                                            Binding="{Binding IsExpired}"
+                                            Value="false"
+                                            TargetType="Label">
+                                    <Setter
+                                                Property="IsVisible"
+                                                Value="true" />
+                                </DataTrigger>
+                            </Label.Triggers>
+
+                        </Label>
+                        <Label
+                                    Grid.Column="2"
+                                    HeightRequest="23"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="End"
+                                    HorizontalOptions="End"
+                                    Text="11/11/11"
+                                    TextColor="#00A700">
+                        </Label>
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+        <!-- TODO temporary disable it -->
+        <Frame
+            x:Name="MaskFrame"
+            Grid.ColumnSpan="2"
+            IsVisible="true"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            InputTransparent="true"
+            HasShadow="false"
+            CornerRadius="0"
+            Margin="0"
+            Padding="0"
+            BackgroundColor="Gray"
+            Opacity="0" />
+    </Grid>
 </cells:BaseMessageViewCell>

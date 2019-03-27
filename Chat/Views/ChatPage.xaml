@@ -112,7 +112,7 @@
                     </DataTrigger>
                 </Frame.Triggers>
             </Frame>
-            <Grid  Margin="0,0,0,15" HorizontalOptions="End" BackgroundColor="Transparent" VerticalOptions="End" x:Name="abc" WidthRequest="70">
+            <Grid  Margin="0,0,0,15" HorizontalOptions="End" BackgroundColor="Transparent" VerticalOptions="End" x:Name="abc" WidthRequest="70" IsVisible="False">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -126,7 +126,7 @@
                     WidthRequest="30"
                     Padding="1" 
                     BackgroundColor="White"
-                    IsVisible="True">
+                    IsVisible="False">
                     <Frame.CornerRadius>
                         <OnPlatform x:TypeArguments="x:Single" iOS="15" Android="25"/>
                     </Frame.CornerRadius>

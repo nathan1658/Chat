@@ -12,7 +12,7 @@ namespace Chat.Models
     {
 
         public bool IsMasked { get; set; } = true;
-
+        public bool IsSubmitted { get; set; } = true;
         private string _text;
         public string Text
         {
