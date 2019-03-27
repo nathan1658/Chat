@@ -230,7 +230,7 @@ namespace Chat.ViewModels
             foreach(var msg in _conversation.Messages)
             {
                 msg.ImageThumbnail = ImageSource.FromStream(() => { return new MemoryStream(fakeImageData); });
-                msg.OutgoingMessage = true;
+               // msg.OutgoingMessage = true;
             }
 
 

@@ -96,9 +96,10 @@
                                         DownsampleToViewSize="True"
                                         Source="{Binding ImageThumbnail}"
                                         x:Name="ImageThumbnail"
-                                          HeightRequest="{Binding Width,Source={x:Reference ImageThumbnail}}"
-                                        WidthRequest="{Binding Width,Source={x:Reference MessageLabel}}"
+                                        HeightRequest="{Binding Width,Source={x:Reference ImageThumbnail}}"
+                                        WidthRequest="{Binding Width,Source={x:Reference lblBody}}"
                                         MinimumWidthRequest="200"
+                                         MinimumHeightRequest="200"
                                         BackgroundColor="Red"
                                         Aspect="AspectFill"
                               

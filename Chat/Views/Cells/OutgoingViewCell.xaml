@@ -288,6 +288,7 @@
                                         HeightRequest="{Binding Width,Source={x:Reference ImageThumbnail}}"
                                         WidthRequest="{Binding Width,Source={x:Reference MessageLabel}}"
                                         MinimumWidthRequest="200"
+                            MinimumHeightRequest="200"
                                         Aspect="AspectFill"
                                         Margin="5"
                                         IsVisible="True">
